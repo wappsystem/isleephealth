@@ -1,0 +1,7 @@
+{
+    "modules":
+	{
+		"task-01":	{"table_id":"20011363","url":"modules/quest-01/task/task-01.html","name_for_search":"Quest 01 -  Task 01"},
+        "task-02":	{"table_id":"20011364","url":"modules/quest-01/task/task-02.html","name_for_search":"Quest 01 -  Task 02"}
+	}
+}

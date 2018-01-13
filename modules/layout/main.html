@@ -2,9 +2,12 @@ VmInclude:/modules/layout/main.html.top-right-corner.html
 VmInclude:/modules/layout/main.html.header.html
 VmInclude:/modules/layout/main.html.content-container.html
 VmInclude:/modules/layout/main.html.footer.html
+<div id="fb-root"></div>
+<div style='display:none'><div id="disqus_thread"></div></div>
+<script>$vm.comments=1;</script>
 <script main-layout-js>
 	function F__ID(){
-		var home_page_module='panel_main_home';
+		var home_page_module='website_home';
         console.log((new Date().getTime()-$vm.start_time).toString()+"---"+"********************* start running code in main.html ************************");
 		//------------------------------------
 		var website_item_list_for_search=[]
@@ -37,16 +40,19 @@ VmInclude:/modules/layout/main.html.footer.html
 		};
 		//-----------------------------------------
 		//This is the place we can add background image to body (Asynchronous)
-        /*
-        var $image1 = $("<img>");
+		/*
+		var $image1 = $("<img>");
 		$image1.on('load',(function(){ $('body').css("background", "url("+$(this).attr("src")+") no-repeat bottom center"); $('body').css("background-size", "cover");  }));
 		$image1.attr("src", "modules/layout/main.html.background.jpg?v=2");
-        */
+		*/
 		//------------------------------------
 		//over write vm alert
 		$vm.alert=function(msg){
 			$('#vm_alert_information div.modal-body').html( $('<div/>').html(msg).text() );
 			$("#vm_alert_information").modal();
+		}
+        $vm.close_alert=function(){
+            $('#vm_alert_information').modal('hide');
 		}
 		//------------------------------------
 		var set_module_search=function(){
@@ -102,12 +108,16 @@ VmInclude:/modules/layout/main.html.footer.html
 						website_item_list_for_search.push({label:nm,value:prefix+property})
 					}
 					var m_url=$vm.module_list[prefix+property].url;
+					$vm.module_list[prefix+property].url=url.split('|')[0]+"/"+m_url;
+                    if(m_url!=undefined && (m_url.substring(0,7)=="http://" || m_url.substring(0,8)=="https://") ) $vm.module_list[prefix+property].url=m_url;
+					/*
 					if(m_url!=undefined && m_url[0]=='/'){
 						$vm.module_list[prefix+property].url=url.split('/configurations/')[0]+m_url;
 					}
 					else if(m_url!=undefined && m_url.substring(0,8)=='modules/'){
 						$vm.module_list[prefix+property].url=url.split('configurations/')[0]+m_url;
 					}
+					*/
 			   	}
 			}
 			N--;
@@ -118,12 +128,12 @@ VmInclude:/modules/layout/main.html.footer.html
 		}
 		//------------------------------------
 		var process_config_file=function(url,prefix){
-			$.get(url+'?_='+$vm.ver[1]+$vm.reload,function(data){
+			$.get(url.replace('|','/')+'?_='+$vm.ver[1]+$vm.reload,function(data){
 				localStorage.setItem(url+"_txt",data);
 				localStorage.setItem(url+"_ver",$vm.ver[1]);
 				add_config_modules_to_module_list_and_start(url,data,prefix);
 			},'text').fail(function() {
-				alert( "The configuration file ("+url+") doesn't exist!" );
+				alert( "The configuration file ("+url.replace('|','/')+") doesn't exist!" );
 			});
 		}
 		//------------------------------------
@@ -136,10 +146,12 @@ VmInclude:/modules/layout/main.html.footer.html
 		for (var property in panels){
 			$vm.module_list[property]={"url":panels[property].url}
 			var prefix=property+"_";
+			$vm.module_list[property].prefix=prefix;
 			var json_files=panels[property].modules;
 			for(var i=0;i<json_files.length;i++){
 				var url=$vm.url(json_files[i]);
-				if(json_files[i].indexOf('https://')==-1) url=$vm.hosting_path+"/configurations/"+url;
+				if(json_files[i].indexOf('https://')==-1) url=$vm.hosting_path+"|"+url;
+				//if(json_files[i].indexOf('https://')==-1) url=$vm.hosting_path+"/configurations/"+url;
 				var ver=localStorage.getItem(url+"_ver");
 				var txt=localStorage.getItem(url+"_txt");
 				if(ver!=$vm.ver[1] || txt===null || $vm.debug===true || $vm.reload!=''){

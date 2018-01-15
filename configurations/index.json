@@ -4,6 +4,6 @@
 	"default_production":"No",
 	"panels":{
 		"website":{"url":"","modules":["configurations/modules.json"]},
-		"quest-01":{"url":"modules/quest-01/panel.html","modules":["modules/quest-01/modules.json"]}
+		"first-visit":{"url":"modules/first-visit/panel.html","modules":["modules/first-visit/modules.json"]}
 	}
 }

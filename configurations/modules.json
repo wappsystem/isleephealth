@@ -2,11 +2,8 @@
     "modules":
 	{
 		"home":	          {"url":"modules/task/home.html","name_for_search":"Home page"},
-		"about":	      {"url":"modules/task/about.html","name_for_search":"About"},
-		"services":	      {"url":"modules/task/services.html","name_for_search":"Services"},
-		"portfolio":	  {"url":"modules/task/portfolio.html","name_for_search":"Portfolio"},
-		"team":	  		  {"url":"modules/task/team.html","name_for_search":"Team"},
-		"contact-us":	  {"table_id":"20009702","url":"modules/task/contact-us.html","name_for_search":"Contact us"},
-		"contact-us-record":  {"table_id":"20009702","url":"modules/task/contact-us-record.html","name_for_search":"Contact us record"}
-	}
+        "medicare-referrals-records":	{"table_id":"20011363","url":"modules/first-visit/task/medicare-referrals-records.html","name_for_search":"First Visit -  Medical Referral -Records"},
+        "epworth-sleepiness-scale-records":	{"table_id":"20011364","url":"modules/first-visit/task/epworth-sleepiness-scale-records.html","name_for_search":"First Visit -  Epworth Sleepiness Scale -Records"},
+        "health-history-records":	{"table_id":"20011365","url":"modules/first-visit/task/health-history-records.html","name_for_search":"First Visit -  Health History -Records"}
+    }
 }

@@ -1,0 +1,13 @@
+{
+	"modules":
+	{
+		"home":	          {"url":"/modules/home.html","name_for_search":"Home page"},
+		"appointment":     {"url":"/modules/task/appointment.html","table_id":"20011471","name_for_search":"Visit"},
+		"physician":      {"url":"/modules/task/physician.html","table_id":"20011472","name_for_search":"Physician"},
+		"email_001":      {"url":"/modules/task/email-001.html","name_for_search":""},
+		"report":         {"url":"/modules/reports/report.html","name_for_search":""},
+		"patient_info":   {"url":"/modules/task/patient_info.html","name_for_search":""},
+		"report-daily-first":   {"url":"/modules/reports/report-daily-first.html","table_id":"20011195","name_for_search":""},
+		"patient_info":   {"url":"/modules/task/patient_info.html","name_for_search":""}
+	}
+}

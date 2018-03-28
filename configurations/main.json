@@ -2,8 +2,9 @@
 	"modules":
 	{
 		"home":	          {"url":"/modules/home.html","name_for_search":"Home page"},
-		"appointment":     {"url":"/modules/task/appointment.html","table_id":"20011471","name_for_search":"Visit"},
+		"appointment":     {"url":"/modules/task/appointment.html","table_id":"20011471","name_for_search":"Appointment"},
 		"physician":      {"url":"/modules/task/physician.html","table_id":"20011472","name_for_search":"Physician"},
+		"appointment-type":      {"url":"/modules/task/appointment-type.html","table_id":"20011473","name_for_search":"Appointment Type"},
 		"email_001":      {"url":"/modules/task/email-001.html","name_for_search":""},
 		"report":         {"url":"/modules/reports/report.html","name_for_search":""},
 		"patient_info":   {"url":"/modules/task/patient_info.html","name_for_search":""},

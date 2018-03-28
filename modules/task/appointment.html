@@ -6,15 +6,14 @@
         //-------------------------------------
         VmInclude:__COMPONENT__/grid/grid.v3.js
         //-------------------------------------
-        var fields="UID,First_Name,Last_Name,Telephone,Email,Physician,Area,Visit_Type,Date,Start_Time,End_Time,_Login_ID,Password,_Hidden|List,_Send_Email,_Report,_Patient_Info";
+        var fields="UID,First_Name,Last_Name,Email,Physician,Appointment_Type,Date,Appointment_Time,_Login_ID,Password,_Hidden|List,_Send_Email,_Report,_Patient_Info";
         _fields="_Form,"+fields+",Submit Date|DateTime,Submitted by|Author,_Delete";
         //-------------------------------------
 		var prefix=_mlist[$vm.vm['__ID'].name].prefix; if(prefix==undefined) prefix="";
 		var physician_tid=_mlist[prefix+'physician'].table_id;
-		var area_tid=_mlist[prefix+'area'].table_id;
-		var visit_type_tid=_mlist[prefix+'visit-type'].table_id;
+		var appointment_type_tid=_mlist[prefix+'appointment-type'].table_id;
 		//-------------------------------------
-		var get_visit_pid_list=function(url,list){
+		var get_appointment_pid_list=function(url,list){
 			$.get(url+'?_='+$vm.ver[1]+$vm.reload,function(data){
 				var txt=$('<div/>').html(data).text();
 				var config;
@@ -27,7 +26,7 @@
 			},'text');
 		}
 		//-------------------------------------
-		var first_pid_list=[];		get_visit_pid_list('https://clinic-online-questionnaire.rt.org.au/configurations/first.json',first_pid_list);
+		var initial_pid_list=[];		get_appointment_pid_list('http://127.0.0.1:8000/wappsystem/isleephealth-patients-portal/configurations/initial.json',initial_pid_list);
 		var second_pid_list=[];
 		//-------------------------------------
 
@@ -39,12 +38,8 @@
 					var sql="with tb as (select distinct name=S1,UID from [TABLE-"+physician_tid+"]) select name, value=name,value2=UID from tb where name like '%'+@S1+'%' ";
 					VmInclude:__COMPONENT__/grid/field_auto.js
 	                break;
-				case 'Area':
-					var sql="with tb as (select distinct name=S1,UID from [TABLE-"+area_tid+"]) select name, value=name,value2=UID from tb where name like '%'+@S1+'%' ";
-					VmInclude:__COMPONENT__/grid/field_auto.js
-	                break;
-				case 'Visit_Type':
-					var sql="with tb as (select distinct name=S1,UID from [TABLE-"+visit_type_tid+"]) select name, value=name,value2=UID from tb where name like '%'+@S1+'%' ";
+				case 'Appointment_Type':
+					var sql="with tb as (select distinct name=S1,UID from [TABLE-"+appointment_type_tid+"]) select name, value=name,value2=UID from tb where name like '%'+@S1+'%' ";
 					VmInclude:__COMPONENT__/grid/field_auto.js
 	                break;
 				case 'Date':
@@ -63,7 +58,7 @@
 					td.find('u').on('click',function(){
 						var email_module_id=''
 						//-----------------
-						switch(records[I].Area+'-'+records[I].Visit_Type){
+						switch(records[I].Physician+'-'+records[I].Appointment_Type){
 							case 'aaa-bbb':email_module_id="email_001";break;
 						}
 						//-----------------
@@ -75,7 +70,6 @@
 							sys:_sys,
 							mobj:this_mobj,
 							record:this_record,
-							//----------------
 							//----------------
 						}
                         $vm.load_module_by_name(email_module_id,$vm.root_layout_content_slot,op);
@@ -94,7 +88,7 @@
 							mobj:this_mobj,
 							record:this_record,
 							//----------------
-							url:'https://clinic-online-questionnaire.rt.org.au/configurations/first.json',
+							url:'https://clinic-online-questionnaire.rt.org.au/configurations/initial.json',
 							//----------------
 						}
                         $vm.load_module_by_name(prefix+'report',$vm.root_layout_content_slot,op);
@@ -113,7 +107,7 @@
 							mobj:this_mobj,
 							record:this_record,
 							//----------------
-							url:'https://clinic-online-questionnaire.rt.org.au/configurations/first.json',
+							url:'http://127.0.0.1:8000/wappsystem/isleephealth-patients-portal/configurations/initial.json',
 							//----------------
 						}
                         $vm.load_module_by_name(prefix+'patient_info',$vm.root_layout_content_slot,op);
@@ -127,10 +121,10 @@
         }
         //-------------------------------------
 		_before_submit=function(record,dbv){
-            //alert(first_pid_list)
-			record.List=first_pid_list.toString(); //based on some logic, select first or second or...
+            //alert(initial_pid_list)
+			record.List=initial_pid_list.toString(); //based on some logic, select first or second or...
 
-			dbv.S1=record.First_Name+' '+record.Last_Name;
+			dbv.S1=record.Email;
 			dbv.S3=record.Password;
 			dbv.DT1=record.Date;
             return true;

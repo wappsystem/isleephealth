@@ -1,9 +1,9 @@
 {
 	"api_path_development":"https://cbs.wappsystem.com/dev/",
-	"api_path_production":"https://cbs.wappsystem.com/dev/",
+	"api_path_production":"https://cbs.wappsystem.com/pro/",
 	"default_production":"No",
 	"panels":{
-		"website":{"url":"","modules":["configurations/modules.json"]},
-		"first-visit":{"url":"modules/first-visit/panel.html","modules":["modules/first-visit/modules.json"]}
+		"panel_setup":{"url":"/modules/panel/setup.html","modules":["main.json"]},
+		"panel_report":{"url":"/modules/panel/report.html","modules":["main.json"]}
 	}
 }

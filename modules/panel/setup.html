@@ -1,0 +1,71 @@
+<section id=panel__ID>
+	<div class='nav__ID'>
+	    <span>Appointment</span>
+	    <ul>
+			<li module=appointment>Appointment Setup</li>
+		</ul>
+		<span>Setup</span>
+	    <ul>
+			<li module=physician>Physician</li>
+			<li module=appointment-type>Appointment Type</li>
+		</ul>
+	</div>
+</section>
+
+<script>
+      function F__ID(){
+          //--------------------------------------------------------
+		  var prefix=$vm.vm["__ID"].name+"_";
+		  $('#panel__ID li').on('click',function(){
+			  var m=$(this).attr('module');
+              if(m!=undefined){
+				  if($vm.module_list[prefix+m]==undefined){
+					  alert(prefix+m +" is not in the module list.");
+					  return;
+				  }
+			      $vm.nav_load_module(prefix+m);
+              }
+		  })
+		  //--------------------------------------------------------
+      }
+</script>
+
+<style>
+	VmInclude:__COMPONENT__/navigation/navigation.css
+	#D__ID{
+		background-color:#fff;
+		height:100%;
+		overflow: auto;
+		animation: vm_module_fadein 1.0s;
+		padding:30px 0 0 30px;
+	}
+	#D__ID li {
+		color:#666;
+	}
+	li::before{
+		font-size: 20px!Important;
+	}
+	#D__ID li:hover {
+		color:#fff;
+	}
+	#D__ID a {
+		text-decoration: none;
+	}
+	#D__ID a:link {
+		color:#666;
+	}
+	#D__ID a:visited {
+		color:#666;
+	}
+	#D__ID a:hover {
+		color:#fff;
+	}
+	#D__ID a:active {
+		color:#666;
+	}
+	@media screen and (max-width:768px){
+		#D__ID{
+			padding:10px 0 0 10px;
+		}
+	}
+</style>

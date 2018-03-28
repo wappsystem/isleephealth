@@ -15,8 +15,8 @@
             Level 57, MLC Building, Martin Pl<br>
             Sydney NSW 2000<br></b>
 
-            Before the appointment could you please please fill in the <b>Intgrated Sleep Online Registration and Questionnaires for Initial Consultaion</b> or arrive early and complete at the clinic.<br><br>
-            <u><a id=q_n href="#" target="_blank" >Click here to access <b>Intgrated Sleep Online Registration and Questionnaires for Initial Consultaion</b></a></u> <br>
+            Before the appointment could you please please fill in the <b>Intgrated Sleep Health Online Registration and Questionnaires for Initial Consultaion</b> or arrive early and complete at the clinic.<br><br>
+            <u><a id=q_n href="#" target="_blank" >Click here to access <b>Intgrated Sleep Health Online Registration and Questionnaires for Initial Consultaion</b></a></u> <br>
             Login ID and Password will be filled automatically.<br>In case this doesn't happend please use the following to get access to your questionnaires<br>
 			Login ID: <span id=Login_ID__ID></span><br>
 			Password: <span id=Password__ID></span><br>
@@ -65,17 +65,17 @@
         //-------------------------------------
         $('#send__ID').on('click',function(){
      	   	var From_Address="noresponse@wappsystem.com";
-     		var From_Name="Woolcock Clinic";
+     		var From_Name="Integrated Sleep Health";
      		var To=record.Email;
             if(To.length<5){
                 alert('No email address.')
                 return;
             }
-     		var Title="Clinic Online Registration";
+     		var Title="Intgrated Sleep Health Online Registration and Questionnaires";
      		var Body=$('#contents__ID').html();
             //if($vm.user=='guest'){ alert('The alert email (to: '+To+') has been sent out'); return;}
 			$VmAPI.request({data:{cmd:'send_email',From_Address:From_Address,From_Name:From_Name,To:To,Title:Title,Body:Body},callback:function(res){
-                $vm.alert('The alert email (to: '+record.Email+') has been sent out');
+                $vm.alert('An email has been sent to '+record.Email+'');
             }})
         });
         //-------------------------------------

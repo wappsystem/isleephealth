@@ -123,8 +123,7 @@
 		_before_submit=function(record,dbv){
             //alert(initial_pid_list)
 			record.List=initial_pid_list.toString(); //based on some logic, select first or second or...
-
-			dbv.S1=record.Email;
+            dbv.S1=record.Email;
 			dbv.S3=record.Password;
 			dbv.DT1=record.Date;
             return true;

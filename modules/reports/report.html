@@ -13,20 +13,20 @@
             var participant_uid=record.UID;
             var tb="<div id=content_container_0 style='padding:20px;'>";
             var name="";
-            var sql="select Information from [TABLE-20011312] where PUID="+participant_uid;
+            var sql="select Information from [TABLE-20011470] where PUID="+participant_uid;
             $VmAPI.request({data:{cmd:'query_records',sql:sql},callback:function(res){
                 var sex="",dob="";
                 if(res.records.length>0){
-                    name=res.records[0].Name;
-                    sex=res.records[0].Sex;
-                    dob=res.records[0].DOB;
+                    name=res.records[0].name;
+                    sex=res.records[0].sex;
+                    dob=res.records[0].dob;
                 }
                 tb+="<table class=width__ID>";
                 tb+="<colgroup><col style='width:450px' /><col style='width:100px'  /><col /></colgroup>";
                 tb+="<tr><th>"+name+"</th><th>"+sex+"</th><th>"+dob+"</th></tr>";
                 tb+="</table>";
             }});
-            var sql="select Information from [TABLE-20011175] where PUID="+participant_uid;
+            var sql="select Information from [TABLE-20011363] where PUID="+participant_uid;
             $VmAPI.request({data:{cmd:'query_records',sql:sql},callback:function(res){
                 var benefit="",ref_doc="",ref_letter="";
                 if(res.records.length>0){
@@ -39,10 +39,10 @@
                 tb+="<tr><td>"+benefit+"</td><td>Ref. Dr: "+ref_doc+"</td><td>"+ref_letter+"</td></tr>";
                 tb+="</table>";
             }});
-            var sql="select Information from [TABLE-20011309] where PUID="+participant_uid;
+            var sql="select Information from [TABLE-20011469] where PUID="+participant_uid;
             $VmAPI.request({data:{cmd:'query_records',sql:sql},callback:function(res){
-                var snore="",unfreshed="",driving="",shortness_breath="",stop_breathing="",staying_asleep="",daytime_worries="",pain="",staying_asleep="",chronically_sleepy="",menopause="",jerk_arms="",sleeping_tablets_frequency="",toilet_number="",unusual_movements_describe="";
-                var grind_teeth="",unusual_movements="",sleeping_tablets="",sleeping_tablets_name="",sleep_start="",sleep_end="",leg_sensations="",toilet="";
+                var snore="<td></td>",unfreshed="<td></td>",driving="<td></td>",shortness_breath="<td></td>",stop_breathing="<td></td>",staying_asleep="<td></td>",daytime_worries="<td></td>",pain="<td></td>",staying_asleep="<td></td>",chronically_sleepy="<td></td>",menopause="<td></td>",jerk_arms="<td></td>",sleeping_tablets_frequency="",toilet_number="",unusual_movements_describe="";
+                var grind_teeth="<td></td>",unusual_movements="<td></td>",sleeping_tablets="<td></td>",sleeping_tablets_name="",sleep_start="",sleep_end="",leg_sensations="<td></td>",toilet="<td></td>";
                 if(res.records.length>0){
                     var td_yes="<td style='color:red;font-weight:bold;text-align:center'>Yes</td>";
                     var td_no="<td style='text-align:center'> No</td>"
@@ -98,21 +98,21 @@
                 tb+="<tr><td><i>Sleep Start</i></td><td style='text-align:center'>"+sleep_start+"</td><td><i>Sleep End</i></td><td style='text-align:center'>"+sleep_end+"</td><td colspan=2></td></tr>";
                 tb+="</table>";
             }});
-            var sql="select Information from [TABLE-20011308] where PUID="+participant_uid;
+            var sql="select Information from [TABLE-20011365] where PUID="+participant_uid;
             $VmAPI.request({data:{cmd:'query_records',sql:sql},callback:function(res){
-                var heart_failure="",pacemaker="",angina="";
-                var hypertension="",blood_clot="",anaemia="";
-                var bleeding="",diabetes_1="",diabetes_2="";
-                var shortness_of_breath="",tuberculosis="",copd="";
-                var asthma="",morning_headaches="",broken_nose="";
-                var claustrophobia="",thyroid="",kidney="";
-                var hepatitis_a="",hepatitis_b="",hepatitis_c="";
-                var alcohol="",drug="",deafness="";
-                var blindness="",insomnia="",anxiety="";
-                var depression="",stroke="",hiv="";
-                var incontinence="",arthritis="",heartburn="";
-                var epilepsy="",cataplexy="",narcolepsy="";
-                var tonsillitis="",sinusitis="";
+                var heart_failure="<td></td>",pacemaker="<td></td>",angina="<td></td>";
+                var hypertension="<td></td>",blood_clot="<td></td>",anaemia="<td></td>";
+                var bleeding="<td></td>",diabetes_1="<td></td>",diabetes_2="<td></td>";
+                var shortness_of_breath="<td></td>",tuberculosis="<td></td>",copd="<td></td>";
+                var asthma="<td></td>",morning_headaches="<td></td>",broken_nose="<td></td>";
+                var claustrophobia="<td></td>",thyroid="<td></td>",kidney="<td></td>";
+                var hepatitis_a="<td></td>",hepatitis_b="<td></td>",hepatitis_c="<td></td>";
+                var alcohol="<td></td>",drug="<td></td>",deafness="<td></td>";
+                var blindness="<td></td>",insomnia="<td></td>",anxiety="<td></td>";
+                var depression="<td></td>",stroke="<td></td>",hiv="<td></td>";
+                var incontinence="<td></td>",arthritis="<td></td>",heartburn="<td></td>";
+                var epilepsy="<td></td>",cataplexy="<td></td>",narcolepsy="<td></td>";
+                var tonsillitis="<td></td>",sinusitis="<td></td>";
                 var heart_other_specify="",lung_other_specify="",mental_other_specify="",neuromuscular_other_specify="",allergies_specify="",Other_Medical_Condition="",Surgical_Procedure="",Medication="";
 
                 if(res.records.length>0){
@@ -221,7 +221,7 @@
                 tb+="<tr><td><i>Are you currently taking any prescription OR non-prescription medication?</i></td><td colspan=5>"+Medication+"</td></tr>";
                 tb+="</table>";
             }});
-            var sql="select Information from [TABLE-20011311] where PUID="+participant_uid;
+            var sql="select Information from [TABLE-20011364] where PUID="+participant_uid;
             $VmAPI.request({data:{cmd:'query_records',sql:sql},callback:function(res){
                 var ess="";
                 if(res.records.length>0){
@@ -233,112 +233,20 @@
                 tb+="<tr><td><i>ESS</i></td><td style='font-weight:bold'>"+ess+"/24</td></tr>";
                 tb+="</table>";
             }});
-            var sql="select Information from [TABLE-20011310] where PUID="+participant_uid;
+            var sql="select Information from [TABLE-20011464] where PUID="+participant_uid;
             $VmAPI.request({data:{cmd:'query_records',sql:sql},callback:function(res){
-                var td_yes="<td style='color:red;font-weight:bold;text-align:center'>Yes</td>";
-                var td_no="<td style='text-align:center'> No</td>"
-                var Tea="",Coffee="",Cola="",Alcohol="",smoker="",per_day="",years="",quit="";
-                var drug_user="",drug_type="",drug_freq="",None="",MRSA="",VRE="",MRAB="";
-                var Other="",infectious_diseases_other="",infectious_diseases_year="",infectious_diseases_site="",wheelchair="",carer="";
-                var interpreter="",interpreter_language="",diet="",diet_type="";
+                var dass_ds="",dass_as="",dass_ss="";
                 if(res.records.length>0){
-                    Tea=res.records[0].Tea;
-                    Coffee=res.records[0].Coffee;
-                    Cola=res.records[0].Cola;
-                    Alcohol=res.records[0].Alcohol;
-                    smoker=res.records[0].smoker;
-                    if(smoker=='Current smoker'){
-                        per_day=res.records[0].smoker_per_day;
-                        years=res.records[0].smoker_years;
-                    }
-                    smoker=res.records[0].smoker;
-                    if(smoker=='Ex-smoker'){
-                        per_day=res.records[0].ex_smoker_per_day;
-                        quit=res.records[0].ex_smoker_quit;
-                        years=res.records[0].ex_smoker_years;
-                    }
-                    drug_user=res.records[0].drug_user;
-                    if(drug_user=='Yes') drug_user=td_yes; else drug_user=td_no
-                    drug_type=res.records[0].drug_type;
-                    drug_freq=res.records[0].drug_freq;
-                    None=res.records[0].None;
-                    if(None=="on") None="<td style='color:green;font-weight:bold;text-align:center'>Yes</td>";
-                    else None="<td style='text-align:center'>-</td>"
-                    MRSA=res.records[0].MRSA;
-                    if(MRSA=="on") MRSA="<td style='color:red;font-weight:bold;text-align:center'>Yes</td>";
-                    else MRSA="<td style='text-align:center'>-</td>"
-                    VRE=res.records[0].VRE;
-                    if(VRE=="on") VRE="<td style='color:red;font-weight:bold;text-align:center'>Yes</td>";
-                    else VRE="<td style='text-align:center'>-</td>"
-                    MRAB=res.records[0].MRAB;
-                    if(MRAB=="on") MRAB="<td style='color:red;font-weight:bold;text-align:center'>Yes</td>";
-                    else MRAB="<td style='text-align:center'>-</td>"
-                    Other=res.records[0].Other;
-                    if(Other=="on") Other="<td style='color:red;font-weight:bold;text-align:center'>Yes</td>";
-                    else Other="<td style='text-align:center'>-</td>"
-                    infectious_diseases_other=res.records[0].infectious_diseases_other;
-                    infectious_diseases_year=res.records[0].infectious_diseases_year;
-                    infectious_diseases_site=res.records[0].infectious_diseases_site;
-                    wheelchair=res.records[0].wheelchair;
-                    if(wheelchair=='Yes') wheelchair=td_yes; else wheelchair=td_no
-                    carer=res.records[0].carer;
-                    if(carer=='Yes') carer=td_yes; else carer=td_no
-                    interpreter=res.records[0].interpreter;
-                    if(interpreter=='Yes') interpreter=td_yes; else interpreter=td_no
-                    interpreter_language=res.records[0].interpreter_language;
-                    diet=res.records[0].diet;
-                    if(diet=='Yes') diet=td_yes; else diet=td_no
-                    diet_type=res.records[0].diet_type;
+                    dass_ds=res.records[0].DASS_DS;
+                    dass_as=res.records[0].DASS_AS;
+                    dass_ss=res.records[0].DASS_SS;
                 }
-                tb+="<table id=table_additional_questions__ID class=width__ID>";
-                tb+="<colgroup><col style='width:100px' /><col style='width:100px'  /><col style='width:100px' /><col style='width:100px'  /><col style='width:100px' /><col style='width:100px'  /><col style='width:100px' /><col style='width:100px'  /></colgroup>";
-                tb+="<tr><th colspan=8>ADDITIONAL QUESTIONS  "+name+"</th></tr>";
-                tb+="<tr><td><i>Tea</i></td><td style='text-align:center'>"+Tea+"</td><td><i>Coffee</i></td><td style='text-align:center'>"+Coffee+"</td><td><i>Cola</i></td><td style='text-align:center'>"+Cola+"</td><td><i>Alcohol</i></td><td style='text-align:center'>"+Alcohol+"</td></tr>";
-                tb+="<tr><td><i>Smoking:</i></td><td style='text-align:center'>"+smoker+"</td><td><i>How many per day</i></td><td style='text-align:center'>"+per_day+"</td><td><i>How many years</i></td><td style='text-align:center'>"+years+"</td><td><i>When did you quit?</i></td><td style='text-align:center'>"+quit+"</td></tr>";
-                tb+="<tr><td><i>Drug user:</i></td>"+drug_user+"<td><i>Drug:</i></td><td colspan=3>"+drug_type+"</i></td><td><i>Frequency</td><td>"+drug_freq+"</td></tr>";
-                tb+="<tr><td colspan=8 ><i>Do you have or ever had any infectious diseases:</i></td></tr>";
-                tb+="<tr><td><i>None</i></td>"+None+"<td><i>MRSA</i></td>"+MRSA+"<td><i>VRE</i></td>"+VRE+"<td><i>MRAB</i></td>"+MRAB+"</tr>";
-                tb+="<tr><td><i>Other</i></td>"+Other+"<td colspan=2 ><i>If other, please specfy:</i></td><td colspan=4>"+infectious_diseases_other+"</td></tr>";
-                tb+="<tr><td colspan=3 ><i>What year were you infected?</i></td><td style='text-align:center'>"+infectious_diseases_year+"</td><td colspan=3 ><i>What was the site of the infection?</i></td><td>"+infectious_diseases_site+"</td></tr>";
-                tb+="<tr><td colspan=3 ><i>Are you wheelchair bound?</i></td>"+wheelchair+"<td colspan=3 ><i>Do you require a carer with you on the night of your sleep study?</i></td>"+carer+"</tr>";
-                tb+="<tr><td colspan=3 ><i>Do you require an interpreter?</i></td>"+interpreter+"<td colspan=2 ><i>If yes, what language?</i></td><td colspan=2>"+interpreter_language+"</td></tr>";
-                tb+="<tr><td colspan=3 ><i>Do you require a special diet?</i></td>"+diet+"<td colspan=2><i>If yes, what type?</i></td><td colspan=2>"+diet_type+"</td></tr>";
-                tb+="</table>";
-            }});
-            var sql="select Information from [TABLE-20011345] where PUID="+participant_uid;
-            $VmAPI.request({data:{cmd:'query_records',sql:sql},callback:function(res){
-                var td_yes_ok="<td style='color:green;font-weight:bold;text-align:center'>Yes</td>";
-                var td_no_nok="<td style='color:red;font-weight:bold;text-align:center'> No</td>"
-                var td_yes="<td style='color:red;font-weight:bold;text-align:center'>Yes</td>";
-                var td_no="<td style='text-align:center'> No</td>"
-                var td_dash="<td style='text-align:center'> - </td>"
-                var video_recording="",airflow_resistance="",results_transmitted="",mailing="",parked="",vehicle_type="",registration_number="",financial_costs="";
-                if(res.records.length>0){
-                    video_recording=res.records[0].video_recording;
-                    if(video_recording=="on") video_recording=td_yes_ok;
-                    else video_recording=td_no_nok;
-                    airflow_resistance=res.records[0].airflow_resistance;
-                    if(airflow_resistance=="on") airflow_resistance=td_yes_ok;
-                    else airflow_resistance=td_no_nok;
-                    results_transmitted=res.records[0].results_transmitted;
-                    if(results_transmitted=="on") results_transmitted=td_yes_ok;
-                    else results_transmitted=td_no_nok;
-                    mailing=res.records[0].mailing;
-                    if(mailing=="on") mailing=td_yes_ok;
-                    else mailing=td_no_nok;
-                    financial_costs=res.records[0].financial_costs;
-                    if(financial_costs=="on") financial_costs=td_yes_ok;
-                    else financial_costs=td_no_nok;
-                    parked=res.records[0].parked;
-                    if(parked=='Yes') parked=td_yes; else parked=td_no
-                    vehicle_type=res.records[0].vehicle_type;
-                    registration_number=res.records[0].registration_number;
-                }
-                tb+="<table id=table_additional_questions__ID class=width__ID>";
-                tb+="<colgroup><col style='width:100px' /><col style='width:50px'  /><col style='width:100px' /><col style='width:50px'  /><col style='width:100px' /><col style='width:50px'  /><col style='width:100px' /><col style='width:50px'  /><col style='width:100px'  /><col style='width:50px'  /></colgroup>";
-                tb+="<tr><th colspan=8>CONSENT - "+name+"</th></tr>";
-                tb+="<tr><td>Video</td>"+video_recording+"<td>Tests</td>"+airflow_resistance+"<td>Transmitted</td>"+results_transmitted+"<td>Mailing</td>"+mailing+"<td>Finance</td>"+financial_costs+"</tr>";
-                tb+="<tr><td>Car</td>"+parked+"<td colspan=2>Vehicle Type</td><td colspan=2>"+vehicle_type+"</td><td colspan=2>Registration Number</td><td colspan=2>"+registration_number+"</td></tr>";
+                tb+="<table id=table_form_ess__ID class=width__ID>";
+                tb+="<colgroup><col style='width:50px' /><col /></colgroup>";
+                tb+="<tr><th colspan=2>Depression Anxiety Stress Scales "+name+"</th></tr>";
+                tb+="<tr><td><i>DASS Depression</i></td><td style='font-weight:bold'>"+dass_ds+"/42</td></tr>";
+                tb+="<tr><td><i>DASS Anxiety</i></td><td style='font-weight:bold'>"+dass_as+"/42</td></tr>";
+                tb+="<tr><td><i>DASS Stress</i></td><td style='font-weight:bold'>"+dass_ss+"/42</td></tr>";
                 tb+="</table>";
             }});
             tb+="</div>";
@@ -356,9 +264,7 @@
         //-------------------------------------
         var load_data=function(record){
             var tbl="";
-            alert(1)
             tbl+=table(record);
-            alert(tbl)
             $('#F__ID').html(tbl)
         }
     }

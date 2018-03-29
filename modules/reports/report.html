@@ -1,4 +1,10 @@
 <section>
+<!--    <div id=toolbar__ID>
+        <a id=previous__ID>Previous Day</a>
+        <input id=date__ID type=text style='width:90px' />
+        <a id=next__ID>Next Day</a><span class=tab__ID></span>
+        <a id=refresh__ID>Refresh</a>
+    </div> -->
     <div id=pvdiv__ID>
         <form id=F__ID>
         </form>
@@ -7,6 +13,7 @@
 <script>
     function F__ID(){
         //---------------------------------------------
+        VmInclude:__COMPONENT__/toolbar/day_v2.js
         VmInclude:__COMPONENT__/grid/grid.v3.js
         //---------------------------------------------
 	        var table=function(record){
@@ -22,7 +29,7 @@
                     dob=res.records[0].dob;
                 }
                 tb+="<table class=width__ID>";
-                tb+="<colgroup><col style='width:450px' /><col style='width:100px'  /><col /></colgroup>";
+                tb+="<colgroup><col style='width:300px' /><col style='width:200px'  /><col /></colgroup>";
                 tb+="<tr><th>"+name+"</th><th>"+sex+"</th><th>"+dob+"</th></tr>";
                 tb+="</table>";
             }});
@@ -87,7 +94,7 @@
                 }
                 tb+="<table id=table_form_sleep_history__ID class=width__ID>";
                 tb+="<colgroup><col style='width:200px' /><col style='width:50px'  /><col style='width:200px' /><col style='width:50px'  /><col style='width:200px' /><col /></colgroup>";
-                tb+="<tr><th colspan=6>SLEEP HISTORY "+name+"</th></tr>";
+                tb+="<tr><th colspan=6>SLEEP HISTORY</th></tr>";
                 tb+="<tr><td><i>Do you snore?</i></td>"+snore+"<td><i>Do you wake unrefreshed?</i></td>"+unfreshed+"<td><i>Have you ever fallen asleep whilst driving?</i></td>"+driving+"</tr>";
                 tb+="<tr><td><i>Do you awaken with shortness of breath?</i></td>"+shortness_breath+"<td><i>Have you or your partner noticed you stop breathing when you are asleep?</i></td>"+stop_breathing+"<td><i>In the daytime are you chronically sleepy, fatigued or tired?</i></td>"+chronically_sleepy+"</tr>";
                 tb+="<tr><td><i>Do you have trouble falling or staying asleep?</i></td>"+staying_asleep+"<td><i>Do daytime worries keep you awake at night?</i></td>"+daytime_worries+"<td><i>Does pain disturb your sleep?</i></td>"+pain+"</tr>";
@@ -196,7 +203,7 @@
                     if(sinusitis=='Yes') sinusitis=td_yes; else sinusitis=td_no
                 }
                 tb+="<table id=table_form_health_history__ID class=width__ID>";
-                tb+="<tr><th colspan=6>HEALTH HISTORY "+name+"</th></tr>";
+                tb+="<tr><th colspan=6>HEALTH HISTORY</th></tr>";
                 tb+="<colgroup><col style='width:200px' /><col style='width:50px'  /><col style='width:200px' /><col style='width:50px'  /><col style='width:200px' /><col /></colgroup>";
                 tb+="<tr><td><i>Heart failure</i></td>"+heart_failure+"<td><i>Pacemaker / Defibrillator</i></td>"+pacemaker+"<td><i>Chest pain / Angina</i></td>"+angina+"</tr>";
                 tb+="<tr><td><i>High blood pressure</i></td>"+hypertension+"<td><i>Blood clot in legs or lungs</i></td>"+blood_clot+"<td><i>Anaemia</i></td>"+anaemia+"</tr>";
@@ -229,7 +236,7 @@
                 }
                 tb+="<table id=table_form_ess__ID class=width__ID>";
                 tb+="<colgroup><col style='width:50px' /><col /></colgroup>";
-                tb+="<tr><th colspan=2>Epworth Sleepiness Scale "+name+"</th></tr>";
+                tb+="<tr><th colspan=2>Epworth Sleepiness Scale</th></tr>";
                 tb+="<tr><td><i>ESS</i></td><td style='font-weight:bold'>"+ess+"/24</td></tr>";
                 tb+="</table>";
             }});
@@ -243,7 +250,7 @@
                 }
                 tb+="<table id=table_form_ess__ID class=width__ID>";
                 tb+="<colgroup><col style='width:50px' /><col /></colgroup>";
-                tb+="<tr><th colspan=2>Depression Anxiety Stress Scales "+name+"</th></tr>";
+                tb+="<tr><th colspan=2>Depression Anxiety Stress Scales</th></tr>";
                 tb+="<tr><td><i>DASS Depression</i></td><td style='font-weight:bold'>"+dass_ds+"/42</td></tr>";
                 tb+="<tr><td><i>DASS Anxiety</i></td><td style='font-weight:bold'>"+dass_as+"/42</td></tr>";
                 tb+="<tr><td><i>DASS Stress</i></td><td style='font-weight:bold'>"+dass_ss+"/42</td></tr>";

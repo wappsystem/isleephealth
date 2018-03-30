@@ -18,7 +18,7 @@
         //---------------------------------------------
 	        var table=function(record){
             var participant_uid=record.UID;
-            var tb="<div id=content_container_0 style='padding:20px;'>";
+            var tb="<div style='padding:20px;'>";
             var name="";
             var sql="select Information from [TABLE-20011470] where PUID="+participant_uid;
             $VmAPI.request({data:{cmd:'query_records',sql:sql},callback:function(res){
@@ -235,7 +235,7 @@
                     ess=res.records[0].ESS;
                 }
                 tb+="<table id=table_form_ess__ID class=width__ID>";
-                tb+="<colgroup><col style='width:50px' /><col /></colgroup>";
+                tb+="<colgroup><col style='width:250px' /><col /></colgroup>";
                 tb+="<tr><th colspan=2>Epworth Sleepiness Scale</th></tr>";
                 tb+="<tr><td><i>ESS</i></td><td style='font-weight:bold'>"+ess+"/24</td></tr>";
                 tb+="</table>";
@@ -249,11 +249,67 @@
                     dass_ss=res.records[0].DASS_SS;
                 }
                 tb+="<table id=table_form_ess__ID class=width__ID>";
-                tb+="<colgroup><col style='width:50px' /><col /></colgroup>";
+                tb+="<colgroup><col style='width:250px' /><col /></colgroup>";
                 tb+="<tr><th colspan=2>Depression Anxiety Stress Scales</th></tr>";
                 tb+="<tr><td><i>DASS Depression</i></td><td style='font-weight:bold'>"+dass_ds+"/42</td></tr>";
                 tb+="<tr><td><i>DASS Anxiety</i></td><td style='font-weight:bold'>"+dass_as+"/42</td></tr>";
                 tb+="<tr><td><i>DASS Stress</i></td><td style='font-weight:bold'>"+dass_ss+"/42</td></tr>";
+                tb+="</table>";
+            }});
+            var sql="select Information from [TABLE-20011465] where PUID="+participant_uid;
+            $VmAPI.request({data:{cmd:'query_records',sql:sql},callback:function(res){
+                var isi="",isi_1="";
+                if(res.records.length>0){
+                    isi=res.records[0].ISI;
+                    isi_1=res.records[0].ISI_1;
+                }
+                tb+="<table id=table_form_ess__ID class=width__ID>";
+                tb+="<colgroup><col style='width:250px' /><col /></colgroup>";
+                tb+="<tr><th colspan=2>Insomnia Severity Index</th></tr>";
+                tb+="<tr><td><i>ISI total</i></td><td style='font-weight:bold'>"+isi+"/28</td></tr>";
+                tb+="<tr><td><i>ISI Questions 1a to 1c</i></td><td style='font-weight:bold'>"+isi_1+"/12</td></tr>";
+                tb+="</table>";
+            }});
+            var sql="select Information from [TABLE-20011467] where PUID="+participant_uid;
+            $VmAPI.request({data:{cmd:'query_records',sql:sql},callback:function(res){
+                var phq_1="",phq_2="",phq_3="",phq_4="",phq_5="",phq_6="",phq_7="",phq_8="",phq_9="",phq_10="";
+                if(res.records.length>0){
+                    phq_1=res.records[0].phq_1;
+                    phq_2=res.records[0].phq_2;
+                    phq_3=res.records[0].phq_3;
+                    phq_4=res.records[0].phq_4;
+                    phq_5=res.records[0].phq_5;
+                    phq_6=res.records[0].phq_6;
+                    phq_7=res.records[0].phq_7;
+                    phq_8=res.records[0].phq_8;
+                    phq_9=res.records[0].phq_9;
+                    phq_10=res.records[0].phq_10;
+                }
+                tb+="<table id=table_form_ess__ID class=width__ID>";
+                tb+="<colgroup><col style='width:600px' /><col /></colgroup>";
+                tb+="<tr><th colspan=2>Patient Health Questionnaire</th></tr>";
+                tb+="<tr><td><i>1. Little interest or pleasure in doing things</i></td><td style='font-weight:bold'>"+phq_1+"</td></tr>";
+                tb+="<tr><td><i>2. Feeling down, depressed, or hopeless</i></td><td style='font-weight:bold'>"+phq_2+"</td></tr>";
+                tb+="<tr><td><i>3. Trouble falling or staying asleep, or sleeping too much</i></td><td style='font-weight:bold'>"+phq_3+"</td></tr>";
+                tb+="<tr><td><i>4. Feeling tired or having little energy</i></td><td style='font-weight:bold'>"+phq_4+"</td></tr>";
+                tb+="<tr><td><i>5. Poor appetite or overeating</i></td><td style='font-weight:bold'>"+phq_5+"</td></tr>";
+                tb+="<tr><td><i>6. Feeling bad about yourself — or that you are a failure or have let yourself or your family down</i></td><td style='font-weight:bold'>"+phq_6+"</td></tr>";
+                tb+="<tr><td><i>7. Trouble concentrating on things, such as reading the newspaper or watching television</i></td><td style='font-weight:bold'>"+phq_7+"</td></tr>";
+                tb+="<tr><td><i>8. Moving or speaking so slowly that other people could have noticed? Or the opposite — being so fidgety or restless that you have been moving around a lot more than usual</i></td><td style='font-weight:bold'>"+phq_8+"</td></tr>";
+                tb+="<tr><td><i>9. Thoughts that you would be better off dead or of hurting yourself in some way</i></td><td style='font-weight:bold'>"+phq_9+"</td></tr>";
+                tb+="<tr><td><i>If you checked off <u>any</u> problems, how <u>difficult</u> have these problems made it for you to do your work, take care of things at home, or get along with other people?</i></td><td style='font-weight:bold'>"+phq_10+"</td></tr>";
+                tb+="</table>";
+            }});
+            var sql="select Information from [TABLE-20011468] where PUID="+participant_uid;
+            $VmAPI.request({data:{cmd:'query_records',sql:sql},callback:function(res){
+                var fss="";
+                if(res.records.length>0){
+                    fss=res.records[0].fss;
+                }
+                tb+="<table id=table_form_ess__ID class=width__ID>";
+                tb+="<colgroup><col style='width:250px' /><col /></colgroup>";
+                tb+="<tr><th colspan=2>Fatigue Severity Scale</th></tr>";
+                tb+="<tr><td><i>FSS</i></td><td style='font-weight:bold'>"+fss+"/63</td></tr>";
                 tb+="</table>";
             }});
             tb+="</div>";

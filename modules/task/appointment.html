@@ -26,8 +26,14 @@
 			},'text');
 		}
 		//-------------------------------------
-		var initial_pid_list=[];		get_appointment_pid_list('http://127.0.0.1:8000/wappsystem/isleephealth-patients-portal/configurations/initial.json',initial_pid_list);
-		var second_pid_list=[];
+		//var initial_pid_list=[];	get_appointment_pid_list('http://127.0.0.1:8000/wappsystem/isleephealth-patients-portal/configurations/initial.json',initial_pid_list);
+        var initial_pid_list=[
+            "20011365","20011469","20011470",
+            "20011363","20011364","20011464",
+            "20011465","20011466","20011467",
+         	"20011468"
+             ];
+        var second_pid_list=[];
 		//-------------------------------------
 
         $('#D__ID').on('load',function(){  _set_req(); _request_data(); })

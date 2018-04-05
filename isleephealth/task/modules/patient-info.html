@@ -1,6 +1,6 @@
 <section>
     <div style='padding:30px'>
-        <div id=contents__ID ></div>
+        <div id=contents__ID >coming soon...</div>
     </div>
 </section>
 <script>
@@ -9,11 +9,12 @@
 		var participant_uid;
 		var config;
 		if($vm.vm['__ID'].op.record==undefined){
-			$('#contents__ID').html("No patient");
+			//$('#contents__ID').html("No patient");
 			return;
 		}
         //-------------------------------------
         $('#D__ID').on('load',function(){
+return;
 			var record=$vm.vm['__ID'].op.record;
 			participant_uid=record.UID;
 			var url=$vm.url($vm.vm['__ID'].op.url);

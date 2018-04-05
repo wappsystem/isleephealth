@@ -26,7 +26,7 @@ var vm_init=function(){
 	$vm.version=$vm.ver[0];
 	//--------------------------------------------------------
 	var load_config_and_init=function(){
-		var url=$vm.hosting_path+"/configurations/index.json";
+		var url=$vm.hosting_path+"/index.json";
 		var ver=localStorage.getItem(url+"_ver");
 		var txt=localStorage.getItem(url+"_txt");
 		//------------------------------------------
@@ -64,6 +64,10 @@ var vm_init=function(){
 				$vm.server          ='production';
 				$VmAPI.api_base     =config.api_path_production;
 			}
+			else if(window.location.toString().indexOf('database=woolcock')!=-1){
+				$vm.server          ='production';
+				$VmAPI.api_base     =config.api_path_woolcock;
+			}
 			else{
 				$vm.server          ='development';
 				$VmAPI.api_base     =config.api_path_development;
@@ -89,7 +93,7 @@ var vm_init=function(){
 	var load_vm      =function(){ load_js($vm.url('https://vmiis.github.io/framework/distribution/vmframework.min.js'),init);}
 	var init         =function(){
 		$vm.init_v3({callback:function(){$vm.init_status=1;}})
-		$vm.load_first_module_to_body({url:'/modules/layout/main.html',callback:last});
+		$vm.load_first_module_to_body({url:'/layout/main.html',callback:last});
 	}
 	//--------------------------------------------------------
 	var load_js=function(url,next){
@@ -125,13 +129,14 @@ var vm_init=function(){
 			//use local version
 			text=text.replace(/https:\/\/cbs.wappsystem.com\/dev\/github/g,window.location.protocol+'//'+window.location.host);
 			text=text.replace(/https:\/\/cbs.wappsystem.com\/pro\/github/g,window.location.protocol+'//'+window.location.host);
-			text=text.replace(/https:\/\/distributed-modules.vmiis.com/g,window.location.protocol+'//'+window.location.host+'/vmiis/distributed-modules');
 
 			//do not use local system files
 			text=text.replace(/http:\/\/127.0.0.1:8000\/vmiis\/api/g,'https://vmiis.github.io/api');
 			text=text.replace(/http:\/\/127.0.0.1:8000\/vmiis\/framework/g,'https://vmiis.github.io/framework');
 			text=text.replace(/http:\/\/127.0.0.1:8000\/vmiis\/component/g,'https://vmiis.github.io/component');
 			text=text.replace(/http:\/\/127.0.0.1:8000\/vmiis\/modules/g,'https://vmiis.github.io/modules');
+
+			text=text.replace(/https:\/\/wappsystem.github.io/g, window.location.protocol+'//'+window.location.host+'/wappsystem');
 		}
 		if(window.location.toString().indexOf('_d=1')!=-1){
 			//use local system files
@@ -141,26 +146,16 @@ var vm_init=function(){
 			text=text.replace(/https:\/\/vmiis.github.io\/component/g,host+'/vmiis/component');
 			text=text.replace(/https:\/\/vmiis.github.io\//g,host+'/vmiis/applications/');
 		}
-		if(window.location.toString().indexOf('_d=2')!=-1){
-			//use latest unstable version (master branch, not gh-pages branch)
-			text=text.replace(/https:\/\/vmiis.github.io\/api/g,'https://raw.githubusercontent.com/vmiis/api/master');
-			text=text.replace(/https:\/\/vmiis.github.io\/framework/g,'https://raw.githubusercontent.com/vmiis/framework/master');
-			text=text.replace(/https:\/\/vmiis.github.io\/component/g,'https://raw.githubusercontent.com/vmiis/component/master');
-			text=text.replace(/https:\/\/vmiis.github.io\/modules/g,'https://raw.githubusercontent.com/vmiis/modules/master');
-			text=text.replace(/http:\/\/127.0.0.1:8000\/vmiis\/api/g,'https://raw.githubusercontent.com/vmiis/api/master');
-			text=text.replace(/http:\/\/127.0.0.1:8000\/vmiis\/framework/g,'https://raw.githubusercontent.com/vmiis/framework/master');
-			text=text.replace(/http:\/\/127.0.0.1:8000\/vmiis\/component/g,'https://raw.githubusercontent.com/vmiis/component/master');
-			text=text.replace(/http:\/\/127.0.0.1:8000\/vmiis\/modules/g,'https://raw.githubusercontent.com/vmiis/modules/master');
-		}
 		return text;
 	}
 	//--------------------------------------------------------
 	var last=function(){
-		$('head').append("<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css'>");
+		$('head').append("<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css'>");
         $('head').append("<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>");
         $('head').append("<link rel='stylesheet' href='https://ajax.aspnetcdn.com/ajax/jquery.ui/1.12.1/themes/redmond/jquery-ui.css'>");
-        $.getScript('https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js',function(){$vm.js_popper=1;});
-        $.getScript('https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js',function(){$vm.js_bootstrap=1;});
+        //$('head').append("<link rel='stylesheet' href='https://www.w3schools.com/w3css/4/w3.css'>");
+        $.getScript('https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js',function(){$vm.js_popper=1;});
+        $.getScript('https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js',function(){$vm.js_bootstrap=1;});
 		$.getScript('https://ajax.aspnetcdn.com/ajax/jquery.ui/1.12.1/jquery-ui.min.js',function(){$vm.js_jquery_ui=1;});
 		$.getScript('https://apis.google.com/js/plusone.js');
         $.getScript('https://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.min.js');
@@ -168,11 +163,16 @@ var vm_init=function(){
 		$.getScript('https://www.gstatic.com/charts/loader.js',function(){
 			google.charts.load('current', {packages: ['corechart']});
 		});
-        $vm.module_list['_system_export_dialog_module']={table_id:'',url:'__PARTS__/dialog/export_dialog_module.html'};
+		//-------------------------------------
+        $vm.module_list['_system_export_dialog_module']={table_id:'',url:'__COMPONENT__/dialog/export_dialog_module.html'};
         $vm.load_module_by_name('_system_export_dialog_module','',{})
         //-------------------------------------
-        $vm.module_list['_system_import_dialog_module']={table_id:'',url:'__PARTS__/dialog/import_dialog_module.html'};
+        $vm.module_list['_system_import_dialog_module']={table_id:'',url:'__COMPONENT__/dialog/import_dialog_module.html'};
         $vm.load_module_by_name('_system_import_dialog_module','',{})
+		//-------------------------------------
+		$vm.module_list['uploading_file_dialog_module']={table_id:'',url:'__COMPONENT__/dialog/uploading_file_dialog_module.html'};
+        $vm.load_module_by_name('_system_import_dialog_module','',{})
+		//-------------------------------------
 	}
 	//********************************************************
 	load_config_and_init();

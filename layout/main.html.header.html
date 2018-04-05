@@ -14,7 +14,7 @@
                 -->
 	            </div>
 	        </a>
-	        <a class="navbar-brand d-lg-none" onclick="$vm.nav_load_module('panel_setup_home');">
+	        <a class="navbar-brand d-lg-none" onclick="$vm.nav_load_module('website_home');">
 	            <div class=small_logo__ID>Sleep Health</div>
 	        </a>
 		</div>
@@ -23,9 +23,9 @@
         </button>
         <div id="navbars__ID" class="navbar-collapse collapse">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item"><a class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" onclick="$vm.nav_load_module('panel_setup_home');"><i class="fa fa-home"></i> Home</a></li>
-                <li class="nav-item"><a class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" onclick="$vm.nav_load_module('panel_setup');"><i class="fa fa-th"></i> Questionnaire Set-up</a></li>
-                <li class="nav-item"><a class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" onclick="$vm.nav_load_module('panel_report');"><i class="fa fa-th"></i> Reports</a></li>
+                <li class="nav-item"><a class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" onclick="$vm.nav_load_module('website_home');"><i class="fa fa-home"></i> Home</a></li>
+                <li class="nav-item"><a class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" onclick="$vm.nav_load_module('task');"><i class="fa fa-th"></i> Questionnaire Set-up</a></li>
+                <li class="nav-item"><a class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" onclick="$vm.nav_load_module('report');"><i class="fa fa-th"></i> Reports</a></li>
                 <li class="nav-item dropdown" id=signin__ID>
                     <a class="nav-link dropdown-toggle" id="nav_dropdown__ID" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i> Sign In</a></a>
                     <div class="dropdown-menu" aria-labelledby="nav_dropdown__ID">
@@ -169,7 +169,8 @@
             color: #000;
 		}
 		#navbars__ID .navbar-nav li.nav-item a.nav-link:hover {
-			color: #18BC9C;
+			/*color: #18BC9C;*/
+            color: #ff7007;
 			outline: none;
 		}
 		#navbars__ID .navbar-nav li.nav-item a.nav-link:active,

@@ -1,0 +1,10 @@
+{
+	"api_path_development":"https://cbs.wappsystem.com/dev/",
+	"api_path_production":"https://cbs.wappsystem.com/pro/",
+	"default_production":"No",
+	"panels":{
+		"website":	{"url":"","modules":["website/index.json"]},
+		"task":		{"url":"isleephealth/task/panel.html",  "modules":["isleephealth/task/index.json"]},
+		"report":	{"url":"isleephealth/report/panel.html","modules":["isleephealth/report/index.json"]}
+	}
+}

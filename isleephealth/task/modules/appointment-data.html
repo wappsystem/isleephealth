@@ -9,11 +9,13 @@
         var fields="First_Name,Last_Name,Email,Physician,Appointment_Type,Date,Appointment_Time,_Login_ID,Password,_Send_Email,_Report,_Patient_Info";
         _fields="_Form,"+fields+",Submit Date|DateTime,Submitted by|Author,_Delete";
         //-------------------------------------
-        var prefix              =$vm.module_list[$vm.vm['__ID'].name].prefix;  if(prefix==undefined) prefix="";
-        var prefix2             =$vm.module_list[$vm.vm['__ID'].name].prefix2; if(prefix2==undefined) prefix2="";
-        var db_pid              =$vm.module_list[$vm.vm['__ID'].name].table_id;
-        var physician_tid		=$vm.module_list[$vm.vm['__ID'].name].physician_tid;
-		var appointment_type_tid=$vm.module_list[$vm.vm['__ID'].name].appointment_type_tid;
+		var this_module			=$vm.module_list[$vm.vm['__ID'].name];
+        var prefix              =this_module.prefix;  if(prefix==undefined) prefix="";
+        var prefix2             =this_module.prefix2; if(prefix2==undefined) prefix2="";
+        var db_pid              =this_module.table_id;
+        var physician_tid		=this_module.physician_tid;
+		var appointment_type_tid=this_module.appointment_type_tid;
+		var form_module			=this_module.form_module;
 		//-------------------------------------
         var initial_pid_list=[
             "20011365","20011469","20011470",
@@ -23,6 +25,8 @@
         ];
 		var second_pid_list=[];
         //-------------------------------------
+		$('#new__ID').off('click').on('click',function(){$vm.nav_load_module(prefix+form_module,'',{goback:1})})
+		//-------------------------------------
         $('#D__ID').on('load',function(){  _set_req(); _request_data(); })
         //-------------------------------------
         var _before_submit=function(record,dbv){

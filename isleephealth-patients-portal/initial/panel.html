@@ -60,7 +60,7 @@
 					var $li=$(this);
                     if($li.data('record_id')!=''){
 						$li.on('click',function(){
-							var sql="select Information from [TABLE-"+$li.data('record_pid')+"] where id=@I1";
+							var sql="select ID,UID,Information from [TABLE-"+$li.data('record_pid')+"] where id=@I1";
 							$VmAPI.request({data:{cmd:"query_records",sql:sql,i1:$li.data('record_id')},callback:function(res){
 								if(res.records.length==1){
 									var m=prefix+$li.attr('module');

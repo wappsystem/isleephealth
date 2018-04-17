@@ -6,7 +6,7 @@
         //-------------------------------------
         VmInclude:__COMPONENT__/grid/grid.v3.js
         //-------------------------------------
-        var fields="First_Name,Last_Name,Email,Physician,Appointment_Type,Date,Appointment_Time,_Login_ID,Password,_Send_Email,_Results"; //*,_Report,_Patient_Info*
+        var fields="First_Name,Last_Name,Email,Location,Physician,Appointment_Type,Date,Appointment_Time,_Login_ID,Password,_Send_Email,_Results"; //*,_Report,_Patient_Info*
         _fields="_Form,"+fields+",Submit Date|DateTime,Submitted by|Author,_Delete";
         //-------------------------------------
 		var this_module			=$vm.module_list[$vm.vm['__ID'].name];
@@ -39,6 +39,13 @@
         //-------------------------------------
         _cell_render=function(records,I,field,td,set_value,source){
             switch(field){
+                case 'Location':
+                    var html="<select style='border:0;'>\
+                    <option>MLC</option><option>Bondi Junction</option>\
+                    </select>\
+                    ";
+                    VmInclude:__COMPONENT__/grid/field_select.js
+                    break;
                 case 'Physician':
                     var sql="with tb as (select distinct name=S1,value2=uid from [TABLE-"+physician_tid+"])";
             		sql+=" select top 10 name,value=name,value2 from tb where Name like '%'+@S1+'%' ";

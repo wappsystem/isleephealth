@@ -23,6 +23,7 @@
 			Password: <span id=Password__ID></span><br>
 
 			<br>
+            If you need to cancel or change your appointment, please call the clinic on <span id=contact__ID></span>. <br><br>
             We look forward to seeing you at your visit.</b>
 
             <br>
@@ -53,8 +54,8 @@
             $('#doctor2__ID').text(record.Physician);
             $('#appointment_time__ID').text(record.Appointment_Time);
             $('#date__ID').text(record.Date);
-            if(record.Location=='MLC') {$('#location_2__ID').text("Level 57, MLC Building Martin Pl");$('#location_3__ID').text("Sydney NSW 2000");}
-            else $('#location_2__ID').text("22/101 Grafton St");$('#location_3__ID').text("Bondi Junction NSW 2022")
+            if(record.Location=='MLC') {$('#location_2__ID').text("Level 57, MLC Building, Martin Pl");$('#location_3__ID').text("Sydney NSW 2000");$('#contact__ID').text("9238 2209");}
+            else {$('#location_2__ID').text("Westfield Tower 2, Level 22, 101 Grafton St");$('#location_3__ID').text("Bondi Junction NSW 2022");$('#contact__ID').text("9238 2209");}
             var d="?visit=initial";
             if($vm.server=='development'){
                 d=d+"&database=development&username="+record.UID+'-'+pid+"&password="+record.Password;

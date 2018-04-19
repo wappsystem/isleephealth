@@ -42,14 +42,16 @@
             }});
             var sql="select Information from [TABLE-20011363] where PUID="+participant_uid;
             $VmAPI.request({data:{cmd:'query_records',sql:sql},callback:function(res){
-                var benefit="",ref_doc="",ref_letter="";
+                var benefit="",ref_doc="",ref_letter="",reason="";
                 if(res.records.length>0){
+                    reason=res.records[0].Reason;
                     benefit=res.records[0].benefits;
                     ref_doc=res.records[0].Referring_doctor;
                     ref_letter=res.records[0].File_Name;
                 }
                 tb+="<table class=width__ID>";
                 tb+="<colgroup><col style='width:300px' /><col style='width:200px'  /><col /></colgroup>";
+                tb+="<tr><td>Reason for visit</td><td  colspan=2>"+reason+"</td></tr>";
                 tb+="<tr><td>"+benefit+"</td><td>Ref. Dr: "+ref_doc+"</td><td>"+ref_letter+"</td></tr>";
                 tb+="</table><br>";
             }});

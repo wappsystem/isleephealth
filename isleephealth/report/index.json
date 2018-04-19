@@ -1,7 +1,9 @@
 {
 	"modules":
 	{
-		"report-initial-appointment":{"table_id":"20011471","url":"isleephealth/report/modules/report-initial-appointment.html"},
-		"report-initial-summary":{"table_id":"20011471","url":"isleephealth/report/modules/report-initial-summary.html"}
+		"report-initial-appointment-day-list":{"table_id":"20011471","url":"isleephealth/report/modules/report-initial-appointment-day-list.html"},
+		"report-initial-appointment-summary":{"table_id":"20011471","url":"isleephealth/report/modules/report-initial-appointment-summary.html"},
+		"report-initial-appointment-check":{"table_id":"20011471","url":"isleephealth/report/modules/report-initial-appointment-check.html"},
+		"report-initial-appointment-patient-info":{"table_id":"20011471","url":"isleephealth/report/modules/report-initial-appointment-patient-info.html"}
 	}
 }

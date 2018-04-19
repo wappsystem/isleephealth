@@ -14,7 +14,7 @@
         $('#t1__ID').datepicker({dateFormat:'dd/mm/yy'});
         $('#t1__ID').val($.datepicker.formatDate('dd/mm/yy', today));
         //-------------------------------------
-        var fields="First_Name,Last_Name,Email,Location,Physician,Appointment_Type,Date,Appointment_Time,_Report,_Patient_Info"; //*,_Report,_Patient_Info*
+        var fields="First_Name,Last_Name,Email,Location,Physician,Appointment_Type,Date,Appointment_Time,_Report,_Patient_Info,Referral_letter"; //*,_Report,_Patient_Info*
         _fields="_Form,"+fields+",Submit Date|DateTime,Submitted by|Author,_Delete";
         //-------------------------------------
 		var this_module			=$vm.module_list[$vm.vm['__ID'].name];
@@ -39,13 +39,14 @@
         //-------------------------------------
         var _set_req=function(){
             var sql="with tb as (select Information,ID,UID,PUID,DateTime,Modified=Convert(varchar,Modified,127),Author,RowNum=row_number() over (order by ID DESC) from [TABLE-"+_db_pid+"-@S1] where DT1=@T1 )";
-            sql+="select Information,ID,UID,PUID,DateTime,Modified,Author,RowNum from tb where RowNum between @I6 and @I7";
+            sql+=", tb2 as (select Referral_letter=JSON_VALUE(Information,'$.File_Name'),letter_puid=PUID from [TABLE-20011363]) ";
+            sql+="select Referral_letter,Information,ID,UID,PUID,DateTime,Modified,Author,RowNum from tb left join tb2 on letter_puid= UID where RowNum between @I6 and @I7";
             var sql_n="select count(ID) from [TABLE-"+_db_pid+"-@S1]";
         	_req={cmd:'query_records',db_pid:_db_pid,sql:sql,sql_n:sql_n,t1:$('#t1__ID').val(),s1:'"'+$('#keyword__ID').val()+'"',I:$('#I__ID').text(),page_size:$('#page_size__ID').val()}
         }
         //-------------------------------------
         var _set_req_export=function(i1,i2){
-            var sql="with tb as (select Information,DateTime,Author,RowNum=row_number() over (order by ID DESC) from [TABLE-"+_db_pid+"-@S1] )";
+            var sql="with tb as (select Information,DateTime,Author,RowNum=row_number() over (order by ID DESC) from [TABLE-"+_db_pid+"] where DT1=@T1)";
             sql+="select Information,DateTime,Author from tb where RowNum between @I1 and @I2";
         	_req={cmd:'query_records',sql:sql,i1:i1,i2:i2,t1:$('#t1__ID').val()};
         }
@@ -65,7 +66,7 @@
 					if(records[I].UID===undefined) return;
 					td.html("<u style='cursor:pointer'>Summay</u>");
 					td.find('u').on('click',function(){
-                        $vm.nav_load_module(prefix+prefix2+"report-initial-summary",$vm.root_layout_content_slot,{record:records[I]});
+                        $vm.nav_load_module(prefix+prefix2+"report-initial-appointment-summary",$vm.root_layout_content_slot,{record:records[I]});
 					});
 					break;
                 case '_Patient_Info':
@@ -73,9 +74,27 @@
 					if(records[I].UID===undefined) return;
 					td.html("<u style='cursor:pointer'>Patient Info</u>");
 					td.find('u').on('click',function(){
-                        $vm.nav_load_module(prefix+prefix2+"patient-info",$vm.root_layout_content_slot,{record:records[I]});
+                        $vm.nav_load_module(prefix+prefix2+"report-initial-appointment-patient-info",$vm.root_layout_content_slot,{record:records[I]});
 					});
 					break;
+                case 'Referral_letter':
+                    records[I].vm_custom[field]=true;
+                    if(records[I][field]===undefined) records[I][field]="";
+                    td.data('filename_field',field);
+                    var html="<u style='cursor:pointer'>"+records[I][field]+"</u>";
+                    html+="<span class=file_buttons></span>";
+                    html+="<form><input type=file style='display:none'></input></form>";
+                    td.html(html);
+                    if(records[I][field]==="" || records[I][field]===null || records[I][field]===undefined) td.find('a.remove_file').css('visibility','hidden');
+                    td.find('u').on('click',function(){
+                        var f_name=$(this).html();
+                        var rid=records[I].ID;
+                        if(rid!==undefined){
+                            $vm.open_link({rid:rid,filename:f_name});
+                        }
+                        else alert("No file was found on server.")
+                    });
+                    break;
             }
         }
         //-------------------------------------

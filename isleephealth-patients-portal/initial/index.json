@@ -2,10 +2,10 @@
 	"modules":
 	{
 		"contact-details":		{"table_id":"20011470","url":"isleephealth-patients-portal/initial/modules/contact-details.html"},
-        "medicare-referrals":	{"table_id":"20011363","url":"isleephealth-patients-portal/initial/modules/medicare-referrals.html"},
+		"medicare-referrals":	{"table_id":"20011363","url":"isleephealth-patients-portal/initial/modules/medicare-referrals.html"},
         "sleep-history":		{"table_id":"20011469","url":"isleephealth-patients-portal/initial/modules/sleep-history.html"},
 		"health-history":		{"table_id":"20011365","url":"isleephealth-patients-portal/initial/modules/health-history.html"},
-        "ess":					{"table_id":"20011364","url":"isleephealth-patients-portal/initial/modules/ess.html"},
+		"ess":					{"table_id":"20011364","url":"isleephealth-patients-portal/initial/modules/ess.html"},
 		"dass":					{"table_id":"20011464","url":"isleephealth-patients-portal/initial/modules/dass.html"},
 		"isi":					{"table_id":"20011465","url":"isleephealth-patients-portal/initial/modules/isi.html"},
 		"psqi":					{"table_id":"20011466","url":"isleephealth-patients-portal/initial/modules/psqi.html"},

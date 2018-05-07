@@ -22,9 +22,10 @@
             var name="";
             var sql="select DateTime,Information from [TABLE-20011470] where PUID="+participant_uid;
             $VmAPI.request({data:{cmd:'query_records',sql:sql},callback:function(res){
-                var sex="",dob="",name="",dob="",residential_address="",suburb,postcode="",phone_number="",email="",emergency_contact="",emergency_contact_number="";
+                var sex="",dob="",first_name="",last_name="",dob="",residential_address="",suburb,postcode="",phone_number="",email="",emergency_contact="",emergency_contact_number="";
                 if(res.records.length>0){
-                    name=res.records[0].name;
+                    first_name=res.records[0].first_name;
+                    last_name=res.records[0].last_name;
                     sex=res.records[0].sex;
                     dob=res.records[0].dob;
                     residential_address=res.records[0].residential_address
@@ -40,7 +41,7 @@
                 tb+="<table class=width__ID>";
                 tb+="<colgroup><col style='width:200px' /><col /></colgroup>";
                 tb+="<tr><td style='font-size:150%' colspan=3>Patient Info</td></tr>"
-                tb+="<tr><td>Name</td><td>"+name+"</td></tr>";
+                tb+="<tr><td>Name</td><td>"+first_name+" "+last_name+"</td></tr>";
                 tb+="<tr><td>Sex</td><td>"+sex+"</td></tr>";
                 tb+="<tr><td>Date of Birth</td><td>"+dob+"</td></tr>";
                 tb+="<tr><td>Residential Address</td><td>"+residential_address+"</td></tr>";

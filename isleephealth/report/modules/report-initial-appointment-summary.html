@@ -22,9 +22,10 @@
             var name="";
             var sql="select DateTime,Information from [TABLE-20011470] where PUID="+participant_uid;
             $VmAPI.request({data:{cmd:'query_records',sql:sql},callback:function(res){
-                var sex="",dob="",name="",dob="",submit=[];
+                var sex="",dob="",first_name="",last_name="",dob="",submit=[];
                 if(res.records.length>0){
-                    name=res.records[0].name;
+                    first_name=res.records[0].first_name;
+                    last_name=res.records[0].last_name;
                     sex=res.records[0].sex;
                     dob=res.records[0].dob;
                     submit=(res.records[0].DateTime).split(' ');
@@ -35,7 +36,7 @@
                 tb+="<table class=width__ID>";
                 tb+="<colgroup><col style='width:300px' /><col style='width:200px'  /><col /></colgroup>";
                 tb+="<tr><td style='font-size:150%' colspan=3>Patient Report for</td></tr>"
-                tb+="<tr><th>"+name+"</th><th>"+sex+"</th><th>"+dob+"</th></tr>";
+                tb+="<tr><th>"+first_name+" "+last_name+"</th><th>"+sex+"</th><th>"+dob+"</th></tr>";
                 tb+="<tr><th colspan=3>&nbsp;</th></tr>";
                 tb+="<tr><td colspan >Date completed </td><td colspan=2>"+submit[0]+"</td></tr>"
                 tb+="</table><br>";

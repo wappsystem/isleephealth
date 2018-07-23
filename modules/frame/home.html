@@ -1,0 +1,64 @@
+<div id=page__ID>
+	<div class=container style='max-width:900px;'>
+		<div class=row>
+			<div class="col-sm-12 col-lg-12 text-center" style='padding:20px'>
+				<h2>Welcome to Integrated Sleep Health</h2>
+			</div>
+		</div>
+		<div class=columnbox__ID>
+			<h5>Providing expert care in sleep health.</h5>
+			<p>
+				<img src=__CURRENT_PATH__home.html.1.jpg class="img-fluid" >
+			</p>
+			<p style='font-size:120%'>
+				<br>
+				Integrated Sleep Health provides expert help for patients
+				with all different types of sleep disorders. Our philosophy
+				is patient-centred, grounded in our academic practice and
+				clinical research experience. We are affiliated with Australia's
+				leading sleep research centre and are part of a network of
+				sleep experts in different clinical sub-specialties, including
+				clinical psychology, nutrition and exercise.
+				<br><br>
+				<b>We talk to patients, we don't sell machines. </b>
+			</p>
+		</div>
+	</div>
+</div>
+<script>
+    function F__ID(){
+		//--------------------------------------------------------
+		$vm.vm["__ID"].show=function(){
+			document.title="Home | "+$vm.default_title;
+            $("meta[name='description']").attr("content","Welcome to Integrated Sleep Health");
+		}
+        //--------------------------------------------------------
+    }
+</script>
+<style>
+	.columnbox__ID{
+		max-width: 900px;
+		column-count: 2;
+		column-width: 420px;
+		column-gap: 30px;
+	}
+
+	#D__ID{
+		height:100%;
+		overflow:auto;
+		animation: vm_module_fadein 1.0s;
+
+		background: rgba(255,255,255,0.65);
+		color:#283f55;
+        font-size:10pt;
+        font-family: Verdana,Helvetica,Arial,sans-serif;
+	}
+	#page__ID{
+        padding:120px 0 0 20px;
+    }
+	@media screen and (max-width: 900px) {
+		#page__ID{
+	        padding:20px 0 0 20px;
+	    }
+	}
+</style>

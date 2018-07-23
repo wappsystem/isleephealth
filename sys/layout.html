@@ -105,7 +105,7 @@
         $vm.root_layout_footer='footer_0';
         if($vm.server=='production') $('#database_d_0').hide();
         //-----------------------------------------------------
-        $('#text_0').html("INTEGRATED SLEEP HEALTH LEVEL 57, MLC BUILDING, 19-29 MARTIN PLACE, SYDNEY, NSW, 2000 LEVEL 22, WESTFIELD TOWER 2, 101 GRAFTON ST, BONDI JUNCTION, NSW, 2022");
+        $('#text_0').html("INTEGRATED SLEEP HEALTH <span id=FL_0>LEVEL 57, MLC BUILDING, 19-29 MARTIN PLACE, SYDNEY, NSW, 2000 LEVEL 22, WESTFIELD TOWER 2, 101 GRAFTON ST, BONDI JUNCTION, NSW, 2022</span>");
         //------------------------------------
     }
     //---------------------------------------------
@@ -176,6 +176,7 @@
         background-attachment: fixed;
     }
     /*----------------------*/
+    @import url('https://fonts.googleapis.com/css?family=Nunito|Nunito+Sans|Roboto+Slab');
     /*layout*/
     #vm_framework{
         height:100%;
@@ -322,7 +323,7 @@
     /*----------------------*/
     /*content*/
     #content_container_0{
-        /*position:fixed;*/
+        position:fixed;
         width:100%;
         overflow:hidden;
     }

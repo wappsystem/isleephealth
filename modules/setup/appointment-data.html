@@ -83,7 +83,7 @@
                     td.html("<u style='cursor:pointer'>Results</u>");
                     td.find('u').on('click',function(){
                         records[I].PID=_db_pid;
-                        $vm.nav_load_module("panel-initial",$vm.root_layout_content_slot,{record:records[I]});
+                        $vm.load_module_v2("panel-initial",$vm.root_layout_content_slot,{record:records[I]});
                     });
                     break;
                 case '_Report':

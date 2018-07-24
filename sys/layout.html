@@ -114,6 +114,7 @@
         if(x.className==='') x.className="responsive";
         else x.className="";
     }
+    //---------------------------------------------
     $vm.header=function(){
         $('#vm_menu a').on('click',function(e){
             e.preventDefault();
@@ -150,6 +151,7 @@
                 $('#vm_signout').removeClass('vm_hide');
             }
         }
+        //---------------------------------------------
         show_user();
         //---------------------------------------------
         if(window.location.hostname!='127.0.0.1'){

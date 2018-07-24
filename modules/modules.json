@@ -1,9 +1,9 @@
 {
 	"modules":
 	{
-		"questionnaire-setup":  {"url":"frame/panel-setup.html"},
-		"reports":    			{"url":"frame/panel-report.html"},
-		"panel-initial": 		{"url":"frame/panel-initial.html"},
+		"questionnaire-setup":  {"url":"frame/setup.html"},
+		"reports":    			{"url":"frame/report.html"},
+		"panel-initial": 		{"url":"frame/initial.html"},
 
 		"appointment-data":  	{"table_id":"20011471","url":"setup/appointment-data.html","physician_tid":"20011472","appointment_type_tid":"20011473","name_for_search":"Appointment Data","form_module":"appointment-form"},
 		"appointment-form":  	{"table_id":"20011471","url":"setup/appointment-form.html","physician_tid":"20011472","appointment_type_tid":"20011473","name_for_search":"Appointment Form"},

@@ -24,12 +24,12 @@
 		"medicare-referrals":	{"table_id":"20011363","url":"initial/medicare-referrals.html"},
         "sleep-history":		{"table_id":"20011469","url":"initial/sleep-history.html"},
 		"health-history":		{"table_id":"20011365","url":"initial/health-history.html"},
-		"ess":					{"table_id":"20011364","url":"initial/ess.html"},
+		"ess":					{"table_id":"20011364","url":"initial/ess-report.html"},
 		"dass":					{"table_id":"20011464","url":"initial/dass.html"},
 		"isi":					{"table_id":"20011465","url":"initial/isi.html"},
 		"psqi":					{"table_id":"20011466","url":"initial/psqi.html"},
 		"phq":					{"table_id":"20011467","url":"initial/phq.html"},
-		"fss":					{"table_id":"20011468","url":"initial/fss.html"}
+		"fss":					{"table_id":"20011468","url":"initial/fss-report.html"}
 	},
 	"dictionary":
 		{

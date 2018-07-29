@@ -19,6 +19,7 @@
 		"report-initial-appointment-summary":{"table_id":"20011471","url":"reports/report-initial-appointment-summary.html"},
 		"report-initial-appointment-check":{"table_id":"20011471","url":"reports/report-initial-appointment-check.html"},
 		"report-initial-appointment-patient-info":{"table_id":"20011471","url":"reports/report-initial-appointment-patient-info.html"},
+		"report-initial-appointment-patient-list":{"table_id":"20011471","url":"reports/report-initial-appointment-patient-list.html"},
 
 		"contact-details":		{"table_id":"20011470","url":"initial/contact-details.html"},
 		"medicare-referrals":	{"table_id":"20011363","url":"initial/medicare-referrals.html"},
@@ -28,7 +29,7 @@
 		"dass":					{"table_id":"20011464","url":"initial/dass-report.html"},
 		"isi":					{"table_id":"20011465","url":"initial/isi-report.html"},
 		"psqi":					{"table_id":"20011466","url":"initial/psqi.html"},
-		"phq":					{"table_id":"20011467","url":"initial/phq.html"},
+		"phq":					{"table_id":"20011467","url":"initial/phq-report.html"},
 		"fss":					{"table_id":"20011468","url":"initial/fss-report.html"}
 	},
 	"dictionary":

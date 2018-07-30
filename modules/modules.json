@@ -23,14 +23,14 @@
 
 		"contact-details":		{"table_id":"20011470","url":"initial/contact-details.html"},
 		"medicare-referrals":	{"table_id":"20011363","url":"initial/medicare-referrals.html"},
-        "sleep-history":		{"table_id":"20011469","url":"initial/sleep-history-report.html"},
-		"health-history":		{"table_id":"20011365","url":"initial/health-history-report.html"},
-		"ess":					{"table_id":"20011364","url":"initial/ess-report.html"},
-		"dass":					{"table_id":"20011464","url":"initial/dass-report.html"},
-		"isi":					{"table_id":"20011465","url":"initial/isi-report.html"},
-		"psqi":					{"table_id":"20011466","url":"initial/psqi.html"},
-		"phq":					{"table_id":"20011467","url":"initial/phq-report.html"},
-		"fss":					{"table_id":"20011468","url":"initial/fss-report.html"}
+        "sleep-history-report":		{"table_id":"20011469","url":"initial/sleep-history-report.html"},
+		"health-history-report":		{"table_id":"20011365","url":"initial/health-history-report.html"},
+		"ess-report":					{"table_id":"20011364","url":"initial/ess-report.html"},
+		"dass-report":					{"table_id":"20011464","url":"initial/dass-report.html"},
+		"isi-report":					{"table_id":"20011465","url":"initial/isi-report.html"},
+		"psqi":							{"table_id":"20011466","url":"initial/psqi.html"},
+		"phq-report":					{"table_id":"20011467","url":"initial/phq-report.html"},
+		"fss-report":					{"table_id":"20011468","url":"initial/fss-report.html"}
 	},
 	"dictionary":
 		{

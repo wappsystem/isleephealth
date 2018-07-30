@@ -5,6 +5,16 @@
 		"reports":    			{"url":"frame/report.html"},
 		"panel-initial": 		{"url":"frame/initial.html"},
 
+		"permissions":                          {                      "url":"permissions/panel.html"},
+        "permission-check":                     {                      "url":"permissions/check.html"},
+        "permission-role-login-data":           {"table_id":"20011583","url":"permissions/role-login-data.html","form_module":"permission-role-login-form"},
+        "permission-role-login-form":           {"table_id":"20011583","url":"permissions/role-login-form.html"},
+        "permission-role-table-group-data":     {"table_id":"20011582","url":"permissions/role-table-group-data.html","form_module":"permission-role-table-group-form"},
+        "permission-role-table-group-form":     {"table_id":"20011582","url":"permissions/role-table-group-form.html"},
+    	"permission-query-data":                {"table_id":"20011581","url":"permissions/query-data.html","form_module":"permission-query-form"},
+        "permission-query-form":                {"table_id":"20011581","url":"permissions/query-form.html"},
+
+
 		"appointment-data":  	{"table_id":"20011471","url":"setup/appointment-data.html","physician_tid":"20011472","appointment_type_tid":"20011473","name_for_search":"Appointment Data","form_module":"appointment-form"},
 		"appointment-form":  	{"table_id":"20011471","url":"setup/appointment-form.html","physician_tid":"20011472","appointment_type_tid":"20011473","name_for_search":"Appointment Form"},
 		"physician":      		{"table_id":"20011472","url":"setup/physician.html","name_for_search":"Physician"},
@@ -12,6 +22,7 @@
 		"email-001":      		{"table_id":"20011471","url":"setup/email-001.html","name_for_search":""},
 		"patient-info":   		{"table_id":"20011471","url":"setup/patient-info.html","name_for_search":""},
 		"report":         		{"table_id":"20011471","url":"setup/report.html","name_for_search":""},
+		"email-setup":      	{"table_id":"20011580","url":"setup/email-setup.html"},
 
 		"report-daily-first":   {"url":"/isleephealth/task/report-daily-first.html","table_id":"20011195","name_for_search":""},
 

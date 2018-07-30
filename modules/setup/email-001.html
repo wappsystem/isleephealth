@@ -36,6 +36,7 @@
         </div>
         <br><br>
         <input type=button id=send__ID value=Send class="btn btn-secondary"/>
+        <input style="display:none" id=password__ID type=password placeholder="Password"></input>
     </div>
 </section>
 <script>
@@ -44,9 +45,12 @@
 		var prefix=$vm.module_list[$vm.vm['__ID'].name].prefix; if(prefix==undefined) prefix="";
 		var pid=$vm.module_list[$vm.vm['__ID'].name].table_id
 		var record;
-		if($vm.vm['__ID'].op.input.record==undefined) return; //no parent;
         //-------------------------------------
         $('#D__ID').on('load',function(){
+            if($vm.vm['__ID'].op.input==undefined) record={};
+    		//if($vm.vm['__ID'].op.input.record==undefined) return; //no parent;
+
+            if($vm.server=="development") $('#password__ID').show();
 			record=$vm.vm['__ID'].op.input.record;
             $('#patient__ID').text(record.First_Name+' '+record.Last_Name);
 			$('#Login_ID__ID').text(record.UID+'-'+pid);
@@ -67,11 +71,12 @@
                 q_url=q_url.replace("https://wappsystem.github.io","http://127.0.0.1:8000/wappsystem")
             };
             $(document).ready(function() {
-                  $('#q_n').attr('href',q_url);
+                $('#q_n').attr('href',q_url);
             });
         })
 
         //-------------------------------------
+        /*
         $('#send__ID').on('click',function(){
      	   	var From_Address="noresponse@wappsystem.com";
      		var From_Name="Integrated Sleep Health";
@@ -87,7 +92,30 @@
                 $vm.alert('An email has been sent to '+record.Email+'');
             }})
         });
+        */
         //-------------------------------------
+        $('#send__ID').on('click',function(){
+            var Subject="Integrated Sleep Health Online Registration and Questionnaires";
+            var To=record.Email;
+            var Body=$('#contents__ID').html();
+            var Password=$('#password__ID').val();
+            var req={cmd:'send-email',qid:$vm.qid,'permission-query':'send-email',db_pid:'20011580',Password:Password,To:To,Subject:Subject,Body:Body}
+            $VmAPI.request({data:req,callback:function(res){
+                if(res.ret==1){
+                    $vm.alert("The email has been sent out to "+To);
+                    /*
+                    var data={Subject:Subject,To:To}
+                    var dbv={S1:Subject,S2:To}
+                    var req={cmd:"add",qid:$vm.qid,db_pid:'20011579',data:data,dbv:dbv};
+                    $VmAPI.request({data:req,callback:function(res){
+                    }});
+                    */
+                }
+                else{
+                    $vm.alert("Error");
+                }
+            }});
+        })
     }
 </script>
 <style>

@@ -6,13 +6,13 @@
         //-------------------------------------
         VmInclude:__COMPONENT__/grid/grid.v3.js
         //-------------------------------------
-        var fields="Visit_Type";
+        var fields="Appointment_Type";
         _fields="_Form,"+fields+",Submit Date|DateTime,Submitted by|Author,_Delete";
         //-------------------------------------
         $('#D__ID').on('load',function(){  _set_req(); _request_data(); })
         //-------------------------------------
 		_before_submit=function(record,dbv){
-			dbv.S1=record.Visit_Type;
+			dbv.S1=record.Appointment_Type;
             return true;
         };
         //-------------------------------------

@@ -25,7 +25,7 @@
         })
         $('#t1__ID').focus(function(){$('#t1__ID').autocomplete("search","");});
         //-------------------------------------
-        var fields="First_Name,Last_Name,Email,Location,Physician,Appointment_Type,Date,Appointment_Time,_Results"; /*_Report,_Patient_Info,Referral_letter,_Hidden|letter_rid";*/
+        var fields="First_Name,Last_Name,Email,Location,Physician,Appointment_Type,Date,Appointment_Time,_Results,_Summary";/*,_Patient_Info,Referral_letter,_Hidden|letter_rid";*/
         _fields="_Form,"+fields+",Submit Date|DateTime,Submitted by|Author,_Delete";
         //-------------------------------------
 		var this_module			=$vm.module_list[$vm.vm['__ID'].name];
@@ -82,12 +82,12 @@
                         $vm.load_module_v2("panel-initial",$vm.root_layout_content_slot,{record:records[I]});
                     });
                     break;
-                case '_Report':
+                case '_Summary':
 					records[I].vm_custom[field]=true;
 					if(records[I].UID===undefined) return;
 					td.html("<u style='cursor:pointer'>Summay</u>");
 					td.find('u').on('click',function(){
-                        $vm.nav_load_module(prefix+prefix2+"report-initial-appointment-summary",$vm.root_layout_content_slot,{record:records[I]});
+                        $vm.nav_load_module("report-initial-appointment-summary",$vm.root_layout_content_slot,{record:records[I]});
 					});
 					break;
                 case '_Patient_Info':

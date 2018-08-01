@@ -17,6 +17,10 @@
             <span id=location_2__ID></span><br>
             <span id=location_3__ID></span></b>
             <br><br>
+            <i>Fees:</i><br>
+            Initial consultation fees will depend on the length of the consultation with a maximum gap of $220 above the relevant Medicare rebate (Up to date GP or specialist referral mandatory). For patients cancelling less than 24 hours before an appointment, there is a cancellation fee of $150. <br>
+            <br>
+
             Before the appointment could you please fill in the <b>Integrated Sleep Health Online Registration and Questionnaires for Initial Consultation.</b> These questionnaires will help us ensure best management for your sleep problem.<br><br>
             <u><a id=q_n href="#" target="_blank" >Click here to access <b>Integrated Sleep Health Online Registration and Questionnaires for Initial Consultation</b></a></u> <br>
             Please use the following to get access to your questionnaires<br>
@@ -59,7 +63,8 @@
             $('#doctor2__ID').text(record.Physician);
             $('#appointment_time__ID').text(record.Appointment_Time);
             var appoint_date=record.Date.split('-');
-            $('#date__ID').text(appoint_date[2]+'/'+appoint_date[1]+'/'+appoint_date[0]);
+            var months=['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            $('#date__ID').text(appoint_date[2]+' '+months[parseInt(appoint_date[1])-1]+' '+appoint_date[0]);
             if(record.Location=='MLC') {$('#location_2__ID').text("Level 57, MLC Building, Martin Pl");$('#location_3__ID').text("Sydney NSW 2000");$('#contact__ID').text("9238 2209");}
             else {$('#location_2__ID').text("Westfield Tower 2, Level 22, 101 Grafton St");$('#location_3__ID').text("Bondi Junction NSW 2022");$('#contact__ID').text("9238 2209");}
             var d="?visit=initial";

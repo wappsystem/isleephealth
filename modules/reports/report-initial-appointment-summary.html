@@ -37,7 +37,7 @@
                 tb+="<colgroup><col style='width:300px' /><col style='width:200px'  /><col /></colgroup>";
                 tb+="<tr><td style='font-size:150%' colspan=3>Patient Report for</td></tr>"
                 tb+="<tr><th>"+first_name+" "+last_name+"</th><th>"+sex+"</th><th>"+dob+"</th></tr>";
-                tb+="<tr><th colspan=3>&nbsp;</th></tr>";
+                //tb+="<tr><th colspan=3>&nbsp;</th></tr>";
                 tb+="<tr><td colspan >Date completed </td><td colspan=2>"+submit[0]+"</td></tr>"
                 tb+="</table><br>";
             }});
@@ -48,12 +48,12 @@
                     reason=res.records[0].Reason;
                     benefit=res.records[0].benefits;
                     ref_doc=res.records[0].Referring_doctor;
-                    ref_letter=res.records[0].File_Name;
+                    //ref_letter=res.records[0].File_Name;
                 }
                 tb+="<table class=width__ID>";
                 tb+="<colgroup><col style='width:300px' /><col style='width:200px'  /><col /></colgroup>";
                 tb+="<tr><td>Reason for visit</td><td  colspan=2>"+reason+"</td></tr>";
-                tb+="<tr><td>"+benefit+"</td><td>Ref. Dr: "+ref_doc+"</td><td>"+ref_letter+"</td></tr>";
+                tb+="<tr><td>"+benefit+"</td><td colspan=2>Ref. Dr: "+ref_doc+"</td></tr>";
                 tb+="</table><br>";
             }});
             var sql="select Information from [TABLE-20011469] where PUID="+participant_uid;
@@ -130,112 +130,133 @@
                 var incontinence="<td></td>",arthritis="<td></td>",heartburn="<td></td>";
                 var epilepsy="<td></td>",cataplexy="<td></td>",narcolepsy="<td></td>";
                 var tonsillitis="<td></td>",sinusitis="<td></td>";
-                var heart_other_specify="",lung_other_specify="",mental_other_specify="",neuromuscular_other_specify="",allergies_specify="",Other_Medical_Condition="",Surgical_Procedure="",Medication="";
+                var heart_other_specify="",lung_other_specify="",mental_other_specify="",neuromuscular_other_specify="",allergies_specify="",Other_Medical_Condition="",Surgical_Procedure="",Medication="",weight,height,BMI="";
+                var sleep_study="",sleep_study_date="",sleep_study_location="",sleep_study_doctor="",sleep_study_result="",cpap="",cpap_use="",cpap_unsuccessful="";
 
                 if(res.records.length>0){
                     var td_yes="<td style='color:red;font-weight:bold;text-align:center'>Yes</td>";
                     var td_no="<td style='text-align:center'> No</td>"
                     heart_failure=res.records[0].heart_failure
-                    if(heart_failure=='Yes') heart_failure=td_yes; else heart_failure=td_no
+                    if(heart_failure=='on') heart_failure=td_yes; else heart_failure=td_no
                     pacemaker=res.records[0].pacemaker
-                    if(pacemaker=='Yes') pacemaker=td_yes; else pacemaker=td_no
+                    if(pacemaker=='on') pacemaker=td_yes; else pacemaker=td_no
                     angina=res.records[0].angina
-                    if(angina=='Yes') angina=td_yes; else angina=td_no
+                    if(angina=='on') angina=td_yes; else angina=td_no
                     hypertension=res.records[0].hypertension
-                    if(hypertension=='Yes') hypertension=td_yes; else hypertension=td_no
+                    if(hypertension=='on') hypertension=td_yes; else hypertension=td_no
                     blood_clot=res.records[0].blood_clot
-                    if(blood_clot=='Yes') blood_clot=td_yes; else blood_clot=td_no
+                    if(blood_clot=='on') blood_clot=td_yes; else blood_clot=td_no
                     anaemia=res.records[0].anaemia
-                    if(anaemia=='Yes') anaemia=td_yes; else anaemia=td_no
+                    if(anaemia=='on') anaemia=td_yes; else anaemia=td_no
                     bleeding=res.records[0].bleeding
-                    if(bleeding=='Yes') bleeding=td_yes; else bleeding=td_no
+                    if(bleeding=='on') bleeding=td_yes; else bleeding=td_no
                     diabetes_1=res.records[0].diabetes_1
-                    if(diabetes_1=='Yes') diabetes_1=td_yes; else diabetes_1=td_no
+                    if(diabetes_1=='on') diabetes_1=td_yes; else diabetes_1=td_no
                     diabetes_2=res.records[0].diabetes_2
-                    if(diabetes_2=='Yes') diabetes_2=td_yes; else diabetes_2=td_no
+                    if(diabetes_2=='on') diabetes_2=td_yes; else diabetes_2=td_no
                     shortness_of_breath=res.records[0].shortness_of_breath
-                    if(shortness_of_breath=='Yes') shortness_of_breath=td_yes; else shortness_of_breath=td_no
+                    if(shortness_of_breath=='on') shortness_of_breath=td_yes; else shortness_of_breath=td_no
                     tuberculosis=res.records[0].tuberculosis
-                    if(tuberculosis=='Yes') tuberculosis=td_yes; else tuberculosis=td_no
+                    if(tuberculosis=='on') tuberculosis=td_yes; else tuberculosis=td_no
                     copd=res.records[0].copd
-                    if(copd=='Yes') copd=td_yes; else copd=td_no
+                    if(copd=='on') copd=td_yes; else copd=td_no
                     asthma=res.records[0].asthma
-                    if(asthma=='Yes') asthma=td_yes; else asthma=td_no
+                    if(asthma=='on') asthma=td_yes; else asthma=td_no
                     morning_headaches=res.records[0].morning_headaches
-                    if(morning_headaches=='Yes') morning_headaches=td_yes; else morning_headaches=td_no
+                    if(morning_headaches=='on') morning_headaches=td_yes; else morning_headaches=td_no
                     broken_nose=res.records[0].broken_nose
-                    if(broken_nose=='Yes') broken_nose=td_yes; else broken_nose=td_no
+                    if(broken_nose=='on') broken_nose=td_yes; else broken_nose=td_no
                     claustrophobia=res.records[0].claustrophobia
-                    if(claustrophobia=='Yes') claustrophobia=td_yes; else claustrophobia=td_no
+                    if(claustrophobia=='on') claustrophobia=td_yes; else claustrophobia=td_no
                     thyroid=res.records[0].thyroid
-                    if(thyroid=='Yes') thyroid=td_yes; else thyroid=td_no
+                    if(thyroid=='on') thyroid=td_yes; else thyroid=td_no
                     kidney=res.records[0].kidney
-                    if(kidney=='Yes') kidney=td_yes; else kidney=td_no
+                    if(kidney=='on') kidney=td_yes; else kidney=td_no
                     hepatitis_a=res.records[0].hepatitis_a
-                    if(hepatitis_a=='Yes') hepatitis_a=td_yes; else hepatitis_a=td_no
+                    if(hepatitis_a=='on') hepatitis_a=td_yes; else hepatitis_a=td_no
                     hepatitis_b=res.records[0].hepatitis_b
-                    if(hepatitis_b=='Yes') hepatitis_b=td_yes; else hepatitis_b=td_no
+                    if(hepatitis_b=='on') hepatitis_b=td_yes; else hepatitis_b=td_no
                     hepatitis_c=res.records[0].hepatitis_c
-                    if(hepatitis_c=='Yes') hepatitis_c=td_yes; else hepatitis_c=td_no
+                    if(hepatitis_c=='on') hepatitis_c=td_yes; else hepatitis_c=td_no
                     alcohol=res.records[0].alcohol
-                    if(alcohol=='Yes') alcohol=td_yes; else alcohol=td_no
+                    if(alcohol=='on') alcohol=td_yes; else alcohol=td_no
                     drug=res.records[0].drug
-                    if(drug=='Yes') drug=td_yes; else drug=td_no
+                    if(drug=='on') drug=td_yes; else drug=td_no
                     deafness=res.records[0].deafness
-                    if(deafness=='Yes') deafness=td_yes; else deafness=td_no
+                    if(deafness=='on') deafness=td_yes; else deafness=td_no
                     blindness=res.records[0].blindness
-                    if(blindness=='Yes') blindness=td_yes; else blindness=td_no
+                    if(blindness=='on') blindness=td_yes; else blindness=td_no
                     insomnia=res.records[0].insomnia
-                    if(insomnia=='Yes') insomnia=td_yes; else insomnia=td_no
+                    if(insomnia=='on') insomnia=td_yes; else insomnia=td_no
                     anxiety=res.records[0].anxiety
-                    if(anxiety=='Yes') anxiety=td_yes; else anxiety=td_no
+                    if(anxiety=='on') anxiety=td_yes; else anxiety=td_no
                     depression=res.records[0].depression
-                    if(depression=='Yes') depression=td_yes; else depression=td_no
+                    if(depression=='on') depression=td_yes; else depression=td_no
                     stroke=res.records[0].stroke
-                    if(stroke=='Yes') stroke=td_yes; else stroke=td_no
+                    if(stroke=='on') stroke=td_yes; else stroke=td_no
                     hiv=res.records[0].hiv
-                    if(hiv=='Yes') hiv=td_yes; else hiv=td_no
+                    if(hiv=='on') hiv=td_yes; else hiv=td_no
                     incontinence=res.records[0].incontinence
-                    if(incontinence=='Yes') incontinence=td_yes; else incontinence=td_no
+                    if(incontinence=='on') incontinence=td_yes; else incontinence=td_no
                     arthritis=res.records[0].arthritis
-                    if(arthritis=='Yes') arthritis=td_yes; else arthritis=td_no
+                    if(arthritis=='on') arthritis=td_yes; else arthritis=td_no
                     heartburn=res.records[0].heartburn
-                    if(heartburn=='Yes') heartburn=td_yes; else heartburn=td_no
+                    if(heartburn=='on') heartburn=td_yes; else heartburn=td_no
                     epilepsy=res.records[0].epilepsy
-                    if(epilepsy=='Yes') epilepsy=td_yes; else epilepsy=td_no
+                    if(epilepsy=='on') epilepsy=td_yes; else epilepsy=td_no
                     cataplexy=res.records[0].cataplexy
-                    if(cataplexy=='Yes') cataplexy=td_yes; else cataplexy=td_no
+                    if(cataplexy=='on') cataplexy=td_yes; else cataplexy=td_no
                     narcolepsy=res.records[0].narcolepsy
-                    if(narcolepsy=='Yes') narcolepsy=td_yes; else narcolepsy=td_no
+                    if(narcolepsy=='on') narcolepsy=td_yes; else narcolepsy=td_no
                     tonsillitis=res.records[0].tonsillitis
-                    if(tonsillitis=='Yes') tonsillitis=td_yes; else tonsillitis=td_no
+                    if(tonsillitis=='on') tonsillitis=td_yes; else tonsillitis=td_no
                     sinusitis=res.records[0].sinusitis
-                    if(sinusitis=='Yes') sinusitis=td_yes; else sinusitis=td_no
+                    if(sinusitis=='on') sinusitis=td_yes; else sinusitis=td_no
+                    Other_Medical_Condition=res.records[0].Other_Medical_Condition;
+                    Other_Medical_Condition=Other_Medical_Condition.replace(/\n/g,'<br>');
+                    Surgical_Procedure=res.records[0].Surgical_Procedure;
+                    Surgical_Procedure=Surgical_Procedure.replace(/\n/g,'<br>');
+                    Medication=res.records[0].Medication;
+                    Medication=Medication.replace(/\n/g,'<br>');
+                    weight=res.records[0].weight;
+                    height=res.records[0].height;
+                    BMI=(parseFloat(record.weight)/(parseFloat(record.height)*parseFloat(record.height))*10000).toFixed(1);
+                    sleep_study=res.records[0].sleep_study
+                    if(sleep_study=='Yes') sleep_study=td_yes; else sleep_study=td_no
+                    sleep_study_date=res.records[0].sleep_study_date;
+                    sleep_study_location=res.records[0].sleep_study_location;
+                    sleep_study_doctor=res.records[0].sleep_study_doctor;
+                    sleep_study_result=res.records[0].sleep_study_result;
+                    sleep_study_result=sleep_study_result.replace(/\n/g,'<br>');
+                    sleep_study_doctor=res.records[0].sleep_study_doctor;
+                    sleep_study_doctor=res.records[0].sleep_study_doctor;
+                    cpap=res.records[0].cpap
+                    if(cpap=='Yes') cpap=td_yes; else cpap=td_no
+                    cpap_use=res.records[0].cpap_use
+                    if(cpap_use=='Yes') cpap_use=td_yes; else cpap_use=td_no
+                    cpap_unsuccessful=res.records[0].cpap_unsuccessful;
+                    cpap_unsuccessful=cpap_unsuccessful.replace(/\n/g,'<br>');
                 }
                 tb+="<table id=table_form_health_history__ID class=width__ID>";
                 tb+="<tr><th colspan=6>HEALTH HISTORY</th></tr>";
                 tb+="<colgroup><col style='width:200px' /><col style='width:50px'  /><col style='width:200px' /><col style='width:50px'  /><col style='width:200px' /><col /></colgroup>";
-                tb+="<tr><td><i>Heart failure</i></td>"+heart_failure+"<td><i>Pacemaker / Defibrillator</i></td>"+pacemaker+"<td><i>Chest pain / Angina</i></td>"+angina+"</tr>";
-                tb+="<tr><td><i>High blood pressure</i></td>"+hypertension+"<td><i>Blood clot in legs or lungs</i></td>"+blood_clot+"<td><i>Anaemia</i></td>"+anaemia+"</tr>";
-                tb+="<tr><td><i>Bleeding disorder</i></td>"+bleeding+"<td><i>Diabetes – Type 1</i></td>"+diabetes_1+"<td><i>Diabetes – Type 2</i></td>"+diabetes_2+"</tr>";
-                tb+="<tr><td><i>Shortness of breath</i></td>"+shortness_of_breath+"<td><i>Tuberculosis</i></td>"+tuberculosis+"<td><i>Emphysema / COPD</i></td>"+copd+"</tr>";
-                tb+="<tr><td><i>Asthma</i></td>"+asthma+"<td><i>Morning headaches</i></td>"+morning_headaches+"<td><i>Broken nose</i></td>"+broken_nose+"</tr>";
-                tb+="<tr><td><i>Claustrophobia</i></td>"+claustrophobia+"<td><i>Thyroid disorder</i></td>"+thyroid+"<td><i>Kidney disorder</i></td>"+kidney+"</tr>";
-                tb+="<tr><td><i>Hepatitis A</i></td>"+hepatitis_a+"<td><i>Hepatitis B</i></td>"+hepatitis_b+"<td><i>Hepatitis C</i></td>"+hepatitis_c+"</tr>";
-                tb+="<tr><td><i>Alcohol related problems</i></td>"+alcohol+"<td><i>Drug related problems</i></td>"+drug+"<td><i>Deafness</i></td>"+deafness+"</tr>";
-                tb+="<tr><td><i>Blindness</i></td>"+blindness+"<td><i>Insomnia</i></td>"+insomnia+"<td><i>Anxiety / Nerves</i></td>"+anxiety+"</tr>";
-                tb+="<tr><td><i>Depression</i></td>"+depression+"<td><i>Stroke</i></td>"+stroke+"<td><i>HIV</i></td>"+hiv+"</tr>";
-                tb+="<tr><td><i>Incontinence</i></td>"+incontinence+"<td><i>Arthritis</i></td>"+arthritis+"<td><i>Heartburn / Acid reflux</i></td>"+heartburn+"</tr>";
-                tb+="<tr><td><i>Epilepsy / Fits</i></td>"+epilepsy+"<td><i>Cataplexy</i></td>"+cataplexy+"<td><i>Narcolepsy</i></td>"+narcolepsy+"</tr>";
+                tb+="<tr><td><i>hypertension</i></td>"+hypertension+"<td><i>Diabetes – Type 1</i></td>"+diabetes_1+"<td><i>Diabetes – Type 2</i></td>"+diabetes_2+"</tr>";
+                tb+="<tr><td><i>Broken nose</i></td>"+broken_nose+"<td><i>Stroke</i></td>"+stroke+"<td><i>Epilepsy / Fits</i></td>"+epilepsy+"</tr>";
                 tb+="<tr><td colspan=3 ><i>Tonsillitis / recurrent sore throat</i></td>"+tonsillitis+"<td><i>Hay fever / sinusitis</i></td>"+sinusitis+"</tr>";
                 tb+="<tr><td><i>Other heart condition</i></td><td colspan=5>"+heart_other_specify+"</td></tr>";
-                tb+="<tr><td><i>Other lung condition</i></td><td colspan=5>"+lung_other_specify+"</td></tr>";
-                tb+="<tr><td><i>Mental illness</i></td><td colspan=5>"+mental_other_specify+"</td></tr>";
-                tb+="<tr><td><i>Neuromuscular disorder</i></td><td colspan=5>"+neuromuscular_other_specify+"</td></tr>";
-                tb+="<tr><td><i>Allergies</i></td><td colspan=5>"+allergies_specify+"</td></tr>";
                 tb+="<tr><td><i>Please list ALL past and present medical conditions not previously listed:</i></td><td colspan=5>"+Other_Medical_Condition+"</td></tr>";
                 tb+="<tr><td><i>Have you ever undergone a surgical procedure?</i></td><td colspan=5>"+Surgical_Procedure+"</td></tr>";
                 tb+="<tr><td><i>Are you currently taking any prescription OR non-prescription medication?</i></td><td colspan=5>"+Medication+"</td></tr>";
+                tb+="<tr><td><i>Weight</i></td>"+weight+"<td><i>Height</i></td>"+height+"<td><i>BMI</i></td>"+BMI+"</tr>";
+                tb+="<tr><td colspan=5><i>Have you ever had a sleep study before?</i></td>"+sleep_study+"</tr>";
+                tb+="<tr><td colspan=6><i>If yes, please add the details of your most recent sleep study:</i></td></tr>";
+                tb+="<tr><td><i>Date</i></td><td colspan=5>"+sleep_study_date+"</td></tr>";
+                tb+="<tr><td><i>Location</i></td><td colspan=5>"+sleep_study_location+"</td></tr>";
+                tb+="<tr><td><i>Doctor</i></td><td colspan=5>"+sleep_study_doctor+"</td></tr>";
+                tb+="<tr><td><i>Result</i></td><td colspan=5>"+sleep_study_result+"</td></tr>";
+                tb+="<tr><td colspan=5><i>Have you ever used a masked breathing device such a continuous positive airway pressure (CPAP)?</i></td>"+cpap+"</tr>";
+                tb+="<tr><td colspan=5><i>Was it successful/unsuccessful?</i></td>"+cpap_use+"</tr>";
+                tb+="<tr><td><i>If unsuccessful, why?</i></td><td colspan=5>"+cpap_unsuccessful+"</td></tr>";
                 tb+="</table><br>";
             }});
             var sql="select Information from [TABLE-20011364] where PUID="+participant_uid;
@@ -282,32 +303,16 @@
             }});
             var sql="select Information from [TABLE-20011467] where PUID="+participant_uid;
             $VmAPI.request({data:{cmd:'query_records',sql:sql},callback:function(res){
-                var phq_1="",phq_2="",phq_3="",phq_4="",phq_5="",phq_6="",phq_7="",phq_8="",phq_9="",phq_10="";
+                var phq_10="",phq="";
                 if(res.records.length>0){
-                    phq_1=res.records[0].phq_1;
-                    phq_2=res.records[0].phq_2;
-                    phq_3=res.records[0].phq_3;
-                    phq_4=res.records[0].phq_4;
-                    phq_5=res.records[0].phq_5;
-                    phq_6=res.records[0].phq_6;
-                    phq_7=res.records[0].phq_7;
-                    phq_8=res.records[0].phq_8;
-                    phq_9=res.records[0].phq_9;
+                    phq=res.records[0].phq;
                     phq_10=res.records[0].phq_10;
                 }
                 tb+="<table id=table_form_ess__ID class=width__ID>";
-                tb+="<colgroup><col style='width:600px' /><col /></colgroup>";
-                tb+="<tr><th colspan=2>Patient Health Questionnaire</th></tr>";
-                tb+="<tr><td><i>1. Little interest or pleasure in doing things</i></td><td style='font-weight:bold'>"+phq_1+"</td></tr>";
-                tb+="<tr><td><i>2. Feeling down, depressed, or hopeless</i></td><td style='font-weight:bold'>"+phq_2+"</td></tr>";
-                tb+="<tr><td><i>3. Trouble falling or staying asleep, or sleeping too much</i></td><td style='font-weight:bold'>"+phq_3+"</td></tr>";
-                tb+="<tr><td><i>4. Feeling tired or having little energy</i></td><td style='font-weight:bold'>"+phq_4+"</td></tr>";
-                tb+="<tr><td><i>5. Poor appetite or overeating</i></td><td style='font-weight:bold'>"+phq_5+"</td></tr>";
-                tb+="<tr><td><i>6. Feeling bad about yourself — or that you are a failure or have let yourself or your family down</i></td><td style='font-weight:bold'>"+phq_6+"</td></tr>";
-                tb+="<tr><td><i>7. Trouble concentrating on things, such as reading the newspaper or watching television</i></td><td style='font-weight:bold'>"+phq_7+"</td></tr>";
-                tb+="<tr><td><i>8. Moving or speaking so slowly that other people could have noticed? Or the opposite — being so fidgety or restless that you have been moving around a lot more than usual</i></td><td style='font-weight:bold'>"+phq_8+"</td></tr>";
-                tb+="<tr><td><i>9. Thoughts that you would be better off dead or of hurting yourself in some way</i></td><td style='font-weight:bold'>"+phq_9+"</td></tr>";
-                tb+="<tr><td><i>If you checked off <u>any</u> problems, how <u>difficult</u> have these problems made it for you to do your work, take care of things at home, or get along with other people?</i></td><td style='font-weight:bold'>"+phq_10+"</td></tr>";
+                tb+="<colgroup><col style='width:250px' /><col /></colgroup>";
+                tb+="<tr><th colspan=2>Insomnia Severity Index</th></tr>";
+                tb+="<tr><td><i>PHQ total</i></td><td style='font-weight:bold'>"+phq+"/27</td></tr>";
+                tb+="<tr><td><i>Questions 10</i></td><td style='font-weight:bold'>"+phq_10+"</td></tr>";
                 tb+="</table><br>";
             }});
             var sql="select Information from [TABLE-20011468] where PUID="+participant_uid;

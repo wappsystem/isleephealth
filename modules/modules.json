@@ -3,10 +3,10 @@
 	{
 		"questionnaire-setup":  {"url":"frame/setup.html"},
 		"reports":    			{"url":"frame/report.html"},
-		"panel-initial": 		{"url":"frame/initial.html"},
+		"panel-initial": 		{"url":"frame/initial.html","nosearch":"1"},
 
 		"permissions":                          {                      "url":"permissions/panel.html"},
-        "permission-check":                     {                      "url":"permissions/check.html"},
+        "permission-check":                     {"table_id":"20011583","url":"permissions/check.html"},
         "permission-role-login-data":           {"table_id":"20011583","url":"permissions/role-login-data.html","form_module":"permission-role-login-form"},
         "permission-role-login-form":           {"table_id":"20011583","url":"permissions/role-login-form.html"},
         "permission-role-table-group-data":     {"table_id":"20011582","url":"permissions/role-table-group-data.html","form_module":"permission-role-table-group-form"},

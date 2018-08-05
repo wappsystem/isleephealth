@@ -1,8 +1,8 @@
 //-------------------------------------
 m.before_submit=function(record,dbv){
     if($vm.coq_participant!=undefined){
-        data.Participant=$vm.coq_participant;
-        data.Participant_uid=$vm.coq_participant_uid;
+        record.Participant=$vm.coq_participant;
+        record.Participant_uid=$vm.coq_participant_uid;
         dbv.S1=$vm.coq_visit;
         dbv.PPID=$vm.coq_participant_pid;
         dbv.PUID=$vm.coq_participant_uid;

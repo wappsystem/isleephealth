@@ -4,9 +4,10 @@
 		"questionnaire-setup":  {"url":"https://wappsystem.github.io/isleephealth/modules/frame/setup.html"},
 		"reports":    			{"url":"https://wappsystem.github.io/isleephealth/modules/frame/report.html"},
 		"panel-initial": 		{"url":"https://wappsystem.github.io/isleephealth/modules/frame/initial.html"},
+		"panel-fu": 			{"url":"https://wappsystem.github.io/isleephealth/modules/frame/follow-up.html"},
 
 		"online-questionnaire-initial": {"url":"https://wappsystem.github.io/isleephealth/modules/online-questionnaire/frame/initial.html"},
-		"online-questionnaire-xxx":     {"url":"https://wappsystem.github.io/isleephealth/modules/online-questionnaire/frame/xxx.html"},
+		"online-questionnaire-fu":     {"url":"https://wappsystem.github.io/isleephealth/modules/online-questionnaire/frame/follow-up.html"},
 
 		"contact-details":		{"table_id":"20011470","url":"https://wappsystem.github.io/isleephealth/modules/initial/contact-details.html"},
 		"medicare-referrals":	{"table_id":"20011363","url":"https://wappsystem.github.io/isleephealth/modules/initial/medicare-referrals.html"},
@@ -18,6 +19,11 @@
 		"psqi":					{"table_id":"20011466","url":"https://wappsystem.github.io/isleephealth/modules/initial/psqi.html"},
 		"phq":					{"table_id":"20011467","url":"https://wappsystem.github.io/isleephealth/modules/initial/phq.html"},
 		"fss":					{"table_id":"20011468","url":"https://wappsystem.github.io/isleephealth/modules/initial/fss.html"},
+		"ess-fu":				{"table_id":"20011584","url":"https://wappsystem.github.io/isleephealth/modules/initial/ess.html"},
+		"dass-fu":				{"table_id":"20011585","url":"https://wappsystem.github.io/isleephealth/modules/initial/dass.html"},
+		"isi-fu":				{"table_id":"20011586","url":"https://wappsystem.github.io/isleephealth/modules/initial/isi.html"},
+		"phq-fu":				{"table_id":"20011587","url":"https://wappsystem.github.io/isleephealth/modules/initial/phq.html"},
+		"fss-fu":				{"table_id":"20011588","url":"https://wappsystem.github.io/isleephealth/modules/initial/fss.html"},
 
 		"permissions":                          {                      "url":"https://wappsystem.github.io/isleephealth/modules/permissions/panel.html"},
         "permission-check":                     {"table_id":"20011583","url":"https://wappsystem.github.io/isleephealth/modules/permissions/check.html"},
@@ -34,6 +40,7 @@
 		"physician":      		{"table_id":"20011472","url":"https://wappsystem.github.io/isleephealth/modules/setup/physician.html","name_for_search":"Physician"},
 		"appointment-type": 	{"table_id":"20011473","url":"https://wappsystem.github.io/isleephealth/modules/setup/appointment-type.html","name_for_search":"Appointment Type"},
 		"email-001":      		{"table_id":"20011471","url":"https://wappsystem.github.io/isleephealth/modules/setup/email-001.html","name_for_search":""},
+		"email-002":      		{"table_id":"20011471","url":"https://wappsystem.github.io/isleephealth/modules/setup/email-002.html","name_for_search":""},
 		"patient-info":   		{"table_id":"20011471","url":"https://wappsystem.github.io/isleephealth/modules/setup/patient-info.html","name_for_search":""},
 		"report":         		{"table_id":"20011471","url":"https://wappsystem.github.io/isleephealth/modules/setup/report.html","name_for_search":""},
 		"email-setup":      	{"table_id":"20011580","url":"https://wappsystem.github.io/isleephealth/modules/setup/email-setup.html"},
@@ -45,17 +52,20 @@
 		"report-initial-appointment-check":{"table_id":"20011471","url":"https://wappsystem.github.io/isleephealth/modules/reports/report-initial-appointment-check.html"},
 		"report-initial-appointment-patient-info":{"table_id":"20011471","url":"https://wappsystem.github.io/isleephealth/modules/reports/report-initial-appointment-patient-info.html"},
 		"report-initial-appointment-patient-list":{"table_id":"20011471","url":"https://wappsystem.github.io/isleephealth/modules/reports/report-initial-appointment-patient-list.html"},
+		"report-follow-up-appointment-summary":{"table_id":"20011471","url":"https://wappsystem.github.io/isleephealth/modules/reports/report-follow-up-appointment-summary.html"},
 
-		"__________contact-details":	{"table_id":"20011470","url":"https://wappsystem.github.io/isleephealth/modules/initial/contact-details.html"},
-		"__________medicare-referrals":	{"table_id":"20011363","url":"https://wappsystem.github.io/isleephealth/modules/initial/medicare-referrals.html"},
         "sleep-history-report":		    {"table_id":"20011469","url":"https://wappsystem.github.io/isleephealth/modules/initial/sleep-history-report.html"},
 		"health-history-report":		{"table_id":"20011365","url":"https://wappsystem.github.io/isleephealth/modules/initial/health-history-report.html"},
 		"ess-report":					{"table_id":"20011364","url":"https://wappsystem.github.io/isleephealth/modules/initial/ess-report.html"},
 		"dass-report":					{"table_id":"20011464","url":"https://wappsystem.github.io/isleephealth/modules/initial/dass-report.html"},
 		"isi-report":					{"table_id":"20011465","url":"https://wappsystem.github.io/isleephealth/modules/initial/isi-report.html"},
-		"__________psqi":				{"table_id":"20011466","url":"https://wappsystem.github.io/isleephealth/modules/initial/psqi.html"},
 		"phq-report":					{"table_id":"20011467","url":"https://wappsystem.github.io/isleephealth/modules/initial/phq-report.html"},
-		"fss-report":					{"table_id":"20011468","url":"https://wappsystem.github.io/isleephealth/modules/initial/fss-report.html"}
+		"fss-report":					{"table_id":"20011468","url":"https://wappsystem.github.io/isleephealth/modules/initial/fss-report.html"},
+		"ess-fu-report":				{"table_id":"20011584","url":"https://wappsystem.github.io/isleephealth/modules/initial/ess-report.html"},
+		"dass-fu-report":				{"table_id":"20011585","url":"https://wappsystem.github.io/isleephealth/modules/initial/dass-report.html"},
+		"isi-fu-report":				{"table_id":"20011586","url":"https://wappsystem.github.io/isleephealth/modules/initial/isi-report.html"},
+		"phq-fu-report":				{"table_id":"20011587","url":"https://wappsystem.github.io/isleephealth/modules/initial/phq-report.html"},
+		"fss-fu-report":				{"table_id":"20011588","url":"https://wappsystem.github.io/isleephealth/modules/initial/fss-report.html"}
 	},
 	"dictionary":
 		{

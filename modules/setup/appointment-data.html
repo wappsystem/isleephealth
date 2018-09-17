@@ -23,14 +23,22 @@
     		"20011465","20011466","20011467",
     		"20011468"
         ];
-		var second_pid_list=[];
+		var fu_pid_list=[
+            "20011584","20011585","20011586",
+            "20011587","20011584"
+        ];
         //-------------------------------------
 		$('#new__ID').off('click').on('click',function(){$vm.nav_load_module(prefix+form_module,'',{goback:1})})
 		//-------------------------------------
-        $('#D__ID').on('load',function(){  _set_req(); _request_data(); })
+        $('#D__ID').on('load',function(){_set_req(); _request_data(); })
         //-------------------------------------
         var _before_submit=function(record,dbv){
-			record.List=initial_pid_list.toString(); //based on some logic, select first or second or...
+            if(record.Appointment_Type=='Follow up'){
+                record.List=fu_pid_list.toString(); //based on some logic, select first or second or...
+            }
+            else{
+    			record.List=initial_pid_list.toString(); //based on some logic, select first or second or...
+            }
             dbv.S1=record.Email;
 			dbv.S3=record.Password;
 			dbv.DT1=record.Date;
@@ -74,6 +82,7 @@
 					td.html("<u style='cursor:pointer'>Send Email</u>");
 					td.find('u').on('click',function(){
                         var email_module_id=prefix+prefix2+"email-001";
+                        if(records[I].Appointment_Type=="Follow up") email_module_id=prefix+prefix2+"email-002";
                         $vm.nav_load_module(email_module_id,$vm.root_layout_content_slot,{record:records[I]});
 					});
 					break;
@@ -83,7 +92,9 @@
                     td.html("<u style='cursor:pointer'>Results</u>");
                     td.find('u').on('click',function(){
                         records[I].PID=_db_pid;
-                        $vm.load_module_v2("panel-initial",$vm.root_layout_content_slot,{record:records[I]});
+                        var panel="panel-initial";
+                        if(records[I].Appointment_Type=="Follow up") panel="panel-fu";
+                        $vm.load_module_v2(panel,$vm.root_layout_content_slot,{record:records[I]});
                     });
                     break;
                 case '_Summary':
@@ -91,7 +102,9 @@
 					if(records[I].UID===undefined) return;
 					td.html("<u style='cursor:pointer'>Summary</u>");
 					td.find('u').on('click',function(){
-                        $vm.nav_load_module("report-initial-appointment-summary",$vm.root_layout_content_slot,{record:records[I]});
+                        var summary="report-initial-appointment-summary";
+                        if(records[I].Appointment_Type=="Follow up") summary="report-follow-up-appointment-summary";
+                        $vm.nav_load_module(summary,$vm.root_layout_content_slot,{record:records[I]});
 					});
 					break;
                 case '_Patient_Info':

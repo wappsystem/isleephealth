@@ -1,0 +1,71 @@
+{
+	"modules":
+	{
+		"questionnaire-setup":  {"url":"https://wappsystem.github.io/isleephealth/modules/frame/setup.html"},
+		"reports":    			{"url":"https://wappsystem.github.io/isleephealth/modules/frame/report.html"},
+		"panel-initial": 		{"url":"https://wappsystem.github.io/isleephealth/modules/frame/initial.html","nosearch":"1"},
+
+		"permissions":                          {                      "url":"https://wappsystem.github.io/isleephealth/modules/permissions/panel.html"},
+        "permission-check":                     {"table_id":"20011583","url":"https://wappsystem.github.io/isleephealth/modules/permissions/check.html"},
+        "permission-role-login-data":           {"table_id":"20011583","url":"https://wappsystem.github.io/isleephealth/modules/permissions/role-login-data.html","form_module":"permission-role-login-form"},
+        "permission-role-login-form":           {"table_id":"20011583","url":"https://wappsystem.github.io/isleephealth/modules/permissions/role-login-form.html"},
+        "permission-role-table-group-data":     {"table_id":"20011582","url":"https://wappsystem.github.io/isleephealth/modules/permissions/role-table-group-data.html","form_module":"permission-role-table-group-form"},
+        "permission-role-table-group-form":     {"table_id":"20011582","url":"https://wappsystem.github.io/isleephealth/modules/permissions/role-table-group-form.html"},
+    	"permission-query-data":                {"table_id":"20011581","url":"https://wappsystem.github.io/isleephealth/modules/permissions/query-data.html","form_module":"permission-query-form"},
+        "permission-query-form":                {"table_id":"20011581","url":"https://wappsystem.github.io/isleephealth/modules/permissions/query-form.html"},
+
+
+		"appointment-data":  	{"table_id":"20011471","url":"https://wappsystem.github.io/isleephealth/modules/setup/appointment-data.html","physician_tid":"20011472","appointment_type_tid":"20011473","name_for_search":"Appointment Data","form_module":"appointment-form"},
+		"appointment-form":  	{"table_id":"20011471","url":"https://wappsystem.github.io/isleephealth/modules/setup/appointment-form.html","physician_tid":"20011472","appointment_type_tid":"20011473","name_for_search":"Appointment Form"},
+		"physician":      		{"table_id":"20011472","url":"https://wappsystem.github.io/isleephealth/modules/setup/physician.html","name_for_search":"Physician"},
+		"appointment-type": 	{"table_id":"20011473","url":"https://wappsystem.github.io/isleephealth/modules/setup/appointment-type.html","name_for_search":"Appointment Type"},
+		"email-001":      		{"table_id":"20011471","url":"https://wappsystem.github.io/isleephealth/modules/setup/email-001.html","name_for_search":""},
+		"patient-info":   		{"table_id":"20011471","url":"https://wappsystem.github.io/isleephealth/modules/setup/patient-info.html","name_for_search":""},
+		"report":         		{"table_id":"20011471","url":"https://wappsystem.github.io/isleephealth/modules/setup/report.html","name_for_search":""},
+		"email-setup":      	{"table_id":"20011580","url":"https://wappsystem.github.io/isleephealth/modules/setup/email-setup.html"},
+
+		"report-daily-first":   {"url":"https://wappsystem.github.io/isleephealth/modules/isleephealth/task/report-daily-first.html","table_id":"20011195","name_for_search":""},
+
+		"report-initial-appointment-day-list":{"table_id":"20011471","url":"https://wappsystem.github.io/isleephealth/modules/reports/report-initial-appointment-day-list.html"},
+		"report-initial-appointment-summary":{"table_id":"20011471","url":"https://wappsystem.github.io/isleephealth/modules/reports/report-initial-appointment-summary.html"},
+		"report-initial-appointment-check":{"table_id":"20011471","url":"https://wappsystem.github.io/isleephealth/modules/reports/report-initial-appointment-check.html"},
+		"report-initial-appointment-patient-info":{"table_id":"20011471","url":"https://wappsystem.github.io/isleephealth/modules/reports/report-initial-appointment-patient-info.html"},
+		"report-initial-appointment-patient-list":{"table_id":"20011471","url":"https://wappsystem.github.io/isleephealth/modules/reports/report-initial-appointment-patient-list.html"},
+
+		"contact-details":		{"table_id":"20011470","url":"https://wappsystem.github.io/isleephealth/modules/initial/contact-details.html"},
+		"medicare-referrals":	{"table_id":"20011363","url":"https://wappsystem.github.io/isleephealth/modules/initial/medicare-referrals.html"},
+        "sleep-history-report":		{"table_id":"20011469","url":"https://wappsystem.github.io/isleephealth/modules/initial/sleep-history-report.html"},
+		"health-history-report":		{"table_id":"20011365","url":"https://wappsystem.github.io/isleephealth/modules/initial/health-history-report.html"},
+		"ess-report":					{"table_id":"20011364","url":"https://wappsystem.github.io/isleephealth/modules/initial/ess-report.html"},
+		"dass-report":					{"table_id":"20011464","url":"https://wappsystem.github.io/isleephealth/modules/initial/dass-report.html"},
+		"isi-report":					{"table_id":"20011465","url":"https://wappsystem.github.io/isleephealth/modules/initial/isi-report.html"},
+		"psqi":							{"table_id":"20011466","url":"https://wappsystem.github.io/isleephealth/modules/initial/psqi.html"},
+		"phq-report":					{"table_id":"20011467","url":"https://wappsystem.github.io/isleephealth/modules/initial/phq-report.html"},
+		"fss-report":					{"table_id":"20011468","url":"https://wappsystem.github.io/isleephealth/modules/initial/fss-report.html"}
+	},
+	"dictionary":
+		{
+        "contact-details":{
+            "Name":"Name",
+            "Sex":"Sex",
+            "DOB":"Date of birth",
+            "Residential_Address":"Residential Address",
+            "Suburb":"Suburb",
+            "Contact_number":"Phone",
+            "Contact_email":"Email",
+            "Emergency_contact":"Emergency Contact",
+            "Emergency_contact_number":"Emergency Contact Phone"
+        },
+        "medicare-referrals":{
+            "Medicare_number":"Medicare number",
+            "Medicare_reference_number":"Ref",
+            "Medicare_expiry":"Expiry Date",
+            "Residential_Address":"Residential Address",
+            "Referring_doctor":"Referring Doctor",
+            "Referring_doctor_address":"Address",
+            "GP_Family_doctor":"GP/Family Doctor",
+            "GP_Family_doctor_address":"Address",
+            "DVA":"DVA"
+        }
+    }
+}

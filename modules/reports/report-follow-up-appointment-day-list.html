@@ -71,7 +71,7 @@
                     td.html("<u style='cursor:pointer'>Results</u>");
                     td.find('u').on('click',function(){
                         records[I].PID=_db_pid;
-                        $vm.load_module_v2("panel-initial",$vm.root_layout_content_slot,{record:records[I]});
+                        $vm.load_module_v2("panel-fu",$vm.root_layout_content_slot,{record:records[I]});
                     });
                     break;
                 case '_Summary':
@@ -79,35 +79,9 @@
 					if(records[I].UID===undefined) return;
 					td.html("<u style='cursor:pointer'>Summay</u>");
 					td.find('u').on('click',function(){
-                        $vm.nav_load_module("report-initial-appointment-summary",$vm.root_layout_content_slot,{record:records[I]});
+                        $vm.nav_load_module("report-follow-up-appointment-summary",$vm.root_layout_content_slot,{record:records[I]});
 					});
 					break;
-                case '_Patient_Info':
-					records[I].vm_custom[field]=true;
-					if(records[I].UID===undefined) return;
-					td.html("<u style='cursor:pointer'>Patient Info</u>");
-					td.find('u').on('click',function(){
-                        $vm.nav_load_module(prefix+prefix2+"report-initial-appointment-patient-info",$vm.root_layout_content_slot,{record:records[I]});
-					});
-					break;
-                case 'Referral_letter':
-                    records[I].vm_custom[field]=true;
-                    if(records[I][field]===undefined) records[I][field]="";
-                    td.data('filename_field',field);
-                    var html="<u style='cursor:pointer'>"+records[I][field]+"</u>";
-                    html+="<span class=file_buttons></span>";
-                    html+="<form><input type=file style='display:none'></input></form>";
-                    td.html(html);
-                    if(records[I][field]==="" || records[I][field]===null || records[I][field]===undefined) td.find('a.remove_file').css('visibility','hidden');
-                    td.find('u').on('click',function(){
-                        var f_name=$(this).html();
-                        var rid=records[I].letter_rid;
-                        if(rid!==undefined){
-                            $vm.open_link({rid:rid,filename:f_name});
-                        }
-                        else alert("No file was found on server.")
-                    });
-                    break;
             }
         }
         //-------------------------------------

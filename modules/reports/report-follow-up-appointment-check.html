@@ -14,7 +14,7 @@
         $('#t1__ID').datepicker({dateFormat:'dd/mm/yy'});
         $('#t1__ID').val($.datepicker.formatDate('dd/mm/yy', today));
         //-------------------------------------
-        var fields="First_Name,Last_Name,Email,Location,Physician,Appointment_Type,Date,Appointment_Time,Contact_Details,Benefit,Sleep_History,Health_History,ESS,DASS,ISI,PHQ,FSS"; //*,_Report,_Patient_Info*
+        var fields="First_Name,Last_Name,Email,Location,Physician,Appointment_Type,Date,Appointment_Time,ESS,DASS,ISI,PHQ,FSS"; //*,_Report,_Patient_Info*
         _fields="_Form,"+fields+",Submit Date|DateTime,Submitted by|Author,_Delete";
         //-------------------------------------
 		var this_module			=$vm.module_list[$vm.vm['__ID'].name];
@@ -42,20 +42,12 @@
         //-------------------------------------
         var _set_req=function(){
             var sql="with tb as (select Information,ID,UID,PUID,DateTime,Modified=Convert(varchar,Modified,127),Author,RowNum=row_number() over (order by ID DESC) from [TABLE-"+_db_pid+"-@S1] where DT1=@T1 )";
-            sql+=", cd as (select Contact_Details=case  when UID > 0 then 'Yes' END ,cd_puid=PUID from [TABLE-20011470]) ";
-            sql+=", b as (select Benefit=case  when UID > 0 then 'Yes' END ,b_puid=PUID from [TABLE-20011363]) ";
-            sql+=", sh as (select Sleep_History=case  when UID > 0 then 'Yes' END ,sh_puid=PUID from [TABLE-20011469]) ";
-            sql+=", hh as (select Health_History=case  when UID > 0 then 'Yes' END ,hh_puid=PUID from [TABLE-20011365]) ";
-            sql+=", ess as (select ESS=case  when UID > 0 then 'Yes' END ,ess_puid=PUID from [TABLE-20011364]) ";
-            sql+=", dass as (select DASS=case  when UID > 0 then 'Yes' END ,dass_puid=PUID from [TABLE-20011464]) ";
-            sql+=", isi as (select ISI=case  when UID > 0 then 'Yes' END ,isi_puid=PUID from [TABLE-20011465]) ";
-            sql+=", phq as (select PHQ=case  when UID > 0 then 'Yes' END ,phq_puid=PUID from [TABLE-20011467]) ";
-            sql+=", fss as (select FSS=case  when UID > 0 then 'Yes' END ,fss_puid=PUID from [TABLE-20011468]) ";
-            sql+="select Contact_Details,Benefit,Sleep_History,Health_History,ESS,DASS,ISI,PHQ,FSS,Information,ID,UID,PUID,DateTime,Author,RowNum from tb \
-            left join cd on cd_puid=UID \
-            left join b on b_puid=UID \
-            left join sh on sh_puid=UID \
-            left join hh on hh_puid=UID \
+            sql+=", ess as (select ESS=case  when UID > 0 then 'Yes' END ,ess_puid=PUID from [TABLE-20011584]) ";
+            sql+=", dass as (select DASS=case  when UID > 0 then 'Yes' END ,dass_puid=PUID from [TABLE-20011585]) ";
+            sql+=", isi as (select ISI=case  when UID > 0 then 'Yes' END ,isi_puid=PUID from [TABLE-20011586]) ";
+            sql+=", phq as (select PHQ=case  when UID > 0 then 'Yes' END ,phq_puid=PUID from [TABLE-20011587]) ";
+            sql+=", fss as (select FSS=case  when UID > 0 then 'Yes' END ,fss_puid=PUID from [TABLE-20011588]) ";
+            sql+="select ESS,DASS,ISI,PHQ,FSS,Information,ID,UID,PUID,DateTime,Author,RowNum from tb \
             left join ess on ess_puid=UID \
             left join dass on dass_puid=UID \
             left join isi on isi_puid=UID \
@@ -68,20 +60,12 @@
         //-------------------------------------
         var _set_req_export=function(i1,i2){
             var sql="with tb as (select UID,PUID,Information,DateTime,Author,RowNum=row_number() over (order by ID DESC) from [TABLE-"+_db_pid+"] where DT1=@T1)";
-            sql+=", cd as (select Contact_Details=case  when UID > 0 then 'Yes' END ,cd_puid=PUID from [TABLE-20011470]) ";
-            sql+=", b as (select Benefit=case  when UID > 0 then 'Yes' END ,b_puid=PUID from [TABLE-20011363]) ";
-            sql+=", sh as (select Sleep_History=case  when UID > 0 then 'Yes' END ,sh_puid=PUID from [TABLE-20011469]) ";
-            sql+=", hh as (select Health_History=case  when UID > 0 then 'Yes' END ,hh_puid=PUID from [TABLE-20011365]) ";
-            sql+=", ess as (select ESS=case  when UID > 0 then 'Yes' END ,ess_puid=PUID from [TABLE-20011364]) ";
-            sql+=", dass as (select DASS=case  when UID > 0 then 'Yes' END ,dass_puid=PUID from [TABLE-20011464]) ";
-            sql+=", isi as (select ISI=case  when UID > 0 then 'Yes' END ,isi_puid=PUID from [TABLE-20011465]) ";
-            sql+=", phq as (select PHQ=case  when UID > 0 then 'Yes' END ,phq_puid=PUID from [TABLE-20011467]) ";
-            sql+=", fss as (select FSS=case  when UID > 0 then 'Yes' END ,fss_puid=PUID from [TABLE-20011468]) ";
-            sql+="select Contact_Details,Benefit,Sleep_History,Health_History,ESS,DASS,ISI,PHQ,FSS,Information,UID,PUID,DateTime,Author,RowNum from tb \
-            left join cd on cd_puid=UID \
-            left join b on b_puid=UID \
-            left join sh on sh_puid=UID \
-            left join hh on hh_puid=UID \
+            sql+=", ess as (select ESS=case  when UID > 0 then 'Yes' END ,ess_puid=PUID from [TABLE-20011584]) ";
+            sql+=", dass as (select DASS=case  when UID > 0 then 'Yes' END ,dass_puid=PUID from [TABLE-20011585]) ";
+            sql+=", isi as (select ISI=case  when UID > 0 then 'Yes' END ,isi_puid=PUID from [TABLE-20011586]) ";
+            sql+=", phq as (select PHQ=case  when UID > 0 then 'Yes' END ,phq_puid=PUID from [TABLE-20011587]) ";
+            sql+=", fss as (select FSS=case  when UID > 0 then 'Yes' END ,fss_puid=PUID from [TABLE-20011588]) ";
+            sql+="select ESS,DASS,ISI,PHQ,FSS,Information,UID,PUID,DateTime,Author,RowNum from tb \
             left join ess on ess_puid=UID \
             left join dass on dass_puid=UID \
             left join isi on isi_puid=UID \
@@ -101,22 +85,6 @@
                     var html='<input type=date style="border:none" />';
                     $vm.render_input_field(records[I],'__ID',td,html);
 	                break;
-                case 'Personal':
-					records[I].vm_custom[field]=true;
-					if(records[I].UID===undefined) return;
-					td.html("<u style='cursor:pointer'>Summay</u>");
-					td.find('u').on('click',function(){
-                        $vm.nav_load_module(prefix+prefix2+"report-initial-summary",$vm.root_layout_content_slot,{record:records[I]});
-					});
-					break;
-                case '_Patient_Info':
-					records[I].vm_custom[field]=true;
-					if(records[I].UID===undefined) return;
-					td.html("<u style='cursor:pointer'>Patient Info</u>");
-					td.find('u').on('click',function(){
-                        $vm.nav_load_module(prefix+prefix2+"patient-info",$vm.root_layout_content_slot,{record:records[I]});
-					});
-					break;
             }
         }
         //-------------------------------------

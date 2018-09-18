@@ -4,14 +4,14 @@
 	</div>
 	<form id=F__ID>
 		<div class="container">
-			<div class="row row__ID"><div class="col-sm col-lg-3">First Name</div><div class="col-sm"><input type="text" placeholder="First Name" class="form-control" name="First_Name" required /></div></div>
-			<div class="row row__ID"><div class="col-sm col-lg-3">Last Name</div><div class="col-sm"><input type="text" placeholder="Last Name" class="form-control" name="Last_Name" required /></div></div>
-			<div class="row row__ID"><div class="col-sm col-lg-3">Email</div><div class="col-sm"><input type="email" placeholder=Email class="form-control" name="Email" required /></div></div>
+			<div class="row row__ID"><div class="col-sm col-lg-3">First Name</div><div class="col-sm"><input type="text" placeholder="First Name" class="form-control" name="First_Name"  /></div></div>
+			<div class="row row__ID"><div class="col-sm col-lg-3">Last Name</div><div class="col-sm"><input type="text" placeholder="Last Name" class="form-control" name="Last_Name"  /></div></div>
+			<div class="row row__ID"><div class="col-sm col-lg-3">Email</div><div class="col-sm"><input type="email" placeholder=Email class="form-control" name="Email"  /></div></div>
 			<div class="row row__ID"><div class="col-sm col-lg-3">Location</div><div class="col-sm"><select class="form-control" name="Location"><option>MLC</option><option>Bondi Junction</option></select></div></div>
-			<div class="row row__ID"><div class="col-sm col-lg-3">Physician</div><div class="col-sm"><input type="text" placeholder=Physician class="form-control" name="Physician" required /></div></div>
-			<div class="row row__ID"><div class="col-sm col-lg-3">Appointment Type</div><div class="col-sm"><input type="text" placeholder="Appointment Type" class="form-control" name="Appointment_Type" required /></div></div>
+			<div class="row row__ID"><div class="col-sm col-lg-3">Physician</div><div class="col-sm"><input type="text" placeholder=Physician class="form-control" name="Physician"  /></div></div>
+			<div class="row row__ID"><div class="col-sm col-lg-3">Appointment Type</div><div class="col-sm"><input type="text" placeholder="Appointment Type" class="form-control" name="Appointment_Type"  /></div></div>
 			<div class="row row__ID"><div class="col-sm col-lg-3">Date</div><div class="col-sm"><input type="date" class="form-control" name="Date" required /></div></div>
-			<div class="row row__ID"><div class="col-sm col-lg-3">Appointment Time</div><div class="col-sm"><input type="time" class="form-control" name="Appointment_Time" required /></div></div>
+			<div class="row row__ID"><div class="col-sm col-lg-3">Appointment Time</div><div class="col-sm"><input type="time" class="form-control" name="Appointment_Time"  /></div></div>
 			<div class="row row__ID"><div class="col-sm col-lg-3">Login ID</div><div class="col-sm"><input type="text" placeholder="Auto generated, read only" class="form-control" id="Login_ID__ID" readonly /></div></div>
 			<div class="row row__ID"><div class="col-sm col-lg-3">Password</div><div class="col-sm"><input type="text" placeholder=Password class="form-control" name="Password" required /></div></div>
 			<br>
@@ -52,6 +52,10 @@
 			$('#F__ID')[0].reset();
 			$('#submit__ID').show();
 			var record=$vm.vm['__ID'].op.record;
+			var clone=$vm.vm['__ID'].op.clone;
+			if(clone==1){
+				$('#submit__ID').text('Add Clone');
+			}
 			$vm.deserialize(record,'#F__ID');
             if(record==undefined)  $("#F__ID input[name=Password]").val( $vm.vm_password(8,false) );
             else $('#Login_ID__ID').val(record.UID+'-'+db_pid);

@@ -121,6 +121,10 @@
 					if(records[I].UID===undefined) return;
 					td.html("<u style='cursor:pointer'><i class='fa fa-clone'></i></u>");
 					td.find('u').on('click',function(){
+                        var this_module_name=$vm.vm['__ID'].name;
+                        var form_module_name=$vm.module_list[this_module_name].form_module;
+                        $vm.load_module_v2(prefix+form_module_name,'',{record:records[I],clone:1});
+                        /*
                         //$vm.nav_load_module(prefix+form_module,'',{goback:1})
                         var row=I;
                         var this_module_name=$vm.vm['__ID'].name;
@@ -159,6 +163,7 @@
     							input:$vm.vm['__ID'].op.input,
                             }
                         );
+                        */
 					});
 					break;
             }

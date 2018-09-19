@@ -1,13 +1,14 @@
 <section>
-    VmInclude:__COMPONENT__/grid/grid.v3.html
+    VmInclude:__COMPONENT__/module/grid.v1.html
 </section>
 <script>
     function F__ID(){
         //-------------------------------------
-        VmInclude:__COMPONENT__/grid/grid.v3.js
+        VmInclude:__COMPONENT__/module/grid.v1.js
         //-------------------------------------
-        var fields="_Clone,First_Name,Last_Name,Email,Location,Physician,Appointment_Type,Date,Appointment_Time,_Hidden|List,_Login_ID,Password,_Send_Email,_Results,_Summary";/*_Patient_Info*/
-        _fields="_Form,"+fields+",Submit Date|DateTime,Submitted by|Author,_Delete";
+        var fields="_Copy,First_Name,Last_Name,Email,Location,Physician,Appointment_Type,Date,Appointment_Time,_Login_ID,Password,_Send_Email,_Results,_Summary";/*_Patient_Info*/
+        m.fields="_Form,"+fields+",Submit Date|DateTime,Submitted by|Author,_Delete";
+        m.form_fields=fields+",List,TID"
         //-------------------------------------
 		var this_module			=$vm.module_list[$vm.vm['__ID'].name];
         var prefix              =this_module.prefix;  if(prefix==undefined) prefix="";
@@ -29,10 +30,8 @@
         ];
         //-------------------------------------
 		$('#new__ID').off('click').on('click',function(){$vm.nav_load_module(prefix+form_module,'',{goback:1})})
-		//-------------------------------------
-        $('#D__ID').on('load',function(){_set_req(); _request_data(); })
         //-------------------------------------
-        var _before_submit=function(record,dbv){
+        m.before_submit=function(record,dbv){
             if(record.Appointment_Type=='Follow up'){
                 record.List=fu_pid_list.toString(); //based on some logic, select first or second or...
             }
@@ -45,7 +44,7 @@
             return true;
         };
         //-------------------------------------
-        _cell_render=function(records,I,field,td,set_value,source){
+        m.cell_render=function(records,I,field,td,set_value,source){
             switch(field){
                 case 'Location':
                     var html="<select style='border:0;'>\
@@ -63,8 +62,8 @@
                     var sql="with tb as (select distinct name=S1,value2=uid from [TABLE-"+appointment_type_tid+"])";
                     sql+=" select top 10 name,value=name,value2 from tb where Name like '%'+@S1+'%' ";
                     $vm.autocomplete(td,sql);
-                    if (records[I].Appointment_Type=="Follow up") _set_value(fu_pid_list.toString(),records,I,"List");
-                    else _set_value(initial_pid_list.toString(),records,I,"List")
+                    if (records[I].Appointment_Type=="Follow up") m.set_value(fu_pid_list.toString(),records,I,"List");
+                    else m.set_value(initial_pid_list.toString(),records,I,"List")
                     break;
 				case 'Date':
                     var html='<input type=date style="border:none" />';
@@ -93,7 +92,7 @@
                     if(records[I].UID===undefined) return;
                     td.html("<u style='cursor:pointer'>Results</u>");
                     td.find('u').on('click',function(){
-                        records[I].PID=_db_pid;
+                        records[I].PID=m.db_pid;
                         var panel="panel-initial";
                         if(records[I].Appointment_Type=="Follow up") panel="panel-fu";
                         $vm.load_module_v2(panel,$vm.root_layout_content_slot,{record:records[I]});
@@ -117,62 +116,22 @@
                         $vm.nav_load_module(prefix+prefix2+"patient-info",$vm.root_layout_content_slot,{record:records[I]});
 					});
 					break;
-                case '_Clone':
+                case '_Copy':
 					if(records[I].UID===undefined) return;
+                    td.removeAttr('contenteditable');
+                    td.css('background-color','#F8F8F8');
 					td.html("<u style='cursor:pointer'><i class='fa fa-clone'></i></u>");
 					td.find('u').on('click',function(){
-                        var this_module_name=$vm.vm['__ID'].name;
-                        var form_module_name=$vm.module_list[this_module_name].form_module;
-                        $vm.load_module_v2(prefix+form_module_name,'',{record:records[I],clone:1});
-                        /*
-                        //$vm.nav_load_module(prefix+form_module,'',{goback:1})
-                        var row=I;
-                        var this_module_name=$vm.vm['__ID'].name;
-                        var form_module_name=$vm.module_list[this_module_name].form_module;
-                        var prefix="";
-    					if($vm.module_list[this_module_name].prefix!=undefined) prefix=$vm.module_list[this_module_name].prefix
-                        if($vm.module_list[prefix+form_module_name]===undefined){
-                            alert('Can not find "'+form_module_name+'" in the module list');
-                            return;
-                        }
-                        var content_container=$vm.root_layout_content_slot;
-                        if($vm.vm['__ID'].input!=undefined && $vm.vm['__ID'].input.content_container!=undefined) content_container=$vm.vm['__ID'].input.content_container;
-                        $vm.load_module_v2(prefix+form_module_name,content_container,
-                            {
-    							//----------------
-                                clone:1,
-    							sys:_mobj.op.sys,
-    							mobj:_mobj,
-    							record:_records[I],
-    							//----------------
-    							records:_records,res:_res,I:row,
-                                headerA:_headerFormA,headerB:_headerFormB,
-                                cell_render:_cell_render,
-                                before_submit:_before_submit,
-                                after_submit:_after_submit,
-                                after_change:_after_change,
-                                before_change:_before_change,
-                                cell_value_process:_cell_value_process,
-                                from_grid:'1',
-                                grid_to_form_parameters:_grid_to_form_parameters,
-                                save_style:$('#save__ID').css('display'),
-                                app_id:_app_id,
-                                record_type:_record_type,
-                                row_data:_row_data,
-                                json:_json,
-    							input:$vm.vm['__ID'].op.input,
-                            }
-                        );
-                        */
+                        $vm.load_module_v2(prefix+form_module,'',{record:records[I],clone:1});
 					});
 					break;
             }
         }
         //-------------------------------------
         //convert the existed date to the new standard format
-        _data_process=function(){
-            for(var i=0;i<_records.length;i++){
-                _records[i].Date=$vm.au_date_to_string_yyyymmdd(_records[i].Date);
+        m.data_process=function(){
+            for(var i=0;i<m.records.length;i++){
+                m.records[i].Date=$vm.au_date_to_string_yyyymmdd(m.records[i].Date);
             }
         }
         //-------------------------------------

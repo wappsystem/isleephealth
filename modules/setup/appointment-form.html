@@ -4,7 +4,7 @@
 	</div>
 	<form id=F__ID>
 		<div class="container">
-			<div class="row row__ID"><div class="col-sm col-lg-3">First Name</div><div class="col-sm"><input type="text" placeholder="First Name" class="form-control" name="First_Name"  /></div></div>
+			<div class="row row__ID"><div class="col-sm col-lg-3">First Name</div><div class="col-sm"><input type="text" placeholder="First Name" class="form-control" name="First_Name" id=first /></div></div>
 			<div class="row row__ID"><div class="col-sm col-lg-3">Last Name</div><div class="col-sm"><input type="text" placeholder="Last Name" class="form-control" name="Last_Name"  /></div></div>
 			<div class="row row__ID"><div class="col-sm col-lg-3">Email</div><div class="col-sm"><input type="email" placeholder=Email class="form-control" name="Email"  /></div></div>
 			<div class="row row__ID"><div class="col-sm col-lg-3">Location</div><div class="col-sm"><select class="form-control" name="Location"><option>MLC</option><option>Bondi Junction</option></select></div></div>
@@ -54,9 +54,12 @@
 			var record=$vm.vm['__ID'].op.record;
 			var clone=$vm.vm['__ID'].op.clone;
 			if(clone==1){
-				$('#submit__ID').text('Add Clone');
+				$('#submit__ID').text('Add Copy');
 				$vm.vm['__ID'].op.record.ID=undefined;
 				$vm.vm['__ID'].op.record.Password=$vm.vm_password(8,false);
+				$vm.vm['__ID'].op.record.Appointment_Type="";
+				$vm.vm['__ID'].op.record.Date="";
+				$vm.vm['__ID'].op.record.Appointment_Time="";
 			}
 			$vm.deserialize(record,'#F__ID');
             if(record==undefined)  $("#F__ID input[name=Password]").val( $vm.vm_password(8,false) );
@@ -106,6 +109,9 @@
 		overflow:auto;
 		animation: vm_module_fadein 1.0s;
 	}
+	#F__ID .form-control::-webkit-input-placeholder{color:#ccc;}
+    #F__ID .form-control:-ms-input-placeholder{color:#ccc;}
+    #F__ID .form-control::-moz-placeholder{color:#ccc;opacity: 1;}
     #form_container__ID{
         margin-top:20px;
 		max-width: 800px;
@@ -155,4 +161,5 @@
     .C__ID {
         background-color: #ccc;
     }
+}
 </style>

@@ -4,7 +4,7 @@
 <script>
     function F__ID(){
         //-------------------------------------
-        VmInclude:__COMPONENT__/grid/grid.v3.js
+        VmInclude:__COMPONENT__/module/grid.v1.js
         VmInclude:__COMPONENT__/toolbar/day_v2.js
         //-------------------------------------
         $('#add_search__ID').append("<span>&nbsp;Date:</span> <input  class='form-control form-control-sm' type=text id=t1__ID placeholder='' style='width:100px;padding-left:3px' />");
@@ -15,7 +15,8 @@
         $('#t1__ID').val($.datepicker.formatDate('dd/mm/yy', today));
         //-------------------------------------
         var fields="First_Name,Last_Name,Email,Location,Physician,Appointment_Type,Date,Appointment_Time,_Results,_Summary"; /*,_Patient_Info,Referral_letter,_Hidden|letter_rid";*/
-        _fields="_Form,"+fields+",Submit Date|DateTime,Submitted by|Author,_Delete";
+        m.fields=""+fields+",Submit Date|DateTime,Submitted by|Author";
+        m.form_fields=fields+",TID"
         //-------------------------------------
 		var this_module			=$vm.module_list[$vm.vm['__ID'].name];
         var prefix              =this_module.prefix;  if(prefix==undefined) prefix="";
@@ -36,30 +37,28 @@
             "20011587","20011588"
         ];
         //-------------------------------------
-        $('#D__ID').on('load',function(){_set_req(); _request_data(); })
+        $('#aquery__ID').on('click',function(){ m.set_req(); m.request_data();  })
         //-------------------------------------
-        $('#aquery__ID').on('click',function(){ _set_req(); _request_data();  })
-        //-------------------------------------
-        var _set_req=function(){
-            var sql="with tb as (select Information,ID,UID,PUID,DateTime,Modified=Convert(varchar,Modified,127),Author,RowNum=row_number() over (order by ID DESC) from [TABLE-"+_db_pid+"-@S1] where DT1=@T1 )";
+        m.set_req=function(){
+            var sql="with tb as (select Information,ID,UID,PUID,DateTime,Modified=Convert(varchar,Modified,127),Author,RowNum=row_number() over (order by ID DESC) from [TABLE-"+m.db_pid+"-@S1] where DT1=@T1 )";
             //sql+=", tb2 as (select letter_rid=ID,Referral_letter=JSON_VALUE(Information,'$.File_Name'),letter_puid=PUID from [TABLE-20011363]) ";
             //sql+="select letter_rid,Referral_letter,Information,ID,UID,PUID,DateTime,Modified,Author,RowNum from tb left join tb2 on letter_puid= UID where RowNum between @I6 and @I7";
             sql+="select Information,ID,UID,PUID,DateTime,Modified,Author,RowNum from tb where RowNum between @I6 and @I7";
-            var sql_n="select count(ID) from [TABLE-"+_db_pid+"-@S1]";
-        	_req={cmd:'query_records',db_pid:_db_pid,sql:sql,sql_n:sql_n,t1:$('#t1__ID').val(),s1:'"'+$('#keyword__ID').val()+'"',I:$('#I__ID').text(),page_size:$('#page_size__ID').val()}
+            var sql_n="select count(ID) from [TABLE-"+m.db_pid+"-@S1]";
+        	m.req={cmd:'read',db_pid:m.db_pid,sql:sql,sql_n:sql_n,t1:$('#t1__ID').val(),s1:'"'+$('#keyword__ID').val()+'"',I:$('#I__ID').text(),page_size:$('#page_size__ID').val()}
         }
         //-------------------------------------
-        var _set_req_export=function(i1,i2){
-            var sql="with tb as (select Information,DateTime,Author,RowNum=row_number() over (order by ID DESC) from [TABLE-"+_db_pid+"] where DT1=@T1)";
+        m.set_req_export=function(i1,i2){
+            var sql="with tb as (select Information,DateTime,Author,RowNum=row_number() over (order by ID DESC) from [TABLE-"+m.db_pid+"] where DT1=@T1)";
             sql+="select Information,DateTime,Author from tb where RowNum between @I1 and @I2";
-        	_req={cmd:'query_records',sql:sql,i1:i1,i2:i2,t1:$('#t1__ID').val()};
+        	m.req={cmd:'read',sql:sql,i1:i1,i2:i2,t1:$('#t1__ID').val()};
         }
         //-------------------------------------
-        var _before_submit=function(record,dbv){
+        m.before_submit=function(record,dbv){
             return true;
         };
         //-------------------------------------
-        _cell_render=function(records,I,field,td,set_value,source){
+        m.cell_render=function(records,I,field,td,set_value,source){
             switch(field){
 				case 'Date':
                     var html='<input type=date style="border:none" />';
@@ -70,8 +69,10 @@
                     if(records[I].UID===undefined) return;
                     td.html("<u style='cursor:pointer'>Results</u>");
                     td.find('u').on('click',function(){
-                        records[I].PID=_db_pid;
-                        $vm.load_module_v2("panel-fu",$vm.root_layout_content_slot,{record:records[I]});
+                        records[I].PID=m.db_pid;
+                        var panel="panel-initial";
+                        if(records[I].Appointment_Type=="Follow up") panel="panel-fu";
+                        $vm.load_module_v2(panel,$vm.root_layout_content_slot,{record:records[I]});
                     });
                     break;
                 case '_Summary':
@@ -79,23 +80,25 @@
 					if(records[I].UID===undefined) return;
 					td.html("<u style='cursor:pointer'>Summay</u>");
 					td.find('u').on('click',function(){
-                        $vm.nav_load_module("report-follow-up-appointment-summary",$vm.root_layout_content_slot,{record:records[I]});
+                        var summary="report-initial-appointment-summary";
+                        if(records[I].Appointment_Type=="Follow up") summary="report-follow-up-appointment-summary";
+                        $vm.nav_load_module(summary,$vm.root_layout_content_slot,{record:records[I]});
 					});
 					break;
             }
         }
         //-------------------------------------
         //convert the existed date to the new standard format
-        _data_process=function(){
-            for(var i=0;i<_records.length;i++){
-                _records[i].Date=$vm.au_date_to_string_yyyymmdd(_records[i].Date);
+        m.data_process=function(){
+            for(var i=0;i<m.records.length;i++){
+                m.records[i].Date=$vm.au_date_to_string_yyyymmdd(m.records[i].Date);
             }
         }
         //-------------------------------------
     }
 </script>
 <style>
-VmInclude:__COMPONENT__/grid/grid.v3.css
+VmInclude:__COMPONENT__/module/grid.v1.css
 #D__ID{
     overflow-x:auto;
     background-color: rgba(255,255,255,0.8);

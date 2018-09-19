@@ -14,14 +14,16 @@
     function F__ID(){
         //---------------------------------------------
         VmInclude:__COMPONENT__/toolbar/day_v2.js
-        VmInclude:__COMPONENT__/grid/grid.v3.js
+        VmInclude:__COMPONENT__/module/grid.v1.js
         //---------------------------------------------
+        m.fields="";
+        m.form_fields="";
 	        var table=function(record){
             var participant_uid=record.UID;
             var tb="<div style='padding:20px;'>";
             var name="";
             var sql="select DateTime,Information from [TABLE-20011470] where PUID="+participant_uid;
-            $VmAPI.request({data:{cmd:'query_records',sql:sql},callback:function(res){
+            $VmAPI.request({data:{cmd:'read',sql:sql},callback:function(res){
                 var sex="",dob="",first_name="",last_name="",dob="",submit=[];
                 if(res.records.length>0){
                     first_name=res.records[0].first_name;
@@ -42,7 +44,7 @@
                 tb+="</table><br>";
             }});
             var sql="select Information from [TABLE-20011363] where PUID="+participant_uid;
-            $VmAPI.request({data:{cmd:'query_records',sql:sql},callback:function(res){
+            $VmAPI.request({data:{cmd:'read',sql:sql},callback:function(res){
                 var benefit="",ref_doc="",ref_letter="",reason="";
                 if(res.records.length>0){
                     reason=res.records[0].Reason;
@@ -57,7 +59,7 @@
                 tb+="</table><br>";
             }});
             var sql="select Information from [TABLE-20011469] where PUID="+participant_uid;
-            $VmAPI.request({data:{cmd:'query_records',sql:sql},callback:function(res){
+            $VmAPI.request({data:{cmd:'read',sql:sql},callback:function(res){
                 var snore="<td></td>",unfreshed="<td></td>",driving="<td></td>",shortness_breath="<td></td>",stop_breathing="<td></td>",staying_asleep="<td></td>",daytime_worries="<td></td>",pain="<td></td>",staying_asleep="<td></td>",chronically_sleepy="<td></td>",menopause="<td></td>",jerk_arms="<td></td>",sleeping_tablets_frequency="",toilet_number="",unusual_movements_describe="";
                 var grind_teeth="<td></td>",unusual_movements="<td></td>",sleeping_tablets="<td></td>",sleeping_tablets_name="",sleep_start="",sleep_end="",leg_sensations="<td></td>",toilet="<td></td>";
                 if(res.records.length>0){
@@ -116,7 +118,7 @@
                 tb+="</table><br>";
             }});
             var sql="select Information from [TABLE-20011365] where PUID="+participant_uid;
-            $VmAPI.request({data:{cmd:'query_records',sql:sql},callback:function(res){
+            $VmAPI.request({data:{cmd:'read',sql:sql},callback:function(res){
                 var heart_failure="<td></td>",pacemaker="<td></td>",angina="<td></td>";
                 var hypertension="<td></td>",blood_clot="<td></td>",anaemia="<td></td>";
                 var bleeding="<td></td>",diabetes_1="<td></td>",diabetes_2="<td></td>";
@@ -260,7 +262,7 @@
                 tb+="</table><br>";
             }});
             var sql="select Information from [TABLE-20011364] where PUID="+participant_uid;
-            $VmAPI.request({data:{cmd:'query_records',sql:sql},callback:function(res){
+            $VmAPI.request({data:{cmd:'read',sql:sql},callback:function(res){
                 var ess="";
                 if(res.records.length>0){
                     ess=res.records[0].ESS;
@@ -272,7 +274,7 @@
                 tb+="</table><br>";
             }});
             var sql="select Information from [TABLE-20011464] where PUID="+participant_uid;
-            $VmAPI.request({data:{cmd:'query_records',sql:sql},callback:function(res){
+            $VmAPI.request({data:{cmd:'read',sql:sql},callback:function(res){
                 var dass_ds="",dass_as="",dass_ss="";
                 if(res.records.length>0){
                     dass_ds=res.records[0].DASS_DS;
@@ -288,7 +290,7 @@
                 tb+="</table><br>";
             }});
             var sql="select Information from [TABLE-20011465] where PUID="+participant_uid;
-            $VmAPI.request({data:{cmd:'query_records',sql:sql},callback:function(res){
+            $VmAPI.request({data:{cmd:'read',sql:sql},callback:function(res){
                 var isi="",isi_1="";
                 if(res.records.length>0){
                     isi=res.records[0].ISI;
@@ -302,7 +304,7 @@
                 tb+="</table><br>";
             }});
             var sql="select Information from [TABLE-20011467] where PUID="+participant_uid;
-            $VmAPI.request({data:{cmd:'query_records',sql:sql},callback:function(res){
+            $VmAPI.request({data:{cmd:'read',sql:sql},callback:function(res){
                 var phq_10="",phq="";
                 if(res.records.length>0){
                     phq=res.records[0].phq;
@@ -316,7 +318,7 @@
                 tb+="</table><br>";
             }});
             var sql="select Information from [TABLE-20011468] where PUID="+participant_uid;
-            $VmAPI.request({data:{cmd:'query_records',sql:sql},callback:function(res){
+            $VmAPI.request({data:{cmd:'read',sql:sql},callback:function(res){
                 var fss="";
                 if(res.records.length>0){
                     fss=res.records[0].fss;

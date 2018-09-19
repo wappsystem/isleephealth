@@ -47,14 +47,13 @@
 
 		"report-daily-first":   {"url":"https://wappsystem.github.io/isleephealth/modules/isleephealth/task/report-daily-first.html","table_id":"20011195","name_for_search":""},
 
-		"report-initial-appointment-day-list":{"table_id":"20011471","url":"https://wappsystem.github.io/isleephealth/modules/reports/report-initial-appointment-day-list.html"},
 		"report-initial-appointment-summary":{"table_id":"20011471","url":"https://wappsystem.github.io/isleephealth/modules/reports/report-initial-appointment-summary.html"},
 		"report-initial-appointment-check":{"table_id":"20011471","url":"https://wappsystem.github.io/isleephealth/modules/reports/report-initial-appointment-check.html"},
 		"report-initial-appointment-patient-info":{"table_id":"20011471","url":"https://wappsystem.github.io/isleephealth/modules/reports/report-initial-appointment-patient-info.html"},
 		"report-appointment-patient-list":{"table_id":"20011471","url":"https://wappsystem.github.io/isleephealth/modules/reports/report-appointment-patient-list.html"},
 		"report-follow-up-appointment-summary":{"table_id":"20011471","url":"https://wappsystem.github.io/isleephealth/modules/reports/report-follow-up-appointment-summary.html"},
 		"report-follow-up-appointment-check":{"table_id":"20011471","url":"https://wappsystem.github.io/isleephealth/modules/reports/report-follow-up-appointment-check.html"},
-		"report-follow-up-appointment-day-list":{"table_id":"20011471","url":"https://wappsystem.github.io/isleephealth/modules/reports/report-follow-up-appointment-day-list.html"},
+		"report-appointment-day-list":{"table_id":"20011471","url":"https://wappsystem.github.io/isleephealth/modules/reports/report-appointment-day-list.html"},
 
         "sleep-history-report":		    {"table_id":"20011469","url":"https://wappsystem.github.io/isleephealth/modules/tasks/sleep-history-report.html"},
 		"health-history-report":		{"table_id":"20011365","url":"https://wappsystem.github.io/isleephealth/modules/tasks/health-history-report.html"},

@@ -4,11 +4,10 @@
 <script>
     function F__ID(){
         //-------------------------------------
-        VmInclude:__COMPONENT__/module/grid.v1.js
+        VmInclude:__COMPONENT__/grid/grid.v3.js
         //-------------------------------------
-        var fields="First_Name,Last_Name,Email,Location,Physician,Appointment_Type,Date,Appointment_Time,_Login_ID,Password,_Hidden|List,_Send_Email,_Results,_Summary";/*_Patient_Info*/
-        m.fields="_Form,"+fields+",Submit Date|DateTime,Submitted by|Author,_Delete";
-        m.form_fields=fields+",TID"
+        var fields="_Clone,First_Name,Last_Name,Email,Location,Physician,Appointment_Type,Date,Appointment_Time,_Hidden|List,_Login_ID,Password,_Send_Email,_Results,_Summary";/*_Patient_Info*/
+        _fields="_Form,"+fields+",Submit Date|DateTime,Submitted by|Author,_Delete";
         //-------------------------------------
 		var this_module			=$vm.module_list[$vm.vm['__ID'].name];
         var prefix              =this_module.prefix;  if(prefix==undefined) prefix="";
@@ -31,9 +30,9 @@
         //-------------------------------------
 		$('#new__ID').off('click').on('click',function(){$vm.nav_load_module(prefix+form_module,'',{goback:1})})
 		//-------------------------------------
-        //$('#D__ID').on('load',function(){m.set_req(); m.request_data(); })
+        $('#D__ID').on('load',function(){_set_req(); _request_data(); })
         //-------------------------------------
-/*        var m.before_submit=function(record,dbv){
+        var _before_submit=function(record,dbv){
             if(record.Appointment_Type=='Follow up'){
                 record.List=fu_pid_list.toString(); //based on some logic, select first or second or...
             }
@@ -45,9 +44,8 @@
 			dbv.DT1=record.Date;
             return true;
         };
-        */
         //-------------------------------------
-        m.cell_render=function(records,I,field,td,set_value,source){
+        _cell_render=function(records,I,field,td,set_value,source){
             switch(field){
                 case 'Location':
                     var html="<select style='border:0;'>\
@@ -64,33 +62,9 @@
 				case 'Appointment_Type':
                     var sql="with tb as (select distinct name=S1,value2=uid from [TABLE-"+appointment_type_tid+"])";
                     sql+=" select top 10 name,value=name,value2 from tb where Name like '%'+@S1+'%' ";
-                    td.autocomplete({
-                        minLength:0,
-                        source:function(request,response){
-                            $VmAPI.request({data:{cmd:'auto',s1:request.term,sql:sql,minLength:0},callback:function(res){
-                                response($vm.autocomplete_list(res.table));
-                            }});
-                        },
-                        select: function(event,ui){
-                            records[I][field+'_uid']=ui.item.value2;
-                            for(key in ui.item){
-                                if(key.indexOf('field_')!==-1){
-                                    var k=key.replace('field_','')
-                                    var v=ui.item[key];
-                                    set_value(v,records,I,k);
-                                    if(source=='grid'){
-                                        td.parent().find("td[data-id='"+k+"']").html(v);
-                                    }
-                                    else{
-                                        td.parent().parent().find("td[data-id='"+k+"']").html(v);
-                                    }
-                                }
-                            }
-                            if(ui.item.value=='Follow up') {set_value(fu_pid_list.toString(),records,I,"List");}
-                            else {set_value(initial_pid_list.toString(),records,I,"List")}
-                        }
-                    })
-                    td.focus(function(){td.autocomplete("search","");});
+                    $vm.autocomplete(td,sql);
+                    if (records[I].Appointment_Type=="Follow up") _set_value(fu_pid_list.toString(),records,I,"List");
+                    else _set_value(initial_pid_list.toString(),records,I,"List")
                     break;
 				case 'Date':
                     var html='<input type=date style="border:none" />';
@@ -143,13 +117,20 @@
                         $vm.nav_load_module(prefix+prefix2+"patient-info",$vm.root_layout_content_slot,{record:records[I]});
 					});
 					break;
+                case '_Clone':
+					if(records[I].UID===undefined) return;
+					td.html("<u style='cursor:pointer'><i class='fa fa-clone'></i></u>");
+					td.find('u').on('click',function(){
+                        $vm.load_module_v2(prefix+form_module,'',{record:records[I],clone:1});
+					});
+					break;
             }
         }
         //-------------------------------------
         //convert the existed date to the new standard format
-        m.data_process=function(){
-            for(var i=0;i<m.records.length;i++){
-                m.records[i].Date=$vm.au_date_to_string_yyyymmdd(m.records[i].Date);
+        _data_process=function(){
+            for(var i=0;i<_records.length;i++){
+                _records[i].Date=$vm.au_date_to_string_yyyymmdd(_records[i].Date);
             }
         }
         //-------------------------------------

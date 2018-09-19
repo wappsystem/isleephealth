@@ -4,7 +4,7 @@
 <script>
     function F__ID(){
         //-------------------------------------
-        VmInclude:__COMPONENT__/grid/grid.v3.js
+        VmInclude:__COMPONENT__/module/grid.v1.js
         //-------------------------------------
         $('#add_search__ID').append("<span>&nbsp;Patient:</span> <input  class='form-control form-control-sm' type=text id=t1__ID placeholder='' style='width:200px;padding-left:3px' />");
         //-------------------------------------
@@ -12,7 +12,7 @@
         $('#t1__ID').autocomplete({
             minLength:0,
             source:function(request,response){
-                var sql="with tb as (select name=JSON_VALUE(Information,'$.Last_Name'),value2=UID,value3=S1 from [TABLE-"+_db_pid+"])";
+                var sql="with tb as (select name=JSON_VALUE(Information,'$.Last_Name'),value2=UID,value3=S1 from [TABLE-"+m.db_pid+"])";
                 sql+=" select top 10 name,value=name,value2,value3 from tb where Name like '%'+@S1+'%' ";
                 $VmAPI.request({data:{cmd:'auto',s1:request.term,sql:sql,minLength:0},callback:function(res){
                     response($vm.autocomplete_list(res.table));
@@ -26,7 +26,8 @@
         $('#t1__ID').focus(function(){$('#t1__ID').autocomplete("search","");});
         //-------------------------------------
         var fields="First_Name,Last_Name,Email,Location,Physician,Appointment_Type,Date,Appointment_Time,_Results,_Summary";/*,_Patient_Info,Referral_letter,_Hidden|letter_rid";*/
-        _fields="_Form,"+fields+",Submit Date|DateTime,Submitted by|Author,_Delete";
+        m.fields=""+fields+",Submit Date|DateTime,Submitted by|Author";
+        m.form_fields=fields+",TID"
         //-------------------------------------
 		var this_module			=$vm.module_list[$vm.vm['__ID'].name];
         var prefix              =this_module.prefix;  if(prefix==undefined) prefix="";
@@ -47,30 +48,28 @@
             "20011587","20011588"
         ];
         //-------------------------------------
-        $('#D__ID').on('load',function(){_set_req(); _request_data(); })
+        $('#aquery__ID').on('click',function(){ m.set_req(); m.request_data();  })
         //-------------------------------------
-        $('#aquery__ID').on('click',function(){ _set_req(); _request_data();  })
-        //-------------------------------------
-        var _set_req=function(){
-            var sql="with tb as (select Information,ID,UID,PUID,DateTime,Modified=Convert(varchar,Modified,127),Author,RowNum=row_number() over (order by ID DESC) from [TABLE-"+_db_pid+"-@S1] where JSON_VALUE(Information,'$.Last_Name')=@S2 )";
+        m.set_req=function(){
+            var sql="with tb as (select Information,ID,UID,PUID,DateTime,Modified=Convert(varchar,Modified,127),Author,RowNum=row_number() over (order by ID DESC) from [TABLE-"+m.db_pid+"-@S1] where JSON_VALUE(Information,'$.Last_Name')=@S2 )";
             //sql+=", tb2 as (select letter_rid=ID,Referral_letter=JSON_VALUE(Information,'$.File_Name'),letter_puid=PUID from [TABLE-20011363]) ";
             //sql+="select letter_rid,Referral_letter,Information,ID,UID,PUID,DateTime,Modified,Author,RowNum from tb left join tb2 on letter_puid= UID where RowNum between @I6 and @I7";
             sql+="select Information,ID,UID,PUID,DateTime,Modified,Author,RowNum from tb where RowNum between @I6 and @I7";
-            var sql_n="select count(ID) from [TABLE-"+_db_pid+"-@S1]";
-        	_req={cmd:'query_records',db_pid:_db_pid,sql:sql,sql_n:sql_n,s2:$('#t1__ID').val(),s1:'"'+$('#keyword__ID').val()+'"',I:$('#I__ID').text(),page_size:$('#page_size__ID').val()}
+            var sql_n="select count(ID) from [TABLE-"+m.db_pid+"-@S1]";
+        	m.req={cmd:'read',db_pid:m.db_pid,sql:sql,sql_n:sql_n,s2:$('#t1__ID').val(),s1:'"'+$('#keyword__ID').val()+'"',I:$('#I__ID').text(),page_size:$('#page_size__ID').val()}
         }
         //-------------------------------------
-        var _set_req_export=function(i1,i2){
-            var sql="with tb as (select Information,DateTime,Author,RowNum=row_number() over (order by ID DESC) from [TABLE-"+_db_pid+"] where DT1=@T1)";
+        m.set_req_export=function(i1,i2){
+            var sql="with tb as (select Information,DateTime,Author,RowNum=row_number() over (order by ID DESC) from [TABLE-"+m.db_pid+"] where DT1=@T1)";
             sql+="select Information,DateTime,Author from tb where RowNum between @I1 and @I2";
-        	_req={cmd:'query_records',sql:sql,i1:i1,i2:i2,t1:$('#t1__ID').val()};
+        	m.req={cmd:'read',sql:sql,i1:i1,i2:i2,t1:$('#t1__ID').val()};
         }
         //-------------------------------------
-        var _before_submit=function(record,dbv){
+        m.before_submit=function(record,dbv){
             return true;
         };
         //-------------------------------------
-        _cell_render=function(records,I,field,td,set_value,source){
+        m.cell_render=function(records,I,field,td,set_value,source){
             switch(field){
 				case 'Date':
                     var html='<input type=date style="border:none" />';
@@ -81,7 +80,7 @@
                     if(records[I].UID===undefined) return;
                     td.html("<u style='cursor:pointer'>Results</u>");
                     td.find('u').on('click',function(){
-                        records[I].PID=_db_pid;
+                        records[I].PID=m.db_pid;
                         var panel="panel-initial";
                         if(records[I].Appointment_Type=="Follow up") panel="panel-fu";
                         $vm.load_module_v2(panel,$vm.root_layout_content_slot,{record:records[I]});
@@ -97,46 +96,20 @@
                         $vm.nav_load_module(summary,$vm.root_layout_content_slot,{record:records[I]});
 					});
 					break;
-/*                case '_Patient_Info':
-					records[I].vm_custom[field]=true;
-					if(records[I].UID===undefined) return;
-					td.html("<u style='cursor:pointer'>Patient Info</u>");
-					td.find('u').on('click',function(){
-                        $vm.nav_load_module(prefix+prefix2+"report-initial-appointment-patient-info",$vm.root_layout_content_slot,{record:records[I]});
-					});
-					break;
-                case 'Referral_letter':
-                    records[I].vm_custom[field]=true;
-                    if(records[I][field]===undefined) records[I][field]="";
-                    td.data('filename_field',field);
-                    var html="<u style='cursor:pointer'>"+records[I][field]+"</u>";
-                    html+="<span class=file_buttons></span>";
-                    html+="<form><input type=file style='display:none'></input></form>";
-                    td.html(html);
-                    if(records[I][field]==="" || records[I][field]===null || records[I][field]===undefined) td.find('a.remove_file').css('visibility','hidden');
-                    td.find('u').on('click',function(){
-                        var f_name=$(this).html();
-                        var rid=records[I].letter_rid;
-                        if(rid!==undefined){
-                            $vm.open_link({rid:rid,filename:f_name});
-                        }
-                        else alert("No file was found on server.")
-                    });
-                    break;
-*/            }
+            }
         }
         //-------------------------------------
         //convert the existed date to the new standard format
-        _data_process=function(){
-            for(var i=0;i<_records.length;i++){
-                _records[i].Date=$vm.au_date_to_string_yyyymmdd(_records[i].Date);
+        m.data_process=function(){
+            for(var i=0;i<m.records.length;i++){
+                m.records[i].Date=$vm.au_date_to_string_yyyymmdd(m.records[i].Date);
             }
         }
         //-------------------------------------
     }
 </script>
 <style>
-VmInclude:__COMPONENT__/grid/grid.v3.css
+VmInclude:__COMPONENT__/module/grid.v1.css
 #D__ID{
     overflow-x:auto;
     background-color: rgba(255,255,255,0.8);

@@ -4,14 +4,13 @@
 <script>
     function F__ID(){
         //-------------------------------------
-        VmInclude:__COMPONENT__/grid/grid.v3.js
+        VmInclude:__COMPONENT__/module/grid.v1.js
         //-------------------------------------
         var fields="Name";
-        _fields="_Form,"+fields+",Submit Date|DateTime,Submitted by|Author,_Delete";
+        m.fields="_Form,"+fields+",Submit Date|DateTime,Submitted by|Author,_Delete";
+        m.form_fields=fields+",TID"
         //-------------------------------------
-        $('#D__ID').on('load',function(){  _set_req(); _request_data(); })
-        //-------------------------------------
-		_before_submit=function(record,dbv){
+		m.before_submit=function(record,dbv){
 			dbv.S1=record.Name;
             return true;
         };

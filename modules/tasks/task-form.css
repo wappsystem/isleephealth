@@ -37,6 +37,9 @@
     #D__ID input[type="radio"] {
         margin-right: 5px !important
     }
+    #D__ID .form-control::-webkit-input-placeholder{color:#ccc;}
+    #D__ID .form-control:-ms-input-placeholder{color:#ccc;}
+    #D__ID .form-control::-moz-placeholder{color:#ccc;opacity: 1;}
     #D__ID .formbox {
         background-color: white;
         padding: 0px !important;

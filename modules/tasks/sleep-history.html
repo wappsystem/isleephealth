@@ -178,7 +178,7 @@
                            </fieldset>
                            <fieldset class="">
                              <label ><span class="">If yes, Describe</span></label><br>
-                               <textarea class="form-control" name="unusual_movements_describe"></textarea>
+                               <textarea class="form-control" name="unusual_movements_describe" id="unusual_movements_describe__ID"></textarea>
                          </fieldset>
                      </div>
                  </div>
@@ -196,7 +196,7 @@
                          <fieldset class="subquestions">
                              <label>
                                  <span class="">If yes, how many times on average per night?</span>
-                                 <input class="form-control" type="number" min=0 name="toilet_number">
+                                 <input class="form-control" type="number" min=0 name="toilet_number" id="toilet_number__ID">
                              </label><br>
                          </fieldset>
                      </div>
@@ -230,7 +230,7 @@
      				 <div class="questiongroup ">
                          <fieldset class="subquestions">
                              <label class="radiobuttons">
-                               <input type="radio" name="sleeping_tablets_frequency" value="Nightly">
+                               <input type="radio" name="sleeping_tablets_frequency" id="sleeping_tablets_frequency__ID" value="Nightly">
                                <span class="checkmark"></span>Nightly</label><br>
                              <label class="radiobuttons">
                                <input type="radio" name="sleeping_tablets_frequency" value="When necessary">
@@ -239,7 +239,7 @@
                          <fieldset class="subquestions">
                              <label>
                                <span >Name of tablet:</span>
-                               <textarea class="form-control" name="sleeping_tablets_name"></textarea>
+                               <textarea class="form-control" name="sleeping_tablets_name" id="sleeping_tablets_name__ID"></textarea>
                              </label><br>
                          </fieldset>
                      </div>
@@ -268,6 +268,35 @@
   <script>
       function F__ID(){
           //------------------------------------------------------------
+          $('input[name=unusual_movements]').on('click', function(){
+              if($('input[name=unusual_movements]:checked').val()=='Yes'){
+                  alert(1)
+                  $('#unusual_movements_describe__ID').prop('required', true);
+              }
+              else{
+                  $('#unusual_movements_describe__ID').prop('required', false);
+              }
+          })
+          $('input[name=toilet]').on('click', function(){
+              if($('input[name=toilet]:checked').val()=='Yes'){
+                  alert(2)
+                  $('#toilet_number__ID').prop('required', true);
+              }
+              else{
+                  $('#toilet_number__ID').prop('required', false);
+              }
+          })
+          $('input[name=sleeping_tablets]').on('click', function(){
+              if($('input[name=sleeping_tablets]:checked').val()=='Yes'){
+                  alert(3)
+                   {$('#sleeping_tablets_frequency__ID').prop('required',true);$('#sleeping_tablets_name__ID').prop('required',true);}
+              }
+              else{
+                  {$('#sleeping_tablets_frequency__ID').prop('required',false);$('#sleeping_tablets_name__ID').prop('required',false);}
+              }
+          })
+
+/*
           $("input[name='unusual_movements']").change(function(){
               var radioValue = $(this).val();
               if(radioValue=='Yes') $('#unusual_movements_describe__ID').prop('required',true);
@@ -283,7 +312,7 @@
               if(radioValue=='Yes') {$('#sleeping_tablets_frequency__ID').prop('required',true);$('#sleeping_tablets_name__ID').prop('required',true);}
               else {$('#sleeping_tablets_frequency__ID').prop('required',false);$('#sleeping_tablets_name__ID').prop('required',false);}
           })
-          //------------------------------------------------------------
+*/          //------------------------------------------------------------
           $('#D__ID').on('load',function(){
               $('#F__ID')[0].reset();
               $('#F__ID input:checkbox').removeAttr('checked');

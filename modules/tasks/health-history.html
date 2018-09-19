@@ -170,7 +170,7 @@
                      <div class="questiongroup ">
                          <fieldset class="subquestions">
                              <label class="radiobuttons">
-                               <input type="radio" name="cpap_use" value="successful" required>
+                               <input type="radio" name="cpap_use" id="cpap_use__ID" value="successful" >
                                <span class="checkmark"></span>Successful</label><br>
                              <label class="radiobuttons">
                                <input type="radio" name="cpap_use" value="unsuccessful">
@@ -202,6 +202,21 @@
               if($vm.vm['__ID'].input!=undefined && $vm.vm['__ID'].input.readonly!=undefined) $('#submit__ID').hide();
               if($vm.vm['__ID'].input!=undefined && $vm.vm['__ID'].input.admin!=undefined) $('#admin__ID').show();
               $vm.deserialize(record,'#F__ID');
+              if($('input[name=cpap]:checked').val()=='Yes'){
+                  $('#cpap_use__ID').prop('required', true);
+              }
+              else{
+                  $('#cpap_use__ID').prop('required', false);
+              }              
+          })
+          //-------------------------------------
+          $('input[name=cpap]').on('click', function(){
+              if($('input[name=cpap]:checked').val()=='Yes'){
+                  $('#cpap_use__ID').prop('required', true);
+              }
+              else{
+                  $('#cpap_use__ID').prop('required', false);
+              }
           })
           //-------------------------------------
           $('#F__ID').submit(function(event){

@@ -59,9 +59,11 @@
             		$vm.autocomplete(td,sql);
 	                break;
 				case 'Appointment_Type':
+                    /*
                     var sql="with tb as (select distinct name=S1,value2=uid from [TABLE-"+appointment_type_tid+"])";
                     sql+=" select top 10 name,value=name,value2 from tb where Name like '%'+@S1+'%' ";
                     $vm.autocomplete(td,sql);
+                    */
                     //if (records[I].Appointment_Type=="Follow up") m.set_value(fu_pid_list.toString(),records,I,"List");
                     //else m.set_value(initial_pid_list.toString(),records,I,"List")
                     var html="<select style='border:0;'>\

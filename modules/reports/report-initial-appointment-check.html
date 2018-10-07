@@ -87,7 +87,7 @@
             left join phq on phq_puid=UID \
             left join fss on fss_puid=UID \
             where RowNum between @I1 and @I2";
-        	m.req={cmd:'read',sql:sql,i1:i1,i2:i2,t1:$('#t1__ID').val()};
+        	m.req={cmd:'read',qid:$vm.qid,sql:sql,i1:i1,i2:i2,t1:$('#t1__ID').val()};
         }
         //-------------------------------------
         m.before_submit=function(record,dbv){

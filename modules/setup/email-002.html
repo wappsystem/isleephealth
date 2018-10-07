@@ -22,7 +22,7 @@
             <br>
 
             Before the appointment could you please fill in the <b>Integrated Sleep Health Online Registration and Questionnaires for Initial Consultation.</b> These questionnaires will help us ensure best management for your sleep problem.<br><br>
-            <u><a id=q_n href="#" target="_blank" >Click here to access <b>Integrated Sleep Health Online Registration and Questionnaires for Initial Consultation</b></a></u> <br>
+            <u><a id=q_n__ID href="#" target="_blank" >Click here to access <b>Integrated Sleep Health Online Registration and Questionnaires for Initial Consultation</b></a></u> <br>
             Please use the following to get access to your questionnaires<br>
 			Login ID: <b><span id=Login_ID__ID></span></b><br>
 			Password: <b><span id=Password__ID></span></b><br>
@@ -75,9 +75,9 @@
             if(window.location.hostname=='127.0.0.1' || window.location.hostname=='localhost'){
                 q_url=q_url.replace("https://wappsystem.github.io","http://127.0.0.1:8000/wappsystem")
             };
-            $(document).ready(function() {
-                $('#q_n').attr('href',q_url);
-            });
+            //$(document).ready(function() {
+                $('#q_n__ID').attr('href',q_url);
+            //});
         })
 
         //-------------------------------------

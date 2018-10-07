@@ -9,7 +9,16 @@
 			<div class="row row__ID"><div class="col-sm col-lg-3">Email</div><div class="col-sm"><input type="email" placeholder=Email class="form-control" name="Email"  /></div></div>
 			<div class="row row__ID"><div class="col-sm col-lg-3">Location</div><div class="col-sm"><select class="form-control" name="Location"><option>MLC</option><option>Bondi Junction</option></select></div></div>
 			<div class="row row__ID"><div class="col-sm col-lg-3">Physician</div><div class="col-sm"><input type="text" placeholder=Physician class="form-control" name="Physician"  /></div></div>
-			<div class="row row__ID"><div class="col-sm col-lg-3">Appointment Type</div><div class="col-sm"><input type="text" placeholder="Appointment Type" class="form-control" name="Appointment_Type"  /></div></div>
+			<div class="row row__ID"><div class="col-sm col-lg-3">Appointment Type</div>
+                <div class="col-sm">
+                    <!--<input type="text" placeholder="Appointment Type" class="form-control" name="Appointment_Type"  /></div>-->
+                    <select class="form-control" name="Appointment_Type" >
+                        <option></option>
+                        <option>Initial</option>
+                        <option>Follow up</option>
+                    </select>
+                </div>
+            </div>
 			<div class="row row__ID"><div class="col-sm col-lg-3">Date</div><div class="col-sm"><input type="date" class="form-control" name="Date" required /></div></div>
 			<div class="row row__ID"><div class="col-sm col-lg-3">Appointment Time</div><div class="col-sm"><input type="time" class="form-control" name="Appointment_Time"  /></div></div>
 			<div class="row row__ID"><div class="col-sm col-lg-3">Login ID</div><div class="col-sm"><input type="text" placeholder="Auto generated, read only" class="form-control" id="Login_ID__ID" readonly /></div></div>
@@ -44,9 +53,11 @@
 		sql+=" select top 10 name,value=name,value2 from tb where Name like '%'+@S1+'%' ";
 		$vm.autocomplete($("#F__ID input[name=Physician]"),sql);
 		//-------------------------------------
+        /*
         var sql="with tb as (select distinct name=S1,value2=uid from [TABLE-"+appointment_type_tid+"])";
 		sql+=" select top 10 name,value=name,value2 from tb where Name like '%'+@S1+'%' ";
 		$vm.autocomplete($("#F__ID input[name=Appointment_Type]"),sql);
+        */
 		//-------------------------------------
 		$('#D__ID').on('load',function(){
 			$('#F__ID')[0].reset();

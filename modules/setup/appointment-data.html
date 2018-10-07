@@ -62,8 +62,13 @@
                     var sql="with tb as (select distinct name=S1,value2=uid from [TABLE-"+appointment_type_tid+"])";
                     sql+=" select top 10 name,value=name,value2 from tb where Name like '%'+@S1+'%' ";
                     $vm.autocomplete(td,sql);
-                    if (records[I].Appointment_Type=="Follow up") m.set_value(fu_pid_list.toString(),records,I,"List");
-                    else m.set_value(initial_pid_list.toString(),records,I,"List")
+                    //if (records[I].Appointment_Type=="Follow up") m.set_value(fu_pid_list.toString(),records,I,"List");
+                    //else m.set_value(initial_pid_list.toString(),records,I,"List")
+                    var html="<select style='border:0;'>\
+                    <option></option><option>Initial</option><option>Follow up</option>\
+                    </select>\
+                    ";
+                    VmInclude:__COMPONENT__/grid/field_select.js
                     break;
 				case 'Date':
                     var html='<input type=date style="border:none" />';

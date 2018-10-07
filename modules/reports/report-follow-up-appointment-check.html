@@ -54,7 +54,7 @@
             left join fss on fss_puid=UID \
             where RowNum between @I6 and @I7";
             var sql_n="select count(ID) from [TABLE-"+m.db_pid+"-@S1]";
-        	m.req={cmd:'read',db_pid:m.db_pid,sql:sql,sql_n:sql_n,t1:$('#t1__ID').val(),s1:'"'+$('#keyword__ID').val()+'"',I:$('#I__ID').text(),page_size:$('#page_size__ID').val()}
+        	m.req={cmd:'read',qid:$vm.qid,db_pid:m.db_pid,sql:sql,sql_n:sql_n,t1:$('#t1__ID').val(),s1:'"'+$('#keyword__ID').val()+'"',I:$('#I__ID').text(),page_size:$('#page_size__ID').val()}
         }
         //-------------------------------------
         m.set_req_export=function(i1,i2){

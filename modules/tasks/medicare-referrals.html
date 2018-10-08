@@ -114,6 +114,21 @@
       </div>
     </div>
     <script>
+        //---------------------------------------------
+        $vm.open_link_v2=function(rid,filename,minutes){
+            var req={cmd:'get_s3_download_url',qid:$vm.qid,rid:rid,filename:filename,minutes:minutes};
+            $VmAPI.request({data:req,callback:function(res){
+                var link = document.createElement("a");
+                link.href = res.s3_download_url;
+                link.style = "visibility:hidden";
+                var fn=filename.split('-');
+                link.download = filename.replace(fn[0]+'-','').replace(/ /g,'_');
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }});
+        }
+        //---------------------------------------------
         function F__ID(){
             //-------------------------------------
             VmInclude:__COMPONENT__/module/form.v1.js

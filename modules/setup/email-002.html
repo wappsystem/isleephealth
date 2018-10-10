@@ -104,7 +104,7 @@
             var To=record.Email;
             var Body=$('#contents__ID').html();
             var Password=$('#password__ID').val();
-            var req={cmd:'send-email',qid:$vm.qid,'permission-query':'send-email',db_pid:'20011580',Password:Password,To:To,Subject:Subject,Body:Body}
+            var req={cmd:'send-email',qid:$vm.qid,db_pid:'20011580',Password:Password,To:To,Subject:Subject,Body:Body}
             $VmAPI.request({data:req,callback:function(res){
                 if(res.ret==1){
                     $vm.alert("The email has been sent out to "+To);

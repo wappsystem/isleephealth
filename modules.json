@@ -54,6 +54,7 @@
 		"report-follow-up-appointment-summary":{"table_id":"20011471","url":"https://wappsystem.github.io/isleephealth/modules/reports/report-follow-up-appointment-summary.html"},
 		"report-follow-up-appointment-check":{"table_id":"20011471","url":"https://wappsystem.github.io/isleephealth/modules/reports/report-follow-up-appointment-check.html"},
 		"report-appointment-day-list":{"table_id":"20011471","url":"https://wappsystem.github.io/isleephealth/modules/reports/report-appointment-day-list.html"},
+		"report-email-log":{"table_id":"20011621","url":"https://wappsystem.github.io/isleephealth/modules/setup/log.html"},
 
         "sleep-history-report":		    {"table_id":"20011469","url":"https://wappsystem.github.io/isleephealth/modules/tasks/sleep-history-report.html"},
 		"health-history-report":		{"table_id":"20011365","url":"https://wappsystem.github.io/isleephealth/modules/tasks/health-history-report.html"},

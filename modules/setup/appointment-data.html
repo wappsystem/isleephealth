@@ -59,13 +59,6 @@
             		$vm.autocomplete(td,sql);
 	                break;
 				case 'Appointment_Type':
-                    /*
-                    var sql="with tb as (select distinct name=S1,value2=uid from [TABLE-"+appointment_type_tid+"])";
-                    sql+=" select top 10 name,value=name,value2 from tb where Name like '%'+@S1+'%' ";
-                    $vm.autocomplete(td,sql);
-                    */
-                    //if (records[I].Appointment_Type=="Follow up") m.set_value(fu_pid_list.toString(),records,I,"List");
-                    //else m.set_value(initial_pid_list.toString(),records,I,"List")
                     var html="<select style='border:0;'>\
                     <option></option><option>Initial</option><option>Follow up</option>\
                     </select>\
@@ -87,7 +80,9 @@
 				case '_Send_Email':
 					records[I].vm_custom[field]=true;
 					if(records[I].UID===undefined) return;
-					td.html("<u style='cursor:pointer'>Send Email</u>");
+                    var v=records[I][field];
+                    if(v!='' && v!=null && v!=undefined){td.html("<u style='cursor:pointer'>Send Email</u> <i style='color:green' class='fa fa-check'></i>");}
+                    else {td.html("<u style='cursor:pointer'>Send Email</u>");}
 					td.find('u').on('click',function(){
                         var email_module_id=prefix+prefix2+"email-001";
                         if(records[I].Appointment_Type=="Follow up") email_module_id=prefix+prefix2+"email-002";
@@ -97,7 +92,13 @@
 				case '_Results':
                     records[I].vm_custom[field]=true;
                     if(records[I].UID===undefined) return;
-                    td.html("<u style='cursor:pointer'>Results</u>");
+                    var v=records[I]['ini'];
+                    if(v!='' && v!=null && v!=undefined && records[I].Appointment_Type=='Initial') {
+                        if(parseInt(v)==9) td.html("<u style='cursor:pointer'>Results</u> <i style='color:green' class='fa fa-smile'></i>")
+                        else if(parseInt(v)>0)  td.html("<u style='cursor:pointer'>Results</u> <i style='color:orange' class='fa fa-meh'></i>")
+                        else td.html("<u style='cursor:pointer'>Results</u> <i style='color:red' class='fa fa-frown'></i>")
+                    }
+                    else td.html("<u style='cursor:pointer'>Results</u>");
                     td.find('u').on('click',function(){
                         records[I].PID=m.db_pid;
                         var panel="panel-initial";
@@ -142,6 +143,36 @@
             }
         }
         //-------------------------------------
+        m.set_req=function(){
+            var sql="with tb as (select Information,ID,UID,PUID,DateTime,Modified=Convert(varchar,Modified,127),Author,RowNum=row_number() over (order by ID DESC) from [TABLE-"+m.db_pid+"-@S1] )";
+            sql+=",log_ac as (select _Send_Email=ID,PUID from [TABLE-20011621] ) "
+            sql+=",q1 as (select Qi1=ID,PUID from [TABLE-20011470] ) "
+            sql+=",q2 as (select Qi2=ID,PUID from [TABLE-20011363] ) "
+            sql+=",q3 as (select Qi3=ID,PUID from [TABLE-20011469] ) "
+            sql+=",q4 as (select Qi4=ID,PUID from [TABLE-20011365] ) "
+            sql+=",q5 as (select Qi5=ID,PUID from [TABLE-20011364] ) "
+            sql+=",q6 as (select Qi6=ID,PUID from [TABLE-20011464] ) "
+            sql+=",q7 as (select Qi7=ID,PUID from [TABLE-20011465] ) "
+            sql+=",q8 as (select Qi8=ID,PUID from [TABLE-20011467] ) "
+            sql+=",q9 as (select Qi9=ID,PUID from [TABLE-20011468] ) "
+            sql+=",tb2 as (select Information,_Send_Email,ID,UID,Qi1,Qi2,Qi3,Qi4,Qi5,Qi6,Qi7,Qi8,Qi9,DateTime,Modified,Author,RowNum from tb";
+            sql+=" left join log_ac on tb.UID=log_ac.PUID ";
+            sql+=" left join q1 on tb.UID=q1.PUID ";
+            sql+=" left join q2 on tb.UID=q2.PUID ";
+            sql+=" left join q3 on tb.UID=q3.PUID ";
+            sql+=" left join q4 on tb.UID=q4.PUID ";
+            sql+=" left join q5 on tb.UID=q5.PUID ";
+            sql+=" left join q6 on tb.UID=q6.PUID ";
+            sql+=" left join q7 on tb.UID=q7.PUID ";
+            sql+=" left join q8 on tb.UID=q8.PUID ";
+            sql+=" left join q9 on tb.UID=q9.PUID ";
+            sql+=")";
+            sql+=" select Information,DateTime,Author,_Send_Email,UID,ini=count(Qi1)+count(Qi2)+count(Qi3)+count(Qi4)+count(Qi5)+count(Qi6)+count(Qi7)+count(Qi8)+count(Qi9),RowNum from tb2 where RowNum between @I6 and @I7 group by RowNum,Information,_Send_Email,UID,DateTime,Author";
+            var sql_n="select count(ID) from [TABLE-"+m.db_pid+"-@S1]";
+          m.req={cmd:'read',qid:m.qid,sql:sql,sql_n:sql_n,s1:'"'+$('#keyword__ID').val()+'"',I:$('#I__ID').text(),page_size:$('#page_size__ID').val()}
+        }
+        //-------------------------------------
+
     }
 </script>
 <style>

@@ -75,46 +75,29 @@
             if(window.location.hostname=='127.0.0.1' || window.location.hostname=='localhost'){
                 q_url=q_url.replace("https://wappsystem.github.io","http://127.0.0.1:8000/wappsystem")
             };
-            //$(document).ready(function() {
                 $('#q_n__ID').attr('href',q_url);
-            //});
         })
-
-        //-------------------------------------
-        /*
-        $('#send__ID').on('click',function(){
-     	   	var From_Address="noresponse@wappsystem.com";
-     		var From_Name="Integrated Sleep Health";
-     		var To=record.Email;
-            if(To.length<5){
-                alert('No email address.')
-                return;
-            }
-     		var Title="Integrated Sleep Health Online Registration and Questionnaires";
-     		var Body=$('#contents__ID').html();
-            //if($vm.user=='guest'){ alert('The alert email (to: '+To+') has been sent out'); return;}
-			$VmAPI.request({data:{cmd:'send_email',From_Address:From_Address,From_Name:From_Name,To:To,Title:Title,Body:Body},callback:function(res){
-                $vm.alert('An email has been sent to '+record.Email+'');
-            }})
-        });
-        */
         //-------------------------------------
         $('#send__ID').on('click',function(){
             var Subject="Integrated Sleep Health Online Registration and Questionnaires";
             var To=record.Email;
             var Body=$('#contents__ID').html();
             var Password=$('#password__ID').val();
+            var appointment_date=record.Date;
+            var appointment_time=record.Appointment_Time
+            var first_name=record.First_Name;
+            var last_name=record.Last_Name;
+            var location=record.Location;
+            var appointment_type=record.Appointment_Type;
             var req={cmd:'send-email',qid:$vm.qid,db_pid:'20011580',Password:Password,To:To,Subject:Subject,Body:Body}
             $VmAPI.request({data:req,callback:function(res){
                 if(res.ret==1){
                     $vm.alert("The email has been sent out to "+To);
-                    /*
-                    var data={Subject:Subject,To:To}
-                    var dbv={S1:Subject,S2:To}
-                    var req={cmd:"add",qid:$vm.qid,db_pid:'20011579',data:data,dbv:dbv};
+                    var data={First_Name:first_name,Last_Name:last_name,Email:To,Location:location,Appointment_Type:appointment_type,Appointment_Date:appointment_date,Appointment_Time:appointment_time}
+                    var dbv={S1:appointment_date,S2:To,PUID:record.UID}
+                    var req={cmd:"add",qid:$vm.qid,db_pid:'20011621',data:data,dbv:dbv};
                     $VmAPI.request({data:req,callback:function(res){
                     }});
-                    */
                 }
                 else{
                     $vm.alert("Error");

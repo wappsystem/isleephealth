@@ -40,7 +40,7 @@
         $('#aquery__ID').on('click',function(){ m.set_req(); m.request_data();  })
         //-------------------------------------
         m.set_req=function(){
-            var sql="with tb as (select Information,ID,UID,PUID,DateTime,Modified=Convert(varchar,Modified,127),Author,RowNum=row_number() over (order by ID DESC) from [TABLE-"+m.db_pid+"-@S1] where DT1=@T1 )";
+            var sql="with tb as (select Information,ID,UID,PUID,DateTime,Modified=Convert(varchar,Modified,127),Author,RowNum=row_number() over (order by ID DESC) from [TABLE-"+m.db_pid+"-@S1] where DT1=@T1 and JSON_VALUE(Information,'$.Appointment_Type')='Follow up'  )";
             sql+=", ess as (select ESS=case  when UID > 0 then 'Yes' END ,ess_puid=PUID from [TABLE-20011584]) ";
             sql+=", dass as (select DASS=case  when UID > 0 then 'Yes' END ,dass_puid=PUID from [TABLE-20011585]) ";
             sql+=", isi as (select ISI=case  when UID > 0 then 'Yes' END ,isi_puid=PUID from [TABLE-20011586]) ";
@@ -58,7 +58,7 @@
         }
         //-------------------------------------
         m.set_req_export=function(i1,i2){
-            var sql="with tb as (select UID,PUID,Information,DateTime,Author,RowNum=row_number() over (order by ID DESC) from [TABLE-"+m.db_pid+"] where DT1=@T1)";
+            var sql="with tb as (select UID,PUID,Information,DateTime,Author,RowNum=row_number() over (order by ID DESC) from [TABLE-"+m.db_pid+"] where DT1=@T1 and JSON_VALUE(Information,'$.Appointment_Type')='Follow up')";
             sql+=", ess as (select ESS=case  when UID > 0 then 'Yes' END ,ess_puid=PUID from [TABLE-20011584]) ";
             sql+=", dass as (select DASS=case  when UID > 0 then 'Yes' END ,dass_puid=PUID from [TABLE-20011585]) ";
             sql+=", isi as (select ISI=case  when UID > 0 then 'Yes' END ,isi_puid=PUID from [TABLE-20011586]) ";

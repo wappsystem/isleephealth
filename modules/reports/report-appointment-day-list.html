@@ -40,12 +40,49 @@
         $('#aquery__ID').on('click',function(){ m.set_req(); m.request_data();  })
         //-------------------------------------
         m.set_req=function(){
-            var sql="with tb as (select Information,ID,UID,PUID,DateTime,Modified=Convert(varchar,Modified,127),Author,RowNum=row_number() over (order by ID DESC) from [TABLE-"+m.db_pid+"-@S1] where DT1=@T1 )";
-            //sql+=", tb2 as (select letter_rid=ID,Referral_letter=JSON_VALUE(Information,'$.File_Name'),letter_puid=PUID from [TABLE-20011363]) ";
-            //sql+="select letter_rid,Referral_letter,Information,ID,UID,PUID,DateTime,Modified,Author,RowNum from tb left join tb2 on letter_puid= UID where RowNum between @I6 and @I7";
+/*            var sql="with tb as (select Information,ID,UID,PUID,DateTime,Modified=Convert(varchar,Modified,127),Author,RowNum=row_number() over (order by ID DESC) from [TABLE-"+m.db_pid+"-@S1] where DT1=@T1 )";
             sql+="select Information,ID,UID,PUID,DateTime,Modified,Author,RowNum from tb where RowNum between @I6 and @I7";
             var sql_n="select count(ID) from [TABLE-"+m.db_pid+"-@S1]";
         	m.req={cmd:'read',qid:$vm.qid,db_pid:m.db_pid,sql:sql,sql_n:sql_n,t1:$('#t1__ID').val(),s1:'"'+$('#keyword__ID').val()+'"',I:$('#I__ID').text(),page_size:$('#page_size__ID').val()}
+*/
+            var sql="with tb as (select Information,ID,UID,PUID,DateTime,Modified=Convert(varchar,Modified,127),Author,RowNum=row_number() over (order by ID DESC) from [TABLE-"+m.db_pid+"-@S1]  where DT1=@T1)";
+            sql+=",log_ac as (select _Send_Email=ID,PUID from [TABLE-20011621] ) "
+            sql+=",q1 as (select Qi1=ID,PUID from [TABLE-20011470] ) "
+            sql+=",q2 as (select Qi2=ID,PUID from [TABLE-20011363] ) "
+            sql+=",q3 as (select Qi3=ID,PUID from [TABLE-20011469] ) "
+            sql+=",q4 as (select Qi4=ID,PUID from [TABLE-20011365] ) "
+            sql+=",q5 as (select Qi5=ID,PUID from [TABLE-20011364] ) "
+            sql+=",q6 as (select Qi6=ID,PUID from [TABLE-20011464] ) "
+            sql+=",q7 as (select Qi7=ID,PUID from [TABLE-20011465] ) "
+            sql+=",q8 as (select Qi8=ID,PUID from [TABLE-20011467] ) "
+            sql+=",q9 as (select Qi9=ID,PUID from [TABLE-20011468] ) "
+            sql+=",q11 as (select Qf1=ID,PUID from [TABLE-20011584] ) "
+            sql+=",q12 as (select Qf2=ID,PUID from [TABLE-20011585] ) "
+            sql+=",q13 as (select Qf3=ID,PUID from [TABLE-20011586] ) "
+            sql+=",q14 as (select Qf4=ID,PUID from [TABLE-20011587] ) "
+            sql+=",q15 as (select Qf5=ID,PUID from [TABLE-20011588] ) "
+            sql+=",tb2 as (select Information,_Send_Email,ID,UID,Qi1,Qi2,Qi3,Qi4,Qi5,Qi6,Qi7,Qi8,Qi9,Qf1,Qf2,Qf3,Qf4,Qf5,DateTime,Modified,Author,RowNum from tb";
+            sql+=" left join log_ac on tb.UID=log_ac.PUID ";
+            sql+=" left join q1 on tb.UID=q1.PUID ";
+            sql+=" left join q2 on tb.UID=q2.PUID ";
+            sql+=" left join q3 on tb.UID=q3.PUID ";
+            sql+=" left join q4 on tb.UID=q4.PUID ";
+            sql+=" left join q5 on tb.UID=q5.PUID ";
+            sql+=" left join q6 on tb.UID=q6.PUID ";
+            sql+=" left join q7 on tb.UID=q7.PUID ";
+            sql+=" left join q8 on tb.UID=q8.PUID ";
+            sql+=" left join q9 on tb.UID=q9.PUID ";
+            sql+=" left join q11 on tb.UID=q11.PUID ";
+            sql+=" left join q12 on tb.UID=q12.PUID ";
+            sql+=" left join q13 on tb.UID=q13.PUID ";
+            sql+=" left join q14 on tb.UID=q14.PUID ";
+            sql+=" left join q15 on tb.UID=q15.PUID ";
+            sql+=")";
+            sql+=" select Information,DateTime,Author,_Send_Email,UID,ini=count(Qi1)+count(Qi2)+count(Qi3)+count(Qi4)+count(Qi5)+count(Qi6)+count(Qi7)+count(Qi8)+count(Qi9)";
+            sql+=",fu=count(Qf1)+count(Qf2)+count(Qf3)+count(Qf4)+count(Qf5),RowNum from tb2 where RowNum between @I6 and @I7 group by RowNum,Information,_Send_Email,UID,DateTime,Author";
+             var sql_n="select count(ID) from [TABLE-"+m.db_pid+"-@S1] where DT1=@T1";
+             m.req={cmd:'read',qid:$vm.qid,db_pid:m.db_pid,sql:sql,sql_n:sql_n,t1:$('#t1__ID').val(),s1:'"'+$('#keyword__ID').val()+'"',I:$('#I__ID').text(),page_size:$('#page_size__ID').val()}
+
         }
         //-------------------------------------
         m.set_req_export=function(i1,i2){
@@ -67,7 +104,24 @@
                 case '_Results':
                     records[I].vm_custom[field]=true;
                     if(records[I].UID===undefined) return;
-                    td.html("<u style='cursor:pointer'>Results</u>");
+                    if(records[I].Appointment_Type=='Initial'){
+                        var v=records[I]['ini'];
+                        if(v!='' && v!=null && v!=undefined ) {
+                            if(parseInt(v)==9) td.html("<u style='cursor:pointer'>Results</u> <i style='color:green' class='fa fa-smile'></i>")
+                            else if(parseInt(v)>0)  td.html("<u style='cursor:pointer'>Results</u> <i style='color:orange' class='fa fa-meh'></i>")
+                            else td.html("<u style='cursor:pointer'>Results</u> <i style='color:red' class='fa fa-frown'></i>")
+                        }
+                    }
+                    else if(records[I].Appointment_Type=='Follow up'){
+                        var v=records[I]['fu'];
+                        if(v!='' && v!=null && v!=undefined ) {
+                            if(parseInt(v)==5) td.html("<u style='cursor:pointer'>Results</u> <i style='color:green' class='fa fa-smile'></i>")
+                            else if(parseInt(v)>0)  td.html("<u style='cursor:pointer'>Results</u> <i style='color:orange' class='fa fa-meh'></i>")
+                            else td.html("<u style='cursor:pointer'>Results</u> <i style='color:red' class='fa fa-frown'></i>")
+                        }
+                    }
+                    else td.html("<u style='cursor:pointer'>Results</u>");
+
                     td.find('u').on('click',function(){
                         records[I].PID=m.db_pid;
                         var panel="panel-initial";

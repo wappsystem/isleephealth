@@ -40,7 +40,7 @@
         $('#aquery__ID').on('click',function(){ m.set_req(); m.request_data();  })
         //-------------------------------------
         m.set_req=function(){
-            var sql="with tb as (select Information,ID,UID,PUID,DateTime,Modified=Convert(varchar,Modified,127),Author,RowNum=row_number() over (order by ID DESC) from [TABLE-"+m.db_pid+"-@S1] where DT1=@T1 )";
+            var sql="with tb as (select Information,ID,UID,PUID,DateTime,Modified=Convert(varchar,Modified,127),Author,RowNum=row_number() over (order by ID DESC) from [TABLE-"+m.db_pid+"-@S1] where DT1=@T1 and JSON_VALUE(Information,'$.Appointment_Type')='Initial'  )";
             sql+=", cd as (select Contact_Details=case  when UID > 0 then 'Yes' END ,cd_puid=PUID from [TABLE-20011470]) ";
             sql+=", b as (select Benefit=case  when UID > 0 then 'Yes' END ,b_puid=PUID from [TABLE-20011363]) ";
             sql+=", sh as (select Sleep_History=case  when UID > 0 then 'Yes' END ,sh_puid=PUID from [TABLE-20011469]) ";
@@ -66,7 +66,7 @@
         }
         //-------------------------------------
         m.set_req_export=function(i1,i2){
-            var sql="with tb as (select UID,PUID,Information,DateTime,Author,RowNum=row_number() over (order by ID DESC) from [TABLE-"+m.db_pid+"] where DT1=@T1)";
+            var sql="with tb as (select UID,PUID,Information,DateTime,Author,RowNum=row_number() over (order by ID DESC) from [TABLE-"+m.db_pid+"] where DT1=@T1 and JSON_VALUE(Information,'$.Appointment_Type')='Initial')";
             sql+=", cd as (select Contact_Details=case  when UID > 0 then 'Yes' END ,cd_puid=PUID from [TABLE-20011470]) ";
             sql+=", b as (select Benefit=case  when UID > 0 then 'Yes' END ,b_puid=PUID from [TABLE-20011363]) ";
             sql+=", sh as (select Sleep_History=case  when UID > 0 then 'Yes' END ,sh_puid=PUID from [TABLE-20011469]) ";

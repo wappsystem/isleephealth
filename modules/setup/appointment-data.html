@@ -95,7 +95,7 @@
                     if(records[I].Appointment_Type=='Initial'){
                         var v=records[I]['ini'];
                         if(v!='' && v!=null && v!=undefined ) {
-                            if(parseInt(v)==9) td.html("<u style='cursor:pointer'>Results</u> <i style='color:green' class='fa fa-smile'></i>")
+                            if(parseInt(v)==9) td.html("<u style='cursor:pointer'>Results</u> <i style='color:green'  class='fa fa-smile'></i>")
                             else if(parseInt(v)>0)  td.html("<u style='cursor:pointer'>Results</u> <i style='color:orange' class='fa fa-meh'></i>")
                             else td.html("<u style='cursor:pointer'>Results</u> <i style='color:red' class='fa fa-frown'></i>")
                         }
@@ -103,9 +103,9 @@
                     else if(records[I].Appointment_Type=='Follow up'){
                         var v=records[I]['fu'];
                         if(v!='' && v!=null && v!=undefined ) {
-                            if(parseInt(v)==5) td.html("<u style='cursor:pointer'>Results</u> <i style='color:green' class='fa fa-smile'></i>")
+                            if(parseInt(v)==5) td.html("<u style='cursor:pointer'>Results</u> <i style='color:green'  class='fa fa-smile'></i>")
                             else if(parseInt(v)>0)  td.html("<u style='cursor:pointer'>Results</u> <i style='color:orange' class='fa fa-meh'></i>")
-                            else td.html("<u style='cursor:pointer'>Results</u> <i style='color:red' class='fa fa-frown'></i>")
+                            else td.html("<u style='cursor:pointer'>Results</u> <i style='color:red'  class='fa fa-frown'></i>")
                         }
                     }
                     else td.html("<u style='cursor:pointer'>Results</u>");

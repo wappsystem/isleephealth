@@ -136,7 +136,18 @@
                     records[I].vm_custom[field]=true;
                     if(records[I].UID===undefined) return;
                     if(records[I].Appointment_Type=='Initial'){
-                        var v=records[I]['ini'];
+                        //var v=records[I]['ini'];
+                        var v=0;
+                        if(records[I]['Qi1']!="") v++;
+                        if(records[I]['Qi2']!="") v++;
+                        if(records[I]['Qi3']!="") v++;
+                        if(records[I]['Qi4']!="") v++;
+                        if(records[I]['Qi5']!="") v++;
+                        if(records[I]['Qi6']!="") v++;
+                        if(records[I]['Qi7']!="") v++;
+                        if(records[I]['Qi8']!="") v++;
+                        if(records[I]['Qi9']!="") v++;
+
                         if(v!='' && v!=null && v!=undefined ) {
                             if(parseInt(v)==9) td.html("<u style='cursor:pointer'>Results</u> <i style='color:green'  class='fa fa-smile'></i>")
                             else if(parseInt(v)>0)  td.html("<u style='cursor:pointer'>Results</u> <i style='color:orange' class='fa fa-meh'></i>")
@@ -144,7 +155,14 @@
                         }
                     }
                     else if(records[I].Appointment_Type=='Follow up'){
-                        var v=records[I]['fu'];
+                        //var v=records[I]['fu'];
+                        var v=0;
+                        if(records[I]['Qf1']!="") v++;
+                        if(records[I]['Qf2']!="") v++;
+                        if(records[I]['Qf3']!="") v++;
+                        if(records[I]['Qf4']!="") v++;
+                        if(records[I]['Qf5']!="") v++;
+
                         if(v!='' && v!=null && v!=undefined ) {
                             if(parseInt(v)==5) td.html("<u style='cursor:pointer'>Results</u> <i style='color:green'  class='fa fa-smile'></i>")
                             else if(parseInt(v)>0)  td.html("<u style='cursor:pointer'>Results</u> <i style='color:orange' class='fa fa-meh'></i>")
@@ -233,7 +251,7 @@
             sql+=")";
             //sql+=" select Information,DateTime,Author,_Send_Email,UID,ini=count(Qi1)+count(Qi2)+count(Qi3)+count(Qi4)+count(Qi5)+count(Qi6)+count(Qi7)+count(Qi8)+count(Qi9)";
             //sql+=",fu=count(Qf1)+count(Qf2)+count(Qf3)+count(Qf4)+count(Qf5),RowNum from tb2 where RowNum between @I6 and @I7 group by RowNum,Information,_Send_Email,UID,DateTime,Author";
-            sql+=" select Information,DateTime,Author,_Send_Email,UID,Qi1,Qi2,Qi3,Qi4,Qi5,Qi6,Qi7,Qi8,Qi9";
+            sql+=" select ID,Information,DateTime,Author,_Send_Email,UID,Qi1,Qi2,Qi3,Qi4,Qi5,Qi6,Qi7,Qi8,Qi9";
             sql+=",Qf1,Qf2,Qf3,Qf4,Qf5,RowNum from tb2 where RowNum between @I6 and @I7";
              var sql_n="select count(ID) from [TABLE-"+m.db_pid+"-@S1]";
              m.req={cmd:'read',qid:m.qid,sql:sql,sql_n:sql_n,s1:'"'+$('#keyword__ID').val()+'"',I:$('#I__ID').text(),page_size:$('#page_size__ID').val()}

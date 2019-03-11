@@ -38,7 +38,7 @@
     <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.2.1.min.js"></script>
     <script main>
         //------------------------------------
-        $vm={};$VmAPI={};$vm.ver=[1.24,1.21];
+        $vm={};$VmAPI={};$vm.ver=[1.25,1.22];
         $vm.start_time=new Date().getTime();
         $vm.api_path_development="https://cbs.wappsystem.com/dev/";
         $vm.api_path_production="https://cbs.wappsystem.com/pro/";
@@ -67,7 +67,7 @@
         for(p in $vm.module_list) $vm.module_list[p].url=$vm.local_url($vm.module_list[p].url);
         //------------------------------------
         $vm.default_title="Integrated Sleep Health";
-        $('#text_0').html("INTEGRATED SLEEP HEALTH <span id=FL_0>Suite 1, Level 7, 26 College St, Darlinghurst NSW 2010 and Level 22, Westfield Tower 2, 101 Grafton st, Bondi Junction, NSW, 2022</span>");
+        $('#text_0').html("INTEGRATED SLEEP HEALTH <span id=FL_0>Suite 1, Level 7, 26 College St, Darlinghurst NSW 2010</span>");
         //------------------------------------
         $('#c_header').contents().appendTo('#header');
         $('#c_footer').contents().appendTo('#footer');

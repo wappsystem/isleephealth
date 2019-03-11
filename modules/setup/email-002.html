@@ -69,17 +69,15 @@
             var appoint_date=record.Date.split('-');
             var months=['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
             $('#date__ID').text(appoint_date[2]+' '+months[parseInt(appoint_date[1])-1]+' '+appoint_date[0]);
-            if(record.Location=='Darlinghurst') {
+           //if(record.Location=='Darlinghurst') {
                 //$('#location_2__ID').text("Level 57, MLC Building, Martin Pl");$('#location_3__ID').text("Sydney NSW 2000");
                 $('#location_2__ID').text("Suite 1, Level 7, 26 College St");
                 $('#location_3__ID').text("Darlinghurst  NSW 2010");
-                //$('#contact__ID').text("9238 2209");
-            }
-            else {
-                $('#location_2__ID').text("Westfield Tower 2, Level 22, 101 Grafton St");
-                $('#location_3__ID').text("Bondi Junction NSW 2022");
-                //$('#contact__ID').text("9238 2209");
-            }
+            //}
+            //else {
+              //  $('#location_2__ID').text("Westfield Tower 2, Level 22, 101 Grafton St");
+              //  $('#location_3__ID').text("Bondi Junction NSW 2022");
+            //}
             var d="?visit=fu";
             if($vm.server=='development'){
                 d=d+"&database=development&username="+record.UID+'-'+pid+"&password="+record.Password;

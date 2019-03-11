@@ -18,8 +18,9 @@
             <span id=location_3__ID></span></b>
             <br><br>
             <i>Fees:</i><br>
-            Follow up consultation fees .... will depend on the length of the consultation with a maximum gap of $220 above the relevant Medicare rebate (Up to date GP or specialist referral mandatory). For patients cancelling less than 24 hours before an appointment, there is a cancellation fee of $150. <br>
-            <br>
+            Follow up consultation fees will depend on the length of the consultation with a maximum gap of $220 above the relevant Medicare rebate (Up to date GP or specialist referral mandatory). 
+            <br><br>For patients cancelling less than 24 hours before an appointment, there is a cancellation fee of $150. 
+            <br><br>
 
             Before the appointment could you please fill in the <b>Integrated Sleep Health Online Registration and Questionnaires for Initial Consultation.</b> These questionnaires will help us ensure best management for your sleep problem.<br><br>
             <u><a id=q_n__ID href="#" target="_blank" >Click here to access <b>Integrated Sleep Health Online Registration and Questionnaires for Initial Consultation</b></a></u> <br>
@@ -28,7 +29,10 @@
 			Password: <b><span id=Password__ID></span></b><br>
 
 			<br>
-            If you need to cancel or change your appointment, please call the clinic on <span id=contact__ID></span>. <br><br>
+            If you need to cancel or change your appointment, please call the clinic on 
+            <br><b>M: </b>+61 401 209 515
+            <br><b>T: </b>(02) 9331 7228 
+            <br><br>
             We look forward to seeing you at your visit.</b>
 
             <br>
@@ -65,8 +69,17 @@
             var appoint_date=record.Date.split('-');
             var months=['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
             $('#date__ID').text(appoint_date[2]+' '+months[parseInt(appoint_date[1])-1]+' '+appoint_date[0]);
-            if(record.Location=='MLC') {$('#location_2__ID').text("Level 57, MLC Building, Martin Pl");$('#location_3__ID').text("Sydney NSW 2000");$('#contact__ID').text("9238 2209");}
-            else {$('#location_2__ID').text("Westfield Tower 2, Level 22, 101 Grafton St");$('#location_3__ID').text("Bondi Junction NSW 2022");$('#contact__ID').text("9238 2209");}
+            if(record.Location=='Darlinghurst') {
+                //$('#location_2__ID').text("Level 57, MLC Building, Martin Pl");$('#location_3__ID').text("Sydney NSW 2000");
+                $('#location_2__ID').text("Suite 1, Level 7, 26 College St");
+                $('#location_3__ID').text("Darlinghurst  NSW 2010");
+                //$('#contact__ID').text("9238 2209");
+            }
+            else {
+                $('#location_2__ID').text("Westfield Tower 2, Level 22, 101 Grafton St");
+                $('#location_3__ID').text("Bondi Junction NSW 2022");
+                //$('#contact__ID').text("9238 2209");
+            }
             var d="?visit=fu";
             if($vm.server=='development'){
                 d=d+"&database=development&username="+record.UID+'-'+pid+"&password="+record.Password;
